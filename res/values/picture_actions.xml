@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="picture_actions">
+        <item>@string/pick_picture</item>
+        <item>@string/remove_picture</item>
+    </string-array>
+</resources>

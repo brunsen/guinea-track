@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:id="@+id/guinea_pig_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginEnd="@dimen/main_list_side_margin"
+        android:layout_marginLeft="@dimen/main_list_side_margin"
+        android:layout_marginRight="@dimen/main_list_side_margin"
+        android:layout_marginStart="@dimen/main_list_side_margin"/>
+
+    <com.getbase.floatingactionbutton.AddFloatingActionButton
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        fab:fab_colorNormal="@color/action_button_normal"
+        fab:fab_colorPressed="@color/action_button_pressed"
+        fab:fab_plusIconColor="@android:color/white" />
+
+
+</RelativeLayout>

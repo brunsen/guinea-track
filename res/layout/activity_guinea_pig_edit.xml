@@ -1,0 +1,199 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_name"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/detail_name_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="text" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/pig_gender"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/detail_gender_spinner"
+                        android:layout_width="@dimen/edit_spinner_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|start"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin" />
+
+                </TableRow>
+
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_birthday"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/detail_birth_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="date" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_color"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/detail_color_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="textPersonName" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_race"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/detail_race_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="text" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/pig_type"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/detail_type_text"
+                        android:layout_width="@dimen/edit_spinner_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|start"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/last_birth_row"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/last_birth"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/last_birth_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="date" />
+
+
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:id="@+id/picture_select_area"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/edit_image"
+                    android:layout_width="@dimen/edit_image_width"
+                    android:layout_height="@dimen/edit_image_height"
+                    android:layout_marginRight="20dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" />
+
+                <Button
+                    android:id="@+id/add_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/picture_button"
+                    android:text="@string/change_picture"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

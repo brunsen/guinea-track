@@ -1,0 +1,46 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
+        <item name="android:background">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:textAppearance">@style/Primary_Text_Style</item>
+
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+
+        <!-- Theme customizations available in newer API levels can go in res/values-vXX/styles.xml,
+         while customizations related to backward-compatibility can go here. -->
+
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/primary_dark_color</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/primary_color</item>
+        <item name="android:textColorPrimary">@color/toolbar_text</item>
+        <item name="android:textColorSecondary">@color/toolbar_text</item>
+        <item name="colorAccent">@color/accent_color</item>
+    </style>
+
+    <style name="Primary_Text_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:alpha">0.87</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Secondary_Text_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:alpha">0.54</item>
+    </style>
+
+</resources>

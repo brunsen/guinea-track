@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@color/background"
+    android:orientation="horizontal">
+
+    <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_list_item_image"
+        android:layout_width="@dimen/list_item_image_width"
+        android:layout_height="@dimen/list_item_image_height"
+        android:layout_marginTop="@dimen/list_vertical_spacing"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:riv_corner_radius="30dip"
+        app:riv_oval="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/main_list_side_margin"
+        android:layout_marginStart="@dimen/main_list_side_margin"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/list_vertical_spacing"
+        android:paddingTop="@dimen/list_vertical_spacing">
+
+        <TextView
+            android:id="@+id/main_list_item_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/main_list_item_sub_info"
+            style="@style/Secondary_Text_Style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
