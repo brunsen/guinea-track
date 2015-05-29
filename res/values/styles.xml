@@ -11,9 +11,10 @@
         <item name="android:background">@color/background</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:colorBackground">@color/background</item>
-        <item name="android:textAppearance">@style/Primary_Text_Style</item>
+        <item name="android:textViewStyle">@style/Primary_Text_Style</item>
         <item name="colorAccent">@color/accent_color</item>
-
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/primary_dark_color</item>
     </style>
 
     <!-- Application theme. -->
@@ -21,15 +22,12 @@
 
         <!-- Theme customizations available in newer API levels can go in res/values-vXX/styles.xml,
          while customizations related to backward-compatibility can go here. -->
-
-        <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryDark">@color/primary_dark_color</item>
     </style>
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
         <item name="android:background">@color/primary_color</item>
-        <item name="android:textColorPrimary">@color/toolbar_text</item>
-        <item name="android:textColorSecondary">@color/toolbar_text</item>
+        <item name="android:textColorPrimary">@color/toolbar_title</item>
+        <item name="android:textColorSecondary">@color/toolbar_subtitle</item>
     </style>
 
     <style name="Primary_Text_Style" parent="@android:style/TextAppearance">

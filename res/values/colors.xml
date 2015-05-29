@@ -5,6 +5,7 @@
     <color name="accent_color">#FF9800</color>
     <color name="background">#ffffff</color>
     <color name="main_list_header_divider">#e8eaf6</color>
-    <color name="toolbar_text">#c5cae9</color>
+    <color name="toolbar_title">#ffffff</color>
+    <color name="toolbar_subtitle">#C5CAE9</color>
     <color name="text_color_primary">#000000</color>
 </resources>
