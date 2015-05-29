@@ -12,6 +12,7 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="android:textAppearance">@style/Primary_Text_Style</item>
+        <item name="colorAccent">@color/accent_color</item>
 
     </style>
 
@@ -29,7 +30,6 @@
         <item name="android:background">@color/primary_color</item>
         <item name="android:textColorPrimary">@color/toolbar_text</item>
         <item name="android:textColorSecondary">@color/toolbar_text</item>
-        <item name="colorAccent">@color/accent_color</item>
     </style>
 
     <style name="Primary_Text_Style" parent="@android:style/TextAppearance">

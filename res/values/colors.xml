@@ -2,9 +2,7 @@
 <resources>
     <color name="primary_color">#3f51b5</color>
     <color name="primary_dark_color">#303f9f</color>
-    <color name="accent_color">#ffcc80</color>
-    <color name="action_button_normal">#ffa726</color>
-    <color name="action_button_pressed">#ffe0b2</color>
+    <color name="accent_color">#FF9800</color>
     <color name="background">#ffffff</color>
     <color name="main_list_header_divider">#e8eaf6</color>
     <color name="toolbar_text">#c5cae9</color>
