@@ -57,4 +57,8 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        showLeaveConfirmation(getString(R.string.message_unsaved_update));
+    }
 }

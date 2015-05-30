@@ -35,4 +35,6 @@
     <string name="type_breed">Breed</string>
     <string name="type_rescue">Rescue</string>
     <string name="deletion_confirmation_text">Are you sure you want to remove %s?</string>
+    <string name="message_unsaved_update">Are you sure you want to leave without saving? Any updated information about the guinea pig, will be lost.</string>
+    <string name="message_unsaved_guinea_pig">Are you sure you don\'t want to add the guinea pig? Any information you typed in so far will be lost.</string>
 </resources>

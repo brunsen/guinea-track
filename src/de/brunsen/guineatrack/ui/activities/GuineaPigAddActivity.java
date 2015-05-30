@@ -34,4 +34,9 @@ public class GuineaPigAddActivity extends AbstractPigActivity {
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        showLeaveConfirmation(getString(R.string.message_unsaved_guinea_pig));
+    }
 }
