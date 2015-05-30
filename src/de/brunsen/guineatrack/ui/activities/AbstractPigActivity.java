@@ -254,6 +254,7 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
                 finish();
             }
         });
