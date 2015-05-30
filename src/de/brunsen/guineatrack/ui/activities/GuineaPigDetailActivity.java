@@ -1,8 +1,10 @@
 package de.brunsen.guineatrack.ui.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -57,7 +59,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
                 callEditor();
                 return true;
             case R.id.call_delete:
-                deletePig();
+                showDeleteDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -121,6 +123,27 @@ public class GuineaPigDetailActivity extends BaseActivity {
                 GuineaPigEditActivity.class);
         intent.putExtra("pig", pig);
         startActivity(intent);
+    }
+
+    public void showDeleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle(getString(R.string.confirm));
+        String message = getString(R.string.deletion_confirmation_text);
+        message = String.format(message, pig.getName());
+        builder.setMessage(message);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deletePig();
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
 }

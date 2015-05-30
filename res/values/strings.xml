@@ -9,6 +9,7 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="confirm">Confirm</string>
     <string name="change_picture">Change Picture</string>
     <string name="pig_name">Name:</string>
     <string name="pig_race">Race:</string>
@@ -33,4 +34,5 @@
     <string name="type_sale">Sale</string>
     <string name="type_breed">Breed</string>
     <string name="type_rescue">Rescue</string>
+    <string name="deletion_confirmation_text">Are you sure you want to remove %s?</string>
 </resources>
