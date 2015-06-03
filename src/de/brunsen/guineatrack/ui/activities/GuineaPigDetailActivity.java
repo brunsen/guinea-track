@@ -113,7 +113,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
             crud.deletePig(pig);
             finish();
         } catch (IOException e) {
-            Toast.makeText(this, "Schwein konnte nicht gelöscht werden",
+            Toast.makeText(this, getString(R.string.error_pig_not_deleted_message),
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -121,7 +121,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
     public void callEditor() {
         Intent intent = new Intent(getApplicationContext(),
                 GuineaPigEditActivity.class);
-        intent.putExtra("pig", pig);
+        intent.putExtra(getString(R.string.pig_identifier), pig);
         startActivity(intent);
     }
 

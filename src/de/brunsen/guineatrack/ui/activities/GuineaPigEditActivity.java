@@ -17,7 +17,7 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pig = getIntent().getParcelableExtra("pig");
+        pig = getIntent().getParcelableExtra(getString(R.string.pig_identifier));
         setData();
     }
 

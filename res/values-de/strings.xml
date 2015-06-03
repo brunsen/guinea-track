@@ -24,7 +24,7 @@
     <string name="pick_picture">Neues Bild auswählen</string>
     <string name="remove_picture">Bild entfernen</string>
     <string name="error_loading_pigs">Fehler beim Laden der Schweinchen</string>
-    <string name="last_birth">Letzer Wurf:</string>
+    <string name="last_birth">Letzter Wurf:</string>
     <string name="unknown">Unbekannt</string>
     <string name="male">Bock</string>
     <string name="female">Weibchen</string>
@@ -35,4 +35,5 @@
     <string name="deletion_confirmation_text">Soll %s wirklich gelöscht werden?</string>
     <string name="message_unsaved_update">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle neuen Eingaben gehen dann verloren.</string>
     <string name="message_unsaved_guinea_pig">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle bisherigen Eingaben gehen dann verloren.</string>
+    <string name="error_pig_not_deleted_message">Meeri konnte nicht gelöscht werden</string>
 </resources>
