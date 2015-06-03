@@ -129,7 +129,11 @@ public abstract class AbstractPigActivity extends BaseActivity implements
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        selectedGender = null;
+        if (parent.getId() == R.id.detail_gender_spinner) {
+            selectedGender = null;
+        } else if (parent.getId() == R.id.detail_type_text) {
+            selectedType = null;
+        }
     }
 
     @Override

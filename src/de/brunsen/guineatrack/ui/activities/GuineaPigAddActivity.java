@@ -6,6 +6,7 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import de.brunsen.guineatrack.R;
+import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.services.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
@@ -23,6 +24,18 @@ public class GuineaPigAddActivity extends AbstractPigActivity {
         ImageService.getInstance().setDefaultImage(editImage);
     }
 
+    private boolean fieldsEmpty() {
+        boolean empty = true;
+        empty &= nameEdit.getText().toString().equals("");
+        empty &= birthEdit.getText().toString().equals("");
+        empty &= colorEdit.getText().toString().equals("");
+        empty &= raceEdit.getText().toString().equals("");
+        if (selectedGender == Gender.Female) {
+            empty &= lastBirthEdit.getText().toString().equals("");
+        }
+        return empty;
+    }
+
     @Override
     protected void storeWithCrud(GuineaPig pig) {
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
@@ -37,6 +50,11 @@ public class GuineaPigAddActivity extends AbstractPigActivity {
 
     @Override
     public void onBackPressed() {
-        showLeaveConfirmation(getString(R.string.message_unsaved_guinea_pig));
+        if (!fieldsEmpty()){
+            showLeaveConfirmation(getString(R.string.message_unsaved_guinea_pig));
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }
