@@ -57,8 +57,27 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
         }
     }
 
+    private boolean newData() {
+        boolean noUpdate = true;
+        noUpdate &= nameEdit.getText().toString().equals(pig.getName());
+        noUpdate &= birthEdit.getText().toString().equals(pig.getBirth());
+        noUpdate &= colorEdit.getText().toString().equals(pig.getColor());
+        noUpdate &= raceEdit.getText().toString().equals(pig.getRace());
+        noUpdate &= pig.getType().equals(selectedType);
+        noUpdate &= pig.getPicturePath().equals(selectedImage);
+        noUpdate &= pig.getGender().equals(selectedGender);
+        if (selectedGender != null && selectedGender == Gender.Female) {
+            noUpdate &= lastBirthEdit.getText().toString().equals(pig.getLastBirth());
+        }
+        return !noUpdate;
+    }
+
     @Override
     public void onBackPressed() {
-        showLeaveConfirmation(getString(R.string.message_unsaved_update));
+        if (newData()) {
+            showLeaveConfirmation(getString(R.string.message_unsaved_update));
+        } else {
+            super.onBackPressed();
+        }
     }
 }

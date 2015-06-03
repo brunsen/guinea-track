@@ -50,10 +50,9 @@ public class GuineaPigAddActivity extends AbstractPigActivity {
 
     @Override
     public void onBackPressed() {
-        if (!fieldsEmpty()){
+        if (!fieldsEmpty()) {
             showLeaveConfirmation(getString(R.string.message_unsaved_guinea_pig));
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
