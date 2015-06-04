@@ -85,9 +85,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                     break;
             }
         }
-        String subTitle = getString(R.string.main_activity_subtitle);
-        subTitle = String.format(subTitle, totalMale, totalFemale, totalCastrato);
-        getToolbar().setSubtitle(subTitle);
+        getToolbar().setSubtitle(getString(R.string.main_activity_subtitle, totalMale, totalFemale, totalCastrato));
     }
 
 

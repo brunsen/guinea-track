@@ -128,9 +128,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
     public void showDeleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         builder.setTitle(getString(R.string.confirm));
-        String message = getString(R.string.deletion_confirmation_text);
-        message = String.format(message, pig.getName());
-        builder.setMessage(message);
+        builder.setMessage(getString(R.string.deletion_confirmation_text, pig.getName()));
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
