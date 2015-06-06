@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -44,24 +47,26 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        ItemViewHolder holder;
         if (convertView == null) {
+            holder = new ItemViewHolder();
             convertView = mInflater.inflate(R.layout.main_list_item, parent, false);
+            holder.imageView = (RoundedImageView) convertView.findViewById(R.id.main_list_item_image);
+            holder.nameTextView = (TextView) convertView.findViewById(R.id.main_list_item_name);
+            holder.subInfoTextView = (TextView) convertView.findViewById(R.id.main_list_item_sub_info);
+            convertView.setTag(holder);
+        } else {
+            holder = (ItemViewHolder) convertView.getTag();
         }
-
-        TextView nameText = (TextView) convertView.findViewById(R.id.main_list_item_name);
-        TextView subInfoTextView = (TextView) convertView.findViewById(R.id.main_list_item_sub_info);
-        RoundedImageView pigImageView = (RoundedImageView) convertView.findViewById(R.id.main_list_item_image);
 
         GuineaPig pig = guineaPigs.get(position);
 
         String subInfoText = pig.getType().toString() + ", " + pig.getRace();
 
-        nameText.setText(pig.getName());
-        subInfoTextView.setText(subInfoText);
-        setImage(pig.getPicturePath(), pigImageView);
-
-
+        holder.nameTextView.setText(pig.getName());
+        holder.subInfoTextView.setText(subInfoText);
+        setImage(pig.getPicturePath(), holder.imageView);
+        
         return convertView;
     }
 
@@ -106,6 +111,12 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
 
     private class HeaderViewHolder {
         TextView text;
+    }
+
+    private class ItemViewHolder {
+        RoundedImageView imageView;
+        TextView nameTextView;
+        TextView subInfoTextView;
     }
 
 }
