@@ -2,6 +2,7 @@ package de.brunsen.guineatrack.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.brunsen.guineatrack.R;
@@ -23,11 +25,28 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 public class MainListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
     private List<GuineaPig> guineaPigs;
+    private List<Bitmap> pigImages;
     private LayoutInflater mInflater;
+    private Context mContext;
 
     public MainListAdapter(Context context, List<GuineaPig> list) {
         mInflater = LayoutInflater.from(context);
         guineaPigs = list;
+        pigImages = new ArrayList<>();
+        mContext = context;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        populatePigImageList();
+    }
+
+    private void populatePigImageList() {
+        pigImages.clear();
+        for (int i = 0; i < guineaPigs.size(); i++) {
+            pigImages.add(getImage(guineaPigs.get(i).getPicturePath()));
+        }
     }
 
     @Override
@@ -65,8 +84,8 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
 
         holder.nameTextView.setText(pig.getName());
         holder.subInfoTextView.setText(subInfoText);
-        setImage(pig.getPicturePath(), holder.imageView);
-        
+        holder.imageView.setImageBitmap(pigImages.get(position));
+
         return convertView;
     }
 
@@ -88,19 +107,21 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
         return convertView;
     }
 
-    protected void setImage(String filePath, RoundedImageView imageView) {
+    protected Bitmap getImage(String filePath) {
+        Bitmap pigImage;
         if (!filePath.equals("")) {
-            int requiredWidth = (int) imageView.getResources().getDimension(R.dimen.list_item_image_width);
-            int requiredHeight = (int) imageView.getResources().getDimension(R.dimen.list_item_image_height);
+            int requiredWidth = (int) mContext.getResources().getDimension(R.dimen.list_item_image_width);
+            int requiredHeight = (int) mContext.getResources().getDimension(R.dimen.list_item_image_height);
             Bitmap picture = ImageService.getInstance().getPicture(filePath, requiredWidth, requiredHeight);
             if (picture != null) {
-                imageView.setImageBitmap(picture);
+                pigImage = picture;
             } else {
-                ImageService.getInstance().setDefaultRoundImage(imageView);
+                pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultImage(mContext)).getBitmap();
             }
         } else {
-            ImageService.getInstance().setDefaultRoundImage(imageView);
+            pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultImage(mContext)).getBitmap();
         }
+        return pigImage;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package de.brunsen.guineatrack.services;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -66,16 +67,18 @@ public class ImageService {
 
     }
 
-    public void setDefaultImage(ImageView iv) {
+    public Drawable getDefaultImage(Context context) {
+        Drawable drawable;
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            Drawable defaultImage = iv.getResources().getDrawable(R.drawable.ic_launcher);
-            iv.setImageDrawable(defaultImage);
+            drawable = context.getResources().getDrawable(R.drawable.ic_launcher);
         } else {
-            iv.setImageResource(R.drawable.ic_launcher);
+            drawable = context.getDrawable(R.drawable.ic_launcher);
         }
+        return drawable;
     }
 
-    public void setDefaultRoundImage(RoundedImageView iv) {
+    public void setDefaultImage(ImageView iv) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             Drawable defaultImage = iv.getResources().getDrawable(R.drawable.ic_launcher);
             iv.setImageDrawable(defaultImage);
