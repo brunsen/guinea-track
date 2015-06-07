@@ -195,7 +195,7 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         String race = raceEdit.getText().toString();
         if (name.equals("") || birth.equals("") || color.equals("")
                 || race.equals("") || selectedGender == null || selectedType == null) {
-            Toast.makeText(this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG)
+            Toast.makeText(getApplicationContext(), getString(R.string.error_empty_fields), Toast.LENGTH_LONG)
                     .show();
         } else {
             String lastBirth = "";
