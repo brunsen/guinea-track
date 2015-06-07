@@ -127,7 +127,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return guineaPigs.get(position).getName().subSequence(0, 1).charAt(0);
+        return guineaPigs.get(position).getName().toUpperCase().subSequence(0, 1).charAt(0);
     }
 
     private class HeaderViewHolder {
