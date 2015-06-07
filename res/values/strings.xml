@@ -38,4 +38,6 @@
     <string name="message_unsaved_update">Are you sure you want to leave without saving? Any updated information about the guinea pig, will be lost.</string>
     <string name="message_unsaved_guinea_pig">Are you sure you don\'t want to add the guinea pig? Any information you typed in so far will be lost.</string>
     <string name="error_pig_not_deleted_message">Guinea pig could not be deleted</string>
+    <string name="no_guinea_pigs_title">No guinea pigs</string>
+    <string name="no_guinea_pigs_message">Currently you got no guinea pigs stored. You can add a new guinea pig by tapping the plus button.</string>
 </resources>

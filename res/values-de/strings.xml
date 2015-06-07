@@ -36,4 +36,6 @@
     <string name="message_unsaved_update">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle neuen Eingaben gehen dann verloren.</string>
     <string name="message_unsaved_guinea_pig">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle bisherigen Eingaben gehen dann verloren.</string>
     <string name="error_pig_not_deleted_message">Meeri konnte nicht gelöscht werden</string>
+    <string name="no_guinea_pigs_title">Keine Meeris</string>
+    <string name="no_guinea_pigs_message">Zur Zeit haben Sie keine Meeris hinterlegt. Sie können ein Meeri durch Tappen des Plus Knopfes hinzufügen.</string>
 </resources>

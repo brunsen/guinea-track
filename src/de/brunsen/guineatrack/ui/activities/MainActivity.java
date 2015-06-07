@@ -3,6 +3,7 @@ package de.brunsen.guineatrack.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -60,6 +61,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         setGenderText();
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
+        if (pigs.isEmpty()) {
+            handleEmptyList();
+        }
     }
 
     private void setGenderText() {
@@ -88,6 +92,13 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         getToolbar().setSubtitle(getString(R.string.main_activity_subtitle, totalMale, totalFemale, totalCastrato));
     }
 
+    private void handleEmptyList() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle(getString(R.string.no_guinea_pigs_title));
+        builder.setMessage(getString(R.string.no_guinea_pigs_message));
+        builder.setPositiveButton(getString(android.R.string.ok), null);
+        builder.show();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
