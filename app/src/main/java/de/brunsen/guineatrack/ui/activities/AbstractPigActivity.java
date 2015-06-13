@@ -1,5 +1,6 @@
 package de.brunsen.guineatrack.ui.activities;
 
+import android.app.DatePickerDialog;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -25,8 +28,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
+import de.brunsen.guineatrack.DatePickDialog;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.ui.adapter.GenderSpinnerAdapter;
 import de.brunsen.guineatrack.ui.adapter.TypeSpinnerAdapter;
@@ -110,6 +115,8 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         genderSpinner.setAdapter(genderAdapter);
         genderSpinner.setOnItemSelectedListener(this);
         selectImageButton.setOnClickListener(this);
+        birthEdit.setOnFocusChangeListener(new timePickerCaller());
+        lastBirthEdit.setOnFocusChangeListener(new timePickerCaller());
     }
 
     @Override
@@ -269,5 +276,23 @@ public abstract class AbstractPigActivity extends BaseActivity implements
             }
         });
         builder.show();
+    }
+
+    private class timePickerCaller implements View.OnFocusChangeListener{
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                EditText editText = (EditText) v;
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                DatePickDialog datePicker = new DatePickDialog(editText.getContext(), editText, year, month, day);
+                datePicker.getDatePicker().setCalendarViewShown(false);
+                Log.d("Bennet", "Datepicker calendar shown:" +datePicker.getDatePicker().getCalendarViewShown());
+                datePicker.show();
+            }
+        }
     }
 }

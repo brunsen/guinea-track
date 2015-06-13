@@ -3,6 +3,7 @@
     <string name="title_activity_guinea_pig_detail">Eigenschaften</string>
     <string name="title_activity_guinea_pig_add">Neues Meeri</string>
     <string name="main_activity_subtitle">M:%1$d W:%2$d K:%3$d</string>
+    <string name="set">Setzen</string>
     <string name="pigs_total">Gesamt: %d</string>
     <string name="add">Hinzufügen</string>
     <string name="save">Speichern</string>

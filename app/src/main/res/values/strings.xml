@@ -4,6 +4,7 @@
     <string name="title_activity_guinea_pig_detail">Characteristics</string>
     <string name="title_activity_guinea_pig_add">New Guinea Pig</string>
     <string name="main_activity_subtitle">M:%1$d F:%2$d C:%3$d</string>
+    <string name="set">Set</string>
     <string name="pigs_total">Total: %d</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
