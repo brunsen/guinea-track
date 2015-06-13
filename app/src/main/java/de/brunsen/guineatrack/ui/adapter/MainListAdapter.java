@@ -127,7 +127,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
     @Override
     public long getHeaderId(int position) {
         long id = 0;
-        char[] chars = guineaPigs.get(position).getRace().toUpperCase().replaceAll("\\s+","").toCharArray();
+        char[] chars = guineaPigs.get(position).getRace().toUpperCase().toCharArray();
         for (char character : chars) {
             id += character;
         }
