@@ -3,7 +3,7 @@ package de.brunsen.guineatrack.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class GuineaPig implements Comparable<GuineaPig>, Parcelable {
+public class GuineaPig implements Parcelable {
 
     private int id;
     private String name;
@@ -124,17 +124,6 @@ public class GuineaPig implements Comparable<GuineaPig>, Parcelable {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
-    }
-
-    @Override
-    public int compareTo(GuineaPig another) {
-        String currentRace = getRace().replaceAll("\\s+","");
-        String anotherRace = another.getRace().replaceAll("\\s+","");
-        int compareResult = currentRace.compareToIgnoreCase(anotherRace);
-        if (compareResult == 0) {
-            compareResult = getName().compareToIgnoreCase(another.getName());
-        }
-        return compareResult;
     }
 
     @Override

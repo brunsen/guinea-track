@@ -17,6 +17,7 @@ import java.util.List;
 
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.model.GuineaPigComparator;
 import de.brunsen.guineatrack.services.GuineaPigCRUD;
 import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -55,7 +56,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             tempPigs = new ArrayList<>();
             e.printStackTrace();
         }
-        Collections.sort(tempPigs);
+        Collections.sort(tempPigs, new GuineaPigComparator());
         pigs = tempPigs;
         MainListAdapter adapter = new MainListAdapter(this, pigs);
         setGenderText();
