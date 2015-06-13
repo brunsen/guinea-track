@@ -101,8 +101,8 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
         } else {
             holder = (HeaderViewHolder) convertView.getTag();
         }
-        //set header text as first char in name
-        String headerText = "" + guineaPigs.get(position).getName().subSequence(0, 1).charAt(0);
+        //set header text as the race of a guinea pig
+        String headerText = "" + guineaPigs.get(position).getRace();
         holder.text.setText(headerText);
         return convertView;
     }
@@ -126,8 +126,12 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
 
     @Override
     public long getHeaderId(int position) {
-        //return the first character of the country as ID because this is what headers are based upon
-        return guineaPigs.get(position).getName().toUpperCase().subSequence(0, 1).charAt(0);
+        long id = 0;
+        char[] chars = guineaPigs.get(position).getRace().toUpperCase().replaceAll("\\s+","").toCharArray();
+        for (char character : chars) {
+            id += character;
+        }
+        return id;
     }
 
     private class HeaderViewHolder {

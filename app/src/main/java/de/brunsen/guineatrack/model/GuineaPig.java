@@ -128,7 +128,13 @@ public class GuineaPig implements Comparable<GuineaPig>, Parcelable {
 
     @Override
     public int compareTo(GuineaPig another) {
-        return getName().compareToIgnoreCase(another.getName());
+        String currentRace = getRace().replaceAll("\\s+","");
+        String anotherRace = another.getRace().replaceAll("\\s+","");
+        int compareResult = currentRace.compareToIgnoreCase(anotherRace);
+        if (compareResult == 0) {
+            compareResult = getName().compareToIgnoreCase(another.getName());
+        }
+        return compareResult;
     }
 
     @Override
