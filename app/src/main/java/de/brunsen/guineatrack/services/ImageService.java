@@ -7,8 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.ImageView;
 
-import com.makeramen.roundedimageview.RoundedImageView;
-
 import java.io.File;
 
 import de.brunsen.guineatrack.R;

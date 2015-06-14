@@ -1,6 +1,5 @@
-package de.brunsen.guineatrack;
+package de.brunsen.guineatrack.ui.dialogs;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,24 +8,24 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-public class DatePickDialog extends DatePickerDialog{
-    EditText editText;
-    DatePicker datePicker;
-    public DatePickDialog(Context context, final EditText editText, int year, int monthOfYear, final int dayOfMonth) {
-        super(context, R.style.AlertDialogStyle, new OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+import java.text.DateFormat;
 
-            }
-        }, year, monthOfYear, dayOfMonth);
-        this.editText = editText;
+import de.brunsen.guineatrack.R;
+
+public class DatePickDialog extends DatePickerDialog {
+    private String title;
+    private DatePicker datePicker;
+
+    public DatePickDialog(Context context, final EditText editText, int year, int monthOfYear, final int dayOfMonth) {
+        super(context, R.style.AlertDialogStyle, null, year, monthOfYear, dayOfMonth);
         setCancelable(false);
+        setPermanentTitle(context.getString(R.string.date_picker_title));
         setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.set), new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 editText.clearFocus();
-
-                String date = datePicker.getDayOfMonth() + "." + datePicker.getMonth() + "." + datePicker.getYear();
+                DateFormat dateFormat = DateFormat.getDateInstance();
+                String date = dateFormat.format(datePicker.getCalendarView().getDate());
                 editText.setText(date);
                 dismiss();
             }
@@ -40,10 +39,21 @@ public class DatePickDialog extends DatePickerDialog{
         });
     }
 
+    public void setPermanentTitle(String title) {
+        this.title = title;
+        setTitle(title);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getButton(DialogInterface.BUTTON_NEUTRAL).setVisibility(View.INVISIBLE);
         datePicker = getDatePicker();
+    }
+
+    @Override
+    public void onDateChanged(DatePicker view, int year, int month, int day) {
+        super.onDateChanged(view, year, month, day);
+        setTitle(title);
     }
 }
