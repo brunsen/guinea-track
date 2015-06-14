@@ -3,8 +3,6 @@ package de.brunsen.guineatrack.ui.activities;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
@@ -42,7 +40,7 @@ public class GuineaPigAddActivity extends AbstractPigActivity {
         try {
             crud.storePig(pig);
             finish();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Toast.makeText(this, getString(R.string.save_error_message),
                     Toast.LENGTH_LONG).show();
         }

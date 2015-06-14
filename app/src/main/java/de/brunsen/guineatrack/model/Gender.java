@@ -15,8 +15,7 @@ public enum Gender {
         return position;
     }
 
-    @Override
-    public String toString() {
+    public String getText() {
         String value = "";
         switch (this) {
             case Male:

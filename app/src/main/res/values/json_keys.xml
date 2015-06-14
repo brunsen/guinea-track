@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="id_key">id</string>
+    <string name="name_key">name</string>
+    <string name="birth_key">birth</string>
+    <string name="gender_key">gender</string>
+    <string name="color_key">color</string>
+    <string name="race_key">race</string>
+    <string name="type_key">type</string>
+    <string name="last_birth_key">lastBirth</string>
+    <string name="picture_key">picturePath</string>
+
+</resources>

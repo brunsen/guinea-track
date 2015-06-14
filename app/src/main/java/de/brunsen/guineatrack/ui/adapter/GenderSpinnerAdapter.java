@@ -26,6 +26,16 @@ public class GenderSpinnerAdapter extends ArrayAdapter<Gender> {
     }
 
     @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = inflater.inflate(android.R.layout.simple_dropdown_item_1line,parent, false);
+        TextView textView = (TextView) row.findViewById(android.R.id.text1);
+        textView.setText(items.get(position).getText());
+        return row;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         if (row == null) {
@@ -34,7 +44,7 @@ public class GenderSpinnerAdapter extends ArrayAdapter<Gender> {
             row = inflater.inflate(resource, parent, false);
         }
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
-        textView.setText(items.get(position).toString());
+        textView.setText(items.get(position).getText());
         return row;
     }
 }

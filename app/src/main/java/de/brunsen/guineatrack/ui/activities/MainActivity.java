@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +49,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
             tempPigs.addAll(crud.getPigs());
-        } catch (IOException e) {
+        } catch (Exception e) {
             Toast.makeText(this, getString(R.string.error_loading_pigs),
                     Toast.LENGTH_LONG).show();
             tempPigs = new ArrayList<>();

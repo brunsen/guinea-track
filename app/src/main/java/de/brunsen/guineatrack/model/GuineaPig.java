@@ -29,7 +29,15 @@ public class GuineaPig implements Parcelable {
     };
 
     public GuineaPig() {
-        // Empty constructor for gson
+        id = 0;
+        name = "";
+        birth = "";
+        gender = Gender.CASTRATO;
+        color = "";
+        race = "";
+        type = Type.RESCUE;
+        picturePath = "";
+        lastBirth = "";
     }
 
     public GuineaPig(Parcel in) {

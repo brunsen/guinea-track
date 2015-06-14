@@ -14,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
@@ -94,9 +92,9 @@ public class GuineaPigDetailActivity extends BaseActivity {
         nameText.setText(pig.getName());
         birthText.setText(pig.getBirth());
         colorText.setText(pig.getColor());
-        genderText.setText(pig.getGender().toString());
+        genderText.setText(pig.getGender().getText());
         raceText.setText(pig.getRace());
-        typeText.setText(pig.getType().toString());
+        typeText.setText(pig.getType().getText());
         if (pig.getGender() == Gender.Female) {
             lastBirthGroup.setVisibility(View.VISIBLE);
             String lastBirthText = pig.getLastBirth();
@@ -112,7 +110,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
         try {
             crud.deletePig(pig);
             finish();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Toast.makeText(this, getString(R.string.error_pig_not_deleted_message),
                     Toast.LENGTH_LONG).show();
         }

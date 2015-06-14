@@ -4,8 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,13 +22,15 @@ import de.brunsen.guineatrack.model.GuineaPig;
 public class GuineaPigCRUD {
     private String path;
     private String fileName;
+    private Context mContext;
 
     public GuineaPigCRUD(Context c) {
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + c.getString(R.string.folder_path);
         fileName = c.getString(R.string.storage_file_name);
+        mContext = c;
     }
 
-    public void storePig(GuineaPig pig) throws IOException {
+    public void storePig(GuineaPig pig) throws IOException, JSONException {
         int newID = 1;
         List<GuineaPig> pigs = new ArrayList<>();
         try {
@@ -47,13 +48,13 @@ public class GuineaPigCRUD {
         storePigs(pigs);
     }
 
-    private void storePigs(List<GuineaPig> pigs) throws IOException {
-        Gson gson = new Gson();
-        String json = gson.toJson(pigs);
+    private void storePigs(List<GuineaPig> pigs) throws IOException, JSONException {
+        JsonWriter writer = new JsonWriter(mContext);
+        String json = writer.createJsonArrayFromList(pigs).toString();
         storeJson(json);
     }
 
-    public void deletePig(GuineaPig pig) throws IOException {
+    public void deletePig(GuineaPig pig) throws IOException, JSONException {
         int deleteId = pig.getId();
         List<GuineaPig> pigs = getPigs();
         Iterator<GuineaPig> iterator = pigs.iterator();
@@ -66,7 +67,7 @@ public class GuineaPigCRUD {
         storePigs(pigs);
     }
 
-    public List<GuineaPig> getPigs() throws IOException {
+    public List<GuineaPig> getPigs() throws IOException, JSONException {
         File f = new File(path + fileName);
         List<GuineaPig> pigs = new ArrayList<>();
         if (f.exists()) {
@@ -81,10 +82,8 @@ public class GuineaPigCRUD {
             reader = null;
             input = null;
             if (!json.equals("")) {
-                Gson gson = new Gson();
-                List<GuineaPig> pigToReturn = gson.fromJson(json, new TypeToken<List<GuineaPig>>() {
-                }.getType());
-                pigs.addAll(pigToReturn);
+                JsonReader jsonReader = new JsonReader(mContext);
+                pigs.addAll(jsonReader.getGuineaListFromString(json));
             }
         }
         return pigs;
@@ -115,7 +114,7 @@ public class GuineaPigCRUD {
         outputStream.close();
     }
 
-    public void updatePig(GuineaPig pigUpdate) throws IOException {
+    public void updatePig(GuineaPig pigUpdate) throws IOException, JSONException {
         List<GuineaPig> pigs = getPigs();
         Iterator<GuineaPig> iterator = pigs.iterator();
         while (iterator.hasNext()) {

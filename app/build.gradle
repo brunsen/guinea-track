@@ -41,5 +41,4 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'se.emilsjolander:stickylistheaders:2.6.0'
     compile 'com.makeramen:roundedimageview:2.0.1'
-    compile 'com.google.code.gson:gson:2.3.1'
 }
