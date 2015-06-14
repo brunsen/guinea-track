@@ -2,7 +2,7 @@ package de.brunsen.guineatrack.model;
 
 import java.util.Comparator;
 
-public class GuineaPigComparator implements Comparator<GuineaPig>{
+public class GuineaPigComparator implements Comparator<GuineaPig> {
 
     @Override
     public int compare(GuineaPig a, GuineaPig b) {

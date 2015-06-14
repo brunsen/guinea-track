@@ -275,7 +275,7 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         builder.show();
     }
 
-    private class timePickerCaller implements View.OnFocusChangeListener{
+    private class timePickerCaller implements View.OnFocusChangeListener {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {

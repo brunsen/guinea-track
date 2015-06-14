@@ -30,7 +30,7 @@ public class TypeSpinnerAdapter extends ArrayAdapter<Type> {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = inflater.inflate(android.R.layout.simple_dropdown_item_1line,parent, false);
+        View row = inflater.inflate(android.R.layout.simple_dropdown_item_1line, parent, false);
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
         textView.setText(items.get(position).getText());
         return row;

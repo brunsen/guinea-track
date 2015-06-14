@@ -1,9 +1,6 @@
 package de.brunsen.guineatrack.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class GuineaPig implements Parcelable {
+public class GuineaPig {
 
     private int id;
     private String name;
@@ -15,19 +12,6 @@ public class GuineaPig implements Parcelable {
     private String picturePath;
     private String lastBirth;
 
-    public static final Creator<GuineaPig> CREATOR = new Creator<GuineaPig>() {
-
-        @Override
-        public GuineaPig createFromParcel(Parcel source) {
-            return new GuineaPig(source);
-        }
-
-        @Override
-        public GuineaPig[] newArray(int size) {
-            return new GuineaPig[size];
-        }
-    };
-
     public GuineaPig() {
         id = 0;
         name = "";
@@ -38,18 +22,6 @@ public class GuineaPig implements Parcelable {
         type = Type.RESCUE;
         picturePath = "";
         lastBirth = "";
-    }
-
-    public GuineaPig(Parcel in) {
-        this.setName(in.readString());
-        this.setBirth(in.readString());
-        this.setRace(in.readString());
-        this.setColor(in.readString());
-        this.setGender(Gender.fromInt(in.readInt()));
-        this.setId(in.readInt());
-        this.setType(Type.fromInt(in.readInt()));
-        this.setPicturePath(in.readString());
-        this.setLastBirth(in.readString());
     }
 
     public GuineaPig(String name, String birthday, Gender g, String color,
@@ -132,24 +104,6 @@ public class GuineaPig implements Parcelable {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getName());
-        dest.writeString(getBirth());
-        dest.writeString(getRace());
-        dest.writeString(getColor());
-        dest.writeInt(getGender().getPosition());
-        dest.writeInt(getId());
-        dest.writeInt(getType().getPosition());
-        dest.writeString(getPicturePath());
-        dest.writeString(getLastBirth());
     }
 
     public String getLastBirth() {

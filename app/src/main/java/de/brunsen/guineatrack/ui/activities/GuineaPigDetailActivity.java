@@ -14,11 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.services.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
+import de.brunsen.guineatrack.services.JsonReader;
+import de.brunsen.guineatrack.services.JsonWriter;
 
 public class GuineaPigDetailActivity extends BaseActivity {
     private GuineaPig pig;
@@ -36,10 +40,16 @@ public class GuineaPigDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guinea_pig_detail);
-        pig = getIntent().getParcelableExtra(getString(R.string.pig_identifier));
-        initComponents();
-        initToolbar();
-        setData();
+        JsonReader reader = new JsonReader(this);
+        try {
+            pig = reader.getGuineaPigFromString(getIntent().getStringExtra(getString(R.string.pig_identifier)));
+            initComponents();
+            initToolbar();
+            setData();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            finish();
+        }
     }
 
     @Override
@@ -117,10 +127,16 @@ public class GuineaPigDetailActivity extends BaseActivity {
     }
 
     public void callEditor() {
-        Intent intent = new Intent(getApplicationContext(),
-                GuineaPigEditActivity.class);
-        intent.putExtra(getString(R.string.pig_identifier), pig);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(getApplicationContext(),
+                    GuineaPigEditActivity.class);
+            JsonWriter writer = new JsonWriter(this);
+            String json = writer.createGuineaJson(pig).toString();
+            intent.putExtra(getString(R.string.pig_identifier), json);
+            startActivity(intent);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showDeleteDialog() {

@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +20,7 @@ import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
 import de.brunsen.guineatrack.services.GuineaPigCRUD;
+import de.brunsen.guineatrack.services.JsonWriter;
 import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -105,10 +108,16 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                             long id) {
         GuineaPig pig = pigs.get(position);
         if (pig != null) {
-            Intent intent = new Intent(getApplicationContext(),
-                    GuineaPigDetailActivity.class);
-            intent.putExtra(getString(R.string.pig_identifier), pig);
-            startActivity(intent);
+            try {
+                Intent intent = new Intent(getApplicationContext(),
+                        GuineaPigDetailActivity.class);
+                JsonWriter writer = new JsonWriter(this);
+                String json = writer.createGuineaJson(pig).toString();
+                intent.putExtra(getString(R.string.pig_identifier), json);
+                startActivity(intent);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

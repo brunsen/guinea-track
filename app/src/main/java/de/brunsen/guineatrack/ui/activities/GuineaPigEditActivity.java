@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.services.GuineaPigCRUD;
+import de.brunsen.guineatrack.services.JsonReader;
 
 public class GuineaPigEditActivity extends AbstractPigActivity {
     GuineaPig pig;
@@ -15,8 +18,14 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pig = getIntent().getParcelableExtra(getString(R.string.pig_identifier));
-        setData();
+        JsonReader reader = new JsonReader(this);
+        try {
+            pig = reader.getGuineaPigFromString(getIntent().getStringExtra(getString(R.string.pig_identifier)));
+            setData();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            finish();
+        }
     }
 
     @Override
