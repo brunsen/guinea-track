@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -88,11 +89,16 @@ public class GuineaPigDetailActivity extends BaseActivity {
 
     private void setData() {
         String picturePath = pig.getPicturePath();
+        int height = getResources().getDisplayMetrics().heightPixels;
+        ViewGroup.LayoutParams imageLayoutParams = pigImage.getLayoutParams();
+        imageLayoutParams.height = (int) (height / 1.7);
+        pigImage.setLayoutParams(imageLayoutParams);
         if (picturePath.equals("")) {
             ImageService.getInstance().setDefaultImage(pigImage);
         } else {
-            int requiredHeight = (int) getResources().getDimension(R.dimen.detail_picture_height);
-            Bitmap picture = ImageService.getInstance().getPicture(pig.getPicturePath(), requiredHeight, requiredHeight);
+            int requiredWidth =imageLayoutParams.width / 2;
+            int requiredHeight = imageLayoutParams.height / 2;
+            Bitmap picture = ImageService.getInstance().getPicture(pig.getPicturePath(), requiredWidth, requiredHeight);
             if (picture != null) {
                 pigImage.setImageBitmap(picture);
             } else {

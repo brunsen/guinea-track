@@ -12,7 +12,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:fillViewport="true">
 
 
         <LinearLayout
@@ -24,7 +25,7 @@
             <ImageView
                 android:id="@+id/detail_image"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/detail_picture_height"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/image_description"
                 android:scaleType="fitXY" />

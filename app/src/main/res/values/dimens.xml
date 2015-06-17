@@ -14,7 +14,6 @@
     <dimen name="list_item_image_height">40dp</dimen>
     <dimen name="action_button_width">60dp</dimen>
     <dimen name="action_button_height">60dp</dimen>
-    <dimen name="detail_picture_height">400dp</dimen>
     <dimen name="edit_picture_height">400dp</dimen>
     <dimen name="edit_input_left_margin">20dp</dimen>
     <dimen name="edit_spinner_width">150dp</dimen>
