@@ -17,6 +17,7 @@
     <string name="pig_birthday">Geburtstag:</string>
     <string name="pig_gender">Geschlecht:</string>
     <string name="pig_type">Typ:</string>
+    <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Meeri bearbeiten</string>
     <string name="error_empty_fields">Bitte alle Felder ausfüllen</string>
     <string name="save_error_message">Speichern fehlgeschlagen</string>

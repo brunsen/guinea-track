@@ -18,6 +18,7 @@
     <string name="pig_birthday">Birthday:</string>
     <string name="pig_gender">Gender:</string>
     <string name="pig_type">Typ:</string>
+    <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Edit Guinea Pig</string>
     <string name="error_empty_fields">Please fill out all fields</string>
     <string name="save_error_message">Saving failing</string>

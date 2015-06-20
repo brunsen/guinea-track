@@ -22,7 +22,7 @@
             <TableLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="2">
+                android:stretchColumns="1">
 
                 <TableRow>
 
@@ -144,7 +144,7 @@
 
                 <TableRow
                     android:id="@+id/last_birth_row"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -161,6 +161,11 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:inputType="date" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/optional_field"/>
 
 
                 </TableRow>
