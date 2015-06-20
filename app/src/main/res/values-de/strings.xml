@@ -19,7 +19,7 @@
     <string name="pig_type">Typ:</string>
     <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Meeri bearbeiten</string>
-    <string name="error_empty_fields">Bitte alle Felder ausfüllen</string>
+    <string name="error_empty_fields">Bitte alle Pflichfelder ausfüllen</string>
     <string name="save_error_message">Speichern fehlgeschlagen</string>
     <string name="update_error_message">Die neuen Werte vom Meeri konnten nicht gespeichert werden</string>
     <string name="image_description">Kein Bild vorhanden</string>

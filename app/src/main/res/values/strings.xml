@@ -20,7 +20,7 @@
     <string name="pig_type">Typ:</string>
     <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Edit Guinea Pig</string>
-    <string name="error_empty_fields">Please fill out all fields</string>
+    <string name="error_empty_fields">Please fill out all mandatory fields</string>
     <string name="save_error_message">Saving failing</string>
     <string name="update_error_message">The new values could not be stored for this guinea pig</string>
     <string name="image_description">No picture available</string>
