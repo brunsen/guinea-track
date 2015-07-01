@@ -65,26 +65,26 @@
 
                 <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pig_weight"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_weight"
+                        android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/pig_weight_edit_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/edit_input_left_margin"
-                    android:layout_marginStart="@dimen/edit_input_left_margin"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:inputType="numberDecimal" />
+                    <EditText
+                        android:id="@+id/pig_weight_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="numberDecimal" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/optional_field"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/optional_field" />
                 </TableRow>
 
                 <TableRow>
@@ -123,7 +123,7 @@
                         android:layout_marginStart="@dimen/edit_input_left_margin"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:inputType="textPersonName" />
+                        android:inputType="text" />
                 </TableRow>
 
                 <TableRow>
@@ -181,12 +181,12 @@
                         android:layout_marginStart="@dimen/edit_input_left_margin"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:inputType="numberDecimal" />
+                        android:inputType="text" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/optional_field"/>
+                        android:text="@string/optional_field" />
                 </TableRow>
 
                 <TableRow>
@@ -205,16 +205,15 @@
                         android:layout_marginStart="@dimen/edit_input_left_margin"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:inputType="numberDecimal" />
+                        android:inputType="text" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/optional_field"/>
+                        android:text="@string/optional_field" />
                 </TableRow>
 
-                <TableRow
-                    android:id="@+id/castration_edit_area">
+                <TableRow android:id="@+id/castration_edit_area">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -230,12 +229,12 @@
                         android:layout_marginStart="@dimen/edit_input_left_margin"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:inputType="numberDecimal" />
+                        android:inputType="date" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/optional_field"/>
+                        android:text="@string/optional_field" />
                 </TableRow>
 
                 <TableRow
@@ -261,7 +260,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/optional_field"/>
+                        android:text="@string/optional_field" />
 
 
                 </TableRow>
