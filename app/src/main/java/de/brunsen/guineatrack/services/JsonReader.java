@@ -51,15 +51,38 @@ public class JsonReader {
             restoredPig.setGender(Gender.valueOf(jsonObject.getString(mContext.getString(R.string.gender_key))));
         if (jsonObject.has(mContext.getString(R.string.color_key)))
             restoredPig.setColor(jsonObject.getString(mContext.getString(R.string.color_key)));
-        if (jsonObject.has(mContext.getString(R.string.race_key)))
-            restoredPig.setRace(jsonObject.getString(mContext.getString(R.string.race_key)));
+        if (jsonObject.has(mContext.getString(R.string.breed_key)))
+            restoredPig.setBreed(jsonObject.getString(mContext.getString(R.string.breed_key)));
+        if (jsonObject.has(mContext.getString(R.string.breed_key_old)))
+            restoredPig.setBreed(jsonObject.getString(mContext.getString(R.string.breed_key_old)));
         if (jsonObject.has(mContext.getString(R.string.type_key)))
             restoredPig.setType(Type.valueOf(jsonObject.getString(mContext.getString(R.string.type_key))));
-        if (jsonObject.has(mContext.getString(R.string.last_birth_key)))
-            restoredPig.setLastBirth(jsonObject.getString(mContext.getString(R.string.last_birth_key)));
-        if (jsonObject.has(mContext.getString(R.string.picture_key)))
-            restoredPig.setPicturePath(jsonObject.getString(mContext.getString(R.string.picture_key)));
+
+        getOptionalDataFromJson(jsonObject, restoredPig);
         return restoredPig;
+    }
+
+    private void getOptionalDataFromJson(JSONObject jsonObject, GuineaPig restoredPig) throws JSONException {
+        if (jsonObject.has(mContext.getString(R.string.last_birth_key)))
+            restoredPig.getOptionalData().setLastBirth(jsonObject.getString(mContext.getString(R.string.last_birth_key)));
+        if (jsonObject.has(mContext.getString(R.string.picture_key)))
+            restoredPig.getOptionalData().setPicturePath(jsonObject.getString(mContext.getString(R.string.picture_key)));
+
+        if (jsonObject.has(mContext.getString(R.string.optional_data_key))) {
+            JSONObject optionalData = jsonObject.getJSONObject(mContext.getString(R.string.optional_data_key));
+            if (optionalData.has(mContext.getString(R.string.weight_key)))
+                restoredPig.getOptionalData().setWeight(optionalData.getDouble(mContext.getString(R.string.weight_key)));
+            if (optionalData.has(mContext.getString(R.string.origin_key)))
+                restoredPig.getOptionalData().setOrigin(optionalData.getString((mContext.getString(R.string.origin_key))));
+            if (optionalData.has(mContext.getString(R.string.castration_date_key)))
+                restoredPig.getOptionalData().setCastrationDate(optionalData.getString(mContext.getString(R.string.castration_date_key)));
+            if (optionalData.has(mContext.getString(R.string.limitations_key)))
+                restoredPig.getOptionalData().setLimitations(optionalData.getString(mContext.getString(R.string.limitations_key)));
+            if (optionalData.has(mContext.getString(R.string.last_birth_key)))
+                restoredPig.getOptionalData().setLastBirth(optionalData.getString(mContext.getString(R.string.last_birth_key)));
+            if (optionalData.has(mContext.getString(R.string.picture_key)))
+                restoredPig.getOptionalData().setPicturePath(optionalData.getString(mContext.getString(R.string.picture_key)));
+        }
     }
 
 }

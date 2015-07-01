@@ -33,10 +33,16 @@ public class JsonWriter {
         json.put(mContext.getString(R.string.birth_key), pig.getBirth());
         json.put(mContext.getString(R.string.gender_key), pig.getGender());
         json.put(mContext.getString(R.string.color_key), pig.getColor());
-        json.put(mContext.getString(R.string.race_key), pig.getRace());
+        json.put(mContext.getString(R.string.breed_key), pig.getBreed());
         json.put(mContext.getString(R.string.type_key), pig.getType());
-        json.put(mContext.getString(R.string.last_birth_key), pig.getLastBirth());
-        json.put(mContext.getString(R.string.picture_key), pig.getPicturePath());
+        JSONObject optionalObject = new JSONObject();
+        optionalObject.put(mContext.getString(R.string.last_birth_key), pig.getOptionalData().getLastBirth());
+        optionalObject.put(mContext.getString(R.string.weight_key), pig.getOptionalData().getWeight());
+        optionalObject.put((mContext.getString(R.string.origin_key)), pig.getOptionalData().getOrigin());
+        optionalObject.put(mContext.getString(R.string.limitations_key), pig.getOptionalData().getLimitations());
+        optionalObject.put(mContext.getString(R.string.castration_date_key), pig.getOptionalData().getCastrationDate());
+        optionalObject.put(mContext.getString(R.string.picture_key), pig.getOptionalData().getPicturePath());
+        json.put(mContext.getString(R.string.optional_data_key), optionalObject);
         return json;
     }
 }

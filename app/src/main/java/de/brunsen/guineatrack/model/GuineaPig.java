@@ -7,39 +7,27 @@ public class GuineaPig {
     private String birth;
     private Gender gender;
     private String color;
-    private String race;
+    private String breed;
     private Type type;
-    private String picturePath;
-    private String lastBirth;
+    private GuineaPigOptionalData guineaPigOptionalData;
 
     public GuineaPig() {
-        id = 0;
-        name = "";
-        birth = "";
-        gender = Gender.CASTRATO;
-        color = "";
-        race = "";
-        type = Type.RESCUE;
-        picturePath = "";
-        lastBirth = "";
+        this(0, "", "", Gender.CASTRATO, "", "", Type.RESCUE, new GuineaPigOptionalData());
     }
 
-    public GuineaPig(String name, String birthday, Gender g, String color,
-                     String race, Type t, String imgPath, String lastBirth) {
-        this(0, name, birthday, g, color, race, t, imgPath, lastBirth);
+    public GuineaPig(String name, String birthday, Gender g, String color, String breed, Type t, GuineaPigOptionalData optionalData) {
+        this(0, name, birthday, g, color, breed, t, optionalData);
     }
 
-    public GuineaPig(int id, String name, String birthday, Gender g,
-                     String color, String race, Type t, String imgPath, String lastBirth) {
+    public GuineaPig(int id, String name, String birthday, Gender g, String color, String breed, Type t, GuineaPigOptionalData optionalData) {
         this.setId(id);
         this.setName(name);
         this.setBirth(birthday);
         this.setGender(g);
         this.setColor(color);
-        this.setRace(race);
+        this.setBreed(breed);
         this.setType(t);
-        this.setPicturePath(imgPath);
-        this.setLastBirth(lastBirth);
+        this.setOptionalData(optionalData);
     }
 
     public int getId() {
@@ -82,12 +70,12 @@ public class GuineaPig {
         this.color = color;
     }
 
-    public String getRace() {
-        return race;
+    public String getBreed() {
+        return breed;
     }
 
-    public void setRace(String race) {
-        this.race = race;
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
     public Type getType() {
@@ -98,19 +86,11 @@ public class GuineaPig {
         this.type = type;
     }
 
-    public String getPicturePath() {
-        return picturePath;
+    public GuineaPigOptionalData getOptionalData() {
+        return guineaPigOptionalData;
     }
 
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
-    }
-
-    public String getLastBirth() {
-        return lastBirth;
-    }
-
-    public void setLastBirth(String lastBirth) {
-        this.lastBirth = lastBirth;
+    public void setOptionalData(GuineaPigOptionalData guineaPigOptionalData) {
+        this.guineaPigOptionalData = guineaPigOptionalData;
     }
 }

@@ -13,11 +13,15 @@
     <string name="confirm">Confirm</string>
     <string name="change_picture">Change Picture</string>
     <string name="pig_name">Name:</string>
-    <string name="pig_race">Race:</string>
+    <string name="pig_breed">Breed:</string>
     <string name="pig_color">Color:</string>
     <string name="pig_birthday">Birthday:</string>
     <string name="pig_gender">Gender:</string>
     <string name="pig_type">Typ:</string>
+    <string name="pig_weight">Weight (in Kg):</string>
+    <string name="pig_limitations">Limitations:</string>
+    <string name="pig_origin">Origin:</string>
+    <string name="pig_castration_date">Castrated at:</string>
     <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Edit Guinea Pig</string>
     <string name="error_empty_fields">Please fill out all mandatory fields</string>
@@ -43,4 +47,5 @@
     <string name="no_guinea_pigs_title">No guinea pigs</string>
     <string name="no_guinea_pigs_message">Currently you got no guinea pigs stored. You can add a new guinea pig by tapping the plus button.</string>
     <string name="date_picker_title">Pick a date</string>
+    <string name="no_limitations">No limitations</string>
 </resources>

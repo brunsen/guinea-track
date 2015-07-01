@@ -6,6 +6,7 @@ import android.widget.Toast;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.services.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
 
@@ -27,10 +28,18 @@ public class GuineaPigAddActivity extends AbstractPigActivity {
         empty &= nameEdit.getText().toString().equals("");
         empty &= birthEdit.getText().toString().equals("");
         empty &= colorEdit.getText().toString().equals("");
-        empty &= raceEdit.getText().toString().equals("");
+        empty &= breedEdit.getText().toString().equals("");
         if (selectedGender == Gender.Female) {
             empty &= lastBirthEdit.getText().toString().equals("");
         }
+        if (selectedGender != null && !selectedGender.equals(Gender.Male)) {
+            if (selectedType != null && !selectedType.equals(Type.BREED)) {
+                empty &= castrationDateEdit.getText().toString().equals("");
+            }
+        }
+        empty &= weightEdit.getText().toString().equals("");
+        empty &= limitationsEdit.getText().toString().equals("");
+        empty &= originEdit.getText().toString().equals("");
         return empty;
     }
 

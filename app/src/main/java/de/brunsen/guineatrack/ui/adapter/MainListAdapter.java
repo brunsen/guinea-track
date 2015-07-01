@@ -42,7 +42,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
     private void populatePigImageList() {
         pigImages.clear();
         for (int i = 0; i < guineaPigs.size(); i++) {
-            pigImages.add(getImage(guineaPigs.get(i).getPicturePath()));
+            pigImages.add(getImage(guineaPigs.get(i).getOptionalData().getPicturePath()));
         }
     }
 
@@ -77,7 +77,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
 
         GuineaPig pig = guineaPigs.get(position);
 
-        String subInfoText = pig.getType().getText() + ", " + pig.getRace();
+        String subInfoText = pig.getType().getText() + ", " + pig.getBreed();
 
         holder.nameTextView.setText(pig.getName());
         holder.subInfoTextView.setText(subInfoText);
@@ -99,7 +99,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
             holder = (HeaderViewHolder) convertView.getTag();
         }
         //set header text as the race of a guinea pig
-        String headerText = "" + guineaPigs.get(position).getRace();
+        String headerText = "" + guineaPigs.get(position).getBreed();
         holder.text.setText(headerText);
         return convertView;
     }
@@ -124,7 +124,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
     @Override
     public long getHeaderId(int position) {
         long id = 0;
-        char[] chars = guineaPigs.get(position).getRace().toUpperCase().toCharArray();
+        char[] chars = guineaPigs.get(position).getBreed().toUpperCase().toCharArray();
         for (char character : chars) {
             id += character;
         }

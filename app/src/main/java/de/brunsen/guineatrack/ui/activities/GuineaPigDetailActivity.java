@@ -20,6 +20,8 @@ import org.json.JSONException;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.model.GuineaPigOptionalData;
+import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.services.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
 import de.brunsen.guineatrack.services.JsonReader;
@@ -30,12 +32,17 @@ public class GuineaPigDetailActivity extends BaseActivity {
     private ImageView pigImage;
     private TextView nameText;
     private TextView birthText;
+    private TextView weightText;
     private TextView colorText;
     private TextView genderText;
     private TextView raceText;
     private TextView typeText;
     private LinearLayout lastBirthGroup;
     private TextView lastBirth;
+    private LinearLayout castrationDateGroup;
+    private TextView castrationDateTextView;
+    private TextView originTextView;
+    private TextView limitationsTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +88,31 @@ public class GuineaPigDetailActivity extends BaseActivity {
         birthText = (TextView) findViewById(R.id.detail_birth_text);
         colorText = (TextView) findViewById(R.id.detail_color_text);
         genderText = (TextView) findViewById(R.id.detail_gender_spinner);
-        raceText = (TextView) findViewById(R.id.detail_race_text);
+        raceText = (TextView) findViewById(R.id.detail_breed_text);
         typeText = (TextView) findViewById(R.id.detail_type_text);
         lastBirthGroup = (LinearLayout) findViewById(R.id.detail_last_birth);
         lastBirth = (TextView) findViewById(R.id.detail_last_birth_text);
+        castrationDateGroup = (LinearLayout) findViewById(R.id.detail_castration_data_area);
+        castrationDateTextView = (TextView) findViewById(R.id.detail_castration_date_text);
+        weightText = (TextView) findViewById(R.id.detail_weight_text);
+        originTextView = (TextView) findViewById(R.id.detail_origin_text);
+        limitationsTextView = (TextView) findViewById(R.id.detail_limitations_text);
     }
 
     private void setData() {
-        String picturePath = pig.getPicturePath();
+        GuineaPigOptionalData optionalData = pig.getOptionalData();
+        setPicture(optionalData);
+        nameText.setText(pig.getName());
+        birthText.setText(pig.getBirth());
+        colorText.setText(pig.getColor());
+        genderText.setText(pig.getGender().getText());
+        raceText.setText(pig.getBreed());
+        typeText.setText(pig.getType().getText());
+        setOptionalData(optionalData);
+    }
+
+    private void setPicture(GuineaPigOptionalData optionalData) {
+        String picturePath = optionalData.getPicturePath();
         int height = getResources().getDisplayMetrics().heightPixels;
         ViewGroup.LayoutParams imageLayoutParams = pigImage.getLayoutParams();
         imageLayoutParams.height = (int) (height / 1.7);
@@ -96,29 +120,45 @@ public class GuineaPigDetailActivity extends BaseActivity {
         if (picturePath.equals("")) {
             ImageService.getInstance().setDefaultImage(pigImage);
         } else {
-            int requiredWidth =imageLayoutParams.width / 2;
+            int requiredWidth = imageLayoutParams.width / 2;
             int requiredHeight = imageLayoutParams.height / 2;
-            Bitmap picture = ImageService.getInstance().getPicture(pig.getPicturePath(), requiredWidth, requiredHeight);
+            Bitmap picture = ImageService.getInstance().getPicture(picturePath, requiredWidth, requiredHeight);
             if (picture != null) {
                 pigImage.setImageBitmap(picture);
             } else {
                 ImageService.getInstance().setDefaultImage(pigImage);
             }
         }
-        nameText.setText(pig.getName());
-        birthText.setText(pig.getBirth());
-        colorText.setText(pig.getColor());
-        genderText.setText(pig.getGender().getText());
-        raceText.setText(pig.getRace());
-        typeText.setText(pig.getType().getText());
+    }
+
+    private void setOptionalData(GuineaPigOptionalData optionalData) {
         if (pig.getGender() == Gender.Female) {
             lastBirthGroup.setVisibility(View.VISIBLE);
-            String lastBirthText = pig.getLastBirth();
+            String lastBirthText = optionalData.getLastBirth();
             if (lastBirthText.equals("")) {
                 lastBirthText = getString(R.string.unknown);
             }
             lastBirth.setText(lastBirthText);
         }
+        if (pig.getGender() != Gender.Male && pig.getType() != Type.BREED) {
+            castrationDateGroup.setVisibility(View.VISIBLE);
+            String castrationDate = optionalData.getCastrationDate();
+            if (castrationDate.equals("")) {
+                castrationDate = getString(R.string.unknown);
+            }
+            castrationDateTextView.setText(castrationDate);
+        }
+        weightText.setText("" + optionalData.getWeight());
+        String originText = optionalData.getOrigin();
+        if (originText.equals("")){
+            originText = getString(R.string.unknown);
+        }
+        originTextView.setText(originText);
+        String limitationsText = optionalData.getLimitations();
+        if (limitationsText.equals("")){
+            limitationsText = getString(R.string.no_limitations);
+        }
+        limitationsTextView.setText(limitationsText);
     }
 
     public void deletePig() {

@@ -31,6 +31,7 @@ import java.util.List;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.services.ImageService;
 import de.brunsen.guineatrack.ui.adapter.GenderSpinnerAdapter;
@@ -42,7 +43,11 @@ public abstract class AbstractPigActivity extends BaseActivity implements
     protected EditText nameEdit;
     protected EditText birthEdit;
     protected EditText colorEdit;
-    protected EditText raceEdit;
+    protected EditText breedEdit;
+    protected EditText weightEdit;
+    protected EditText castrationDateEdit;
+    protected EditText limitationsEdit;
+    protected EditText originEdit;
     protected Spinner genderSpinner;
     protected Spinner typeSpinner;
     protected Gender selectedGender;
@@ -53,6 +58,7 @@ public abstract class AbstractPigActivity extends BaseActivity implements
     protected List<Type> typeSpinnerItems;
     protected String selectedImage;
     protected TableRow lastBirthRow;
+    protected TableRow castrationDateRow;
     protected EditText lastBirthEdit;
     private static final int RESULT_GALLERY = 0;
 
@@ -90,13 +96,18 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         nameEdit = (EditText) findViewById(R.id.detail_name_text);
         birthEdit = (EditText) findViewById(R.id.detail_birth_text);
         colorEdit = (EditText) findViewById(R.id.detail_color_text);
-        raceEdit = (EditText) findViewById(R.id.detail_race_text);
+        breedEdit = (EditText) findViewById(R.id.detail_breed_text);
         genderSpinner = (Spinner) findViewById(R.id.detail_gender_spinner);
         typeSpinner = (Spinner) findViewById(R.id.detail_type_text);
         selectImageButton = (Button) findViewById(R.id.add_picture);
         editImage = (ImageView) findViewById(R.id.edit_image);
         lastBirthRow = (TableRow) findViewById(R.id.last_birth_row);
+        castrationDateRow = (TableRow) findViewById(R.id.castration_edit_area);
         lastBirthEdit = (EditText) findViewById(R.id.last_birth_edit_text);
+        castrationDateEdit = (EditText) findViewById(R.id.pig_castration_edit_text);
+        weightEdit = (EditText) findViewById(R.id.pig_weight_edit_text);
+        originEdit = (EditText) findViewById(R.id.pig_origin_edit_text);
+        limitationsEdit = (EditText) findViewById(R.id.pig_limitations_edit_text);
     }
 
     protected void setAdaptersAndListeners() {
@@ -112,8 +123,9 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         genderSpinner.setAdapter(genderAdapter);
         genderSpinner.setOnItemSelectedListener(this);
         selectImageButton.setOnClickListener(this);
-        birthEdit.setOnFocusChangeListener(new timePickerCaller());
-        lastBirthEdit.setOnFocusChangeListener(new timePickerCaller());
+        birthEdit.setOnFocusChangeListener(new TimePickerCaller());
+        lastBirthEdit.setOnFocusChangeListener(new TimePickerCaller());
+        castrationDateEdit.setOnFocusChangeListener(new TimePickerCaller());
     }
 
     @Override
@@ -129,6 +141,7 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         } else if (parent.getId() == R.id.detail_type_text) {
             selectedType = typeSpinnerItems.get(position);
         }
+        toggleCastrationDateArea();
     }
 
     @Override
@@ -196,9 +209,9 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         String name = nameEdit.getText().toString();
         String birth = birthEdit.getText().toString();
         String color = colorEdit.getText().toString();
-        String race = raceEdit.getText().toString();
+        String breed = breedEdit.getText().toString();
         if (name.equals("") || birth.equals("") || color.equals("")
-                || race.equals("") || selectedGender == null || selectedType == null) {
+                || breed.equals("") || selectedGender == null || selectedType == null) {
             Toast.makeText(getApplicationContext(), getString(R.string.error_empty_fields), Toast.LENGTH_LONG)
                     .show();
         } else {
@@ -206,8 +219,19 @@ public abstract class AbstractPigActivity extends BaseActivity implements
             if (selectedGender == Gender.Female) {
                 lastBirth = lastBirthEdit.getText().toString();
             }
-            GuineaPig pig = new GuineaPig(name, birth, selectedGender,
-                    color, race, selectedType, selectedImage, lastBirth);
+            String castrationDate = "";
+            if (!selectedGender.equals(Gender.Male) && !selectedType.equals(Type.BREED)) {
+                castrationDate = castrationDateEdit.getText().toString();
+            }
+            String weightText = weightEdit.getText().toString();
+            double weight = 0.0;
+            if (!weightText.equals("")) {
+                weight = Double.valueOf(weightText);
+            }
+            String origin = originEdit.getText().toString();
+            String limitations = limitationsEdit.getText().toString();
+            GuineaPigOptionalData optionalData = new GuineaPigOptionalData(weight, lastBirth, origin, limitations, castrationDate, selectedImage);
+            GuineaPig pig = new GuineaPig(name, birth, selectedGender, color, breed, selectedType, optionalData);
             storeWithCrud(pig);
         }
     }
@@ -220,6 +244,16 @@ public abstract class AbstractPigActivity extends BaseActivity implements
             lastBirthRow.setVisibility(View.VISIBLE);
         } else {
             lastBirthRow.setVisibility(View.GONE);
+        }
+    }
+
+    protected void toggleCastrationDateArea() {
+        if (selectedGender != null && !selectedGender.equals(Gender.Male)) {
+            if (selectedType != null && !selectedType.equals(Type.BREED)) {
+                castrationDateRow.setVisibility(View.VISIBLE);
+            }
+        } else {
+            castrationDateRow.setVisibility(View.GONE);
         }
     }
 
@@ -275,7 +309,7 @@ public abstract class AbstractPigActivity extends BaseActivity implements
         builder.show();
     }
 
-    private class timePickerCaller implements View.OnFocusChangeListener {
+    private class TimePickerCaller implements View.OnFocusChangeListener {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {

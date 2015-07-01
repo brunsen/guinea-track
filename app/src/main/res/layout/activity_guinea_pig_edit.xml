@@ -63,6 +63,29 @@
 
                 </TableRow>
 
+                <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pig_weight"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/pig_weight_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/edit_input_left_margin"
+                    android:layout_marginStart="@dimen/edit_input_left_margin"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:inputType="numberDecimal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/optional_field"/>
+                </TableRow>
 
                 <TableRow>
 
@@ -108,11 +131,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_race"
+                        android:text="@string/pig_breed"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/detail_race_text"
+                        android:id="@+id/detail_breed_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/edit_input_left_margin"
@@ -142,9 +165,82 @@
 
                 </TableRow>
 
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_origin"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/pig_origin_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="numberDecimal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/optional_field"/>
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_limitations"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/pig_limitations_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="numberDecimal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/optional_field"/>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/castration_edit_area">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pig_castration_date"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/pig_castration_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/edit_input_left_margin"
+                        android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:inputType="numberDecimal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/optional_field"/>
+                </TableRow>
+
                 <TableRow
                     android:id="@+id/last_birth_row"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"

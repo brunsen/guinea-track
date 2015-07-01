@@ -6,9 +6,15 @@
     <string name="birth_key">birth</string>
     <string name="gender_key">gender</string>
     <string name="color_key">color</string>
-    <string name="race_key">race</string>
+    <string name="breed_key">breed</string>
+    <string name="breed_key_old">race</string>
     <string name="type_key">type</string>
+    <string name="optional_data_key">optionalData</string>
+    <string name="weight_key">weight</string>
     <string name="last_birth_key">lastBirth</string>
     <string name="picture_key">picturePath</string>
+    <string name="origin_key">origin</string>
+    <string name="limitations_key">limitations</string>
+    <string name="castration_date_key">castrationDate</string>
 
 </resources>
