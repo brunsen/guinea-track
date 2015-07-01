@@ -248,10 +248,9 @@ public abstract class AbstractPigActivity extends BaseActivity implements
     }
 
     protected void toggleCastrationDateArea() {
-        if (selectedGender != null && !selectedGender.equals(Gender.Male)) {
-            if (selectedType != null && !selectedType.equals(Type.BREED)) {
-                castrationDateRow.setVisibility(View.VISIBLE);
-            }
+        boolean showCastration = selectedGender != null && !selectedGender.equals(Gender.Male) && selectedType != null && !selectedType.equals(Type.BREED);
+        if (showCastration) {
+            castrationDateRow.setVisibility(View.VISIBLE);
         } else {
             castrationDateRow.setVisibility(View.GONE);
         }
