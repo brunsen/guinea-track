@@ -45,5 +45,5 @@
     <string name="no_guinea_pigs_title">Keine Meeris</string>
     <string name="no_guinea_pigs_message">Zur Zeit haben Sie keine Meeris hinterlegt. Sie können ein Meeri durch Tappen des Plus Knopfes hinzufügen.</string>
     <string name="date_picker_title">Wählen Sie ein Datum</string>
-    <string name="no_limitations">Keine Einschränkungen</string>
+    <string name="no_limitations">Keine Einschränkung</string>
 </resources>

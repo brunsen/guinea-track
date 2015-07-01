@@ -76,8 +76,11 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
         }
 
         GuineaPig pig = guineaPigs.get(position);
-
-        String subInfoText = pig.getType().getText() + ", " + pig.getBreed();
+        String limitationText = pig.getOptionalData().getLimitations();
+        if(limitationText.equals("")){
+            limitationText = mContext.getString(R.string.no_limitations);
+        }
+        String subInfoText = pig.getType().getText() + ", " + limitationText;
 
         holder.nameTextView.setText(pig.getName());
         holder.subInfoTextView.setText(subInfoText);

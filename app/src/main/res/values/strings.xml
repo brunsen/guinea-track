@@ -47,5 +47,5 @@
     <string name="no_guinea_pigs_title">No guinea pigs</string>
     <string name="no_guinea_pigs_message">Currently you got no guinea pigs stored. You can add a new guinea pig by tapping the plus button.</string>
     <string name="date_picker_title">Pick a date</string>
-    <string name="no_limitations">No limitations</string>
+    <string name="no_limitations">No limitation</string>
 </resources>
