@@ -65,23 +65,29 @@ public class ImageService {
 
     }
 
-    public Drawable getDefaultImage(Context context) {
+    public Drawable getDefaultListImage(Context context) {
         Drawable drawable;
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            drawable = context.getResources().getDrawable(R.drawable.ic_launcher);
+            drawable = context.getResources().getDrawable(R.drawable.unknown_guineapig);
         } else {
-            drawable = context.getDrawable(R.drawable.ic_launcher);
+            drawable = context.getDrawable(R.drawable.unknown_guineapig);
         }
+        
         return drawable;
     }
 
     public void setDefaultImage(ImageView iv) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            Drawable defaultImage = iv.getResources().getDrawable(R.drawable.ic_launcher);
+            Drawable defaultImage = iv.getResources().getDrawable(R.drawable.unknown_guineapig);
             iv.setImageDrawable(defaultImage);
         } else {
-            iv.setImageResource(R.drawable.ic_launcher);
+            iv.setImageResource(R.drawable.unknown_guineapig);
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            iv.setBackgroundColor(iv.getResources().getColor(R.color.primary_color));
+        } else {
+            iv.setBackgroundColor(iv.getResources().getColor(R.color.primary_color, null));
         }
     }
 }

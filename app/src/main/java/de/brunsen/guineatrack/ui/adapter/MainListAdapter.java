@@ -116,10 +116,10 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
             if (picture != null) {
                 pigImage = picture;
             } else {
-                pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultImage(mContext)).getBitmap();
+                pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultListImage(mContext)).getBitmap();
             }
         } else {
-            pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultImage(mContext)).getBitmap();
+            pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultListImage(mContext)).getBitmap();
         }
         return pigImage;
     }
