@@ -11,7 +11,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "de.brunsen.guineatrack"
@@ -40,5 +40,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
-    compile 'com.makeramen:roundedimageview:2.2.0'
+    compile 'com.makeramen:roundedimageview:2.2.1'
 }
