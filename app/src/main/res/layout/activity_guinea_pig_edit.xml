@@ -79,7 +79,7 @@
                         android:layout_marginStart="@dimen/edit_input_left_margin"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:inputType="numberDecimal" />
+                        android:inputType="number" />
 
                     <TextView
                         android:layout_width="wrap_content"

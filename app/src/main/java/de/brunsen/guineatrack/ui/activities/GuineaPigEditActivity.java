@@ -92,7 +92,7 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
         if (weightEdit.getText().equals("")) {
             noUpdate = true;
         }
-        noUpdate &= optionalData.getWeight() == Double.valueOf(weightEdit.getText().toString());
+        noUpdate &= optionalData.getWeight() == Integer.valueOf(weightEdit.getText().toString());
         return !noUpdate;
     }
 

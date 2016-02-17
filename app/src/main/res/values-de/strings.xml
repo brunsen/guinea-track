@@ -17,7 +17,7 @@
     <string name="pig_birthday">Geburtstag:</string>
     <string name="pig_gender">Geschlecht:</string>
     <string name="pig_type">Typ:</string>
-    <string name="pig_weight">Gewicht (in Kg):</string>
+    <string name="pig_weight">Gewicht (in Gramm):</string>
     <string name="pig_limitations">Einschränkungen:</string>
     <string name="pig_origin">Herkunft:</string>
     <string name="pig_castration_date">Kastriert am:</string>
