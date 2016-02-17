@@ -15,4 +15,14 @@ public final class GuineaPigDbContract {
         public static final String COLUMN_NAME_BREED = "Breed";
         public static final String COLUMN_NAME_TYPE = "Type";
     }
+
+    public static abstract class GuineaPigOptionalEntry implements BaseColumns {
+        public static final String TABLE_NAME = "GuineaPigOptional";
+        public static final String COLUMN_NAME_ID = "GuineaPigId";
+        public static final String COLUMN_NAME_WEIGHT = "Weight";
+        public static final String COLUMN_NAME_ORIGIN = "Origin";
+        public static final String COLUMN_NAME_LIMITATIONS = "Limitations";
+        public static final String COLUMN_NAME_CASTRATION_DATE = "CastrationDate";
+        public static final String COLUMN_NAME_PICTURE_PATH = "PicturePath";
+    }
 }

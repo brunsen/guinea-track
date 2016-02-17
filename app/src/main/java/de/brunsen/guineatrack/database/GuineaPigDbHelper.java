@@ -13,24 +13,32 @@ public class GuineaPigDbHelper extends SQLiteOpenHelper{
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
 
-    private final String CREATE_GUINEA_PIG_TABLE = CREATE_TABLE + GuineaPigDbContract.GuineaPigEntry.TABLE_NAME + " (" +
-            GuineaPigDbContract.GuineaPigEntry._ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
-            GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_ID + INTEGER_TYPE + COMMA_SEP +
-            GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
-            GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_GENDER + INTEGER_TYPE + COMMA_SEP +
-            GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_COLOR + TEXT_TYPE + COMMA_SEP +
-            GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_BREED + TEXT_TYPE + COMMA_SEP +
-            GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_TYPE + INTEGER_TYPE +
-            " )";
-
-
     public GuineaPigDbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_GUINEA_PIG_TABLE);
+        final String createGuineaPigTable = CREATE_TABLE + GuineaPigDbContract.GuineaPigEntry.TABLE_NAME + " (" +
+                GuineaPigDbContract.GuineaPigEntry._ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_ID + INTEGER_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_GENDER + INTEGER_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_COLOR + TEXT_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_BREED + TEXT_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_TYPE + INTEGER_TYPE +
+                " )";
+        final String createGuineaExtraTable = CREATE_TABLE + GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME + " (" +
+                GuineaPigDbContract.GuineaPigOptionalEntry._ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID + INTEGER_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT + INTEGER_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN + TEXT_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS + TEXT_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE + TEXT_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH + TEXT_TYPE +
+                " )";
+        db.execSQL(createGuineaPigTable);
+        db.execSQL(createGuineaExtraTable);
     }
 
     @Override
