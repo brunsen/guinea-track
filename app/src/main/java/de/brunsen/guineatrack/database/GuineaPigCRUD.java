@@ -1,4 +1,4 @@
-package de.brunsen.guineatrack.services;
+package de.brunsen.guineatrack.database;
 
 import android.content.Context;
 import android.os.Environment;
@@ -18,6 +18,8 @@ import java.util.List;
 
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.services.JsonReader;
+import de.brunsen.guineatrack.services.JsonWriter;
 
 public class GuineaPigCRUD {
     private String path;
@@ -30,11 +32,11 @@ public class GuineaPigCRUD {
         mContext = c;
     }
 
-    public void storePig(GuineaPig pig) throws IOException, JSONException {
+    public void storeGuineaPig(GuineaPig pig) throws IOException, JSONException {
         int newID = 1;
         List<GuineaPig> pigs = new ArrayList<>();
         try {
-            pigs.addAll(getPigs());
+            pigs.addAll(getGuineaPigs());
 
         } catch (Exception e) {
             Log.e("Failed to load pigs", e.getMessage(), e.getCause());
@@ -45,18 +47,18 @@ public class GuineaPigCRUD {
         }
         pig.setId(newID);
         pigs.add(pig);
-        storePigs(pigs);
+        storeGuineaPigs(pigs);
     }
 
-    private void storePigs(List<GuineaPig> pigs) throws IOException, JSONException {
+    private void storeGuineaPigs(List<GuineaPig> pigs) throws IOException, JSONException {
         JsonWriter writer = new JsonWriter(mContext);
         String json = writer.createJsonArrayFromList(pigs).toString();
         storeJson(json);
     }
 
-    public void deletePig(GuineaPig pig) throws IOException, JSONException {
+    public void deleteGuineaPig(GuineaPig pig) throws IOException, JSONException {
         int deleteId = pig.getId();
-        List<GuineaPig> pigs = getPigs();
+        List<GuineaPig> pigs = getGuineaPigs();
         Iterator<GuineaPig> iterator = pigs.iterator();
         while (iterator.hasNext()) {
             GuineaPig pigToCheck = iterator.next();
@@ -64,10 +66,10 @@ public class GuineaPigCRUD {
                 iterator.remove();
             }
         }
-        storePigs(pigs);
+        storeGuineaPigs(pigs);
     }
 
-    public List<GuineaPig> getPigs() throws IOException, JSONException {
+    public List<GuineaPig> getGuineaPigs() throws IOException, JSONException {
         File f = new File(path + fileName);
         List<GuineaPig> pigs = new ArrayList<>();
         if (f.exists()) {
@@ -114,8 +116,8 @@ public class GuineaPigCRUD {
         outputStream.close();
     }
 
-    public void updatePig(GuineaPig pigUpdate) throws IOException, JSONException {
-        List<GuineaPig> pigs = getPigs();
+    public void updateGuineaPig(GuineaPig pigUpdate) throws IOException, JSONException {
+        List<GuineaPig> pigs = getGuineaPigs();
         Iterator<GuineaPig> iterator = pigs.iterator();
         while (iterator.hasNext()) {
             GuineaPig pig = iterator.next();
@@ -125,6 +127,6 @@ public class GuineaPigCRUD {
             }
         }
         pigs.add(pigUpdate);
-        storePigs(pigs);
+        storeGuineaPigs(pigs);
     }
 }

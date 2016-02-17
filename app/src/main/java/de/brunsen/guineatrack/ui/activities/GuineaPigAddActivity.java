@@ -7,7 +7,7 @@ import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.services.GuineaPigCRUD;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
 
 public class GuineaPigAddActivity extends AbstractPigActivity {
@@ -47,7 +47,7 @@ public class GuineaPigAddActivity extends AbstractPigActivity {
     protected void storeWithCrud(GuineaPig pig) {
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            crud.storePig(pig);
+            crud.storeGuineaPig(pig);
             finish();
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.save_error_message),

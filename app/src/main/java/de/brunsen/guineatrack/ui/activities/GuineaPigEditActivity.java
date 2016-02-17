@@ -11,7 +11,7 @@ import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.services.GuineaPigCRUD;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.JsonReader;
 
 public class GuineaPigEditActivity extends AbstractPigActivity {
@@ -35,7 +35,7 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
         updatedPig.setId(pig.getId());
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            crud.updatePig(updatedPig);
+            crud.updateGuineaPig(updatedPig);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

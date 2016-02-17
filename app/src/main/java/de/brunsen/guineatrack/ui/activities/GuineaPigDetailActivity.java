@@ -22,7 +22,7 @@ import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.services.GuineaPigCRUD;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
 import de.brunsen.guineatrack.services.JsonReader;
 import de.brunsen.guineatrack.services.JsonWriter;
@@ -164,7 +164,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
     public void deletePig() {
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            crud.deletePig(pig);
+            crud.deleteGuineaPig(pig);
             finish();
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.error_pig_not_deleted_message),

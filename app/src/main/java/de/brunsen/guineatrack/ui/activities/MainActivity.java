@@ -19,7 +19,7 @@ import java.util.List;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
-import de.brunsen.guineatrack.services.GuineaPigCRUD;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.JsonWriter;
 import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         List<GuineaPig> tempPigs = new ArrayList<>();
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            tempPigs.addAll(crud.getPigs());
+            tempPigs.addAll(crud.getGuineaPigs());
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.error_loading_pigs),
                     Toast.LENGTH_LONG).show();
