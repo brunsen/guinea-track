@@ -1,6 +1,9 @@
 package de.brunsen.guineatrack.database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 
@@ -18,6 +21,7 @@ import java.util.List;
 
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.services.JsonReader;
 import de.brunsen.guineatrack.services.JsonWriter;
 
@@ -71,7 +75,7 @@ public class GuineaPigCRUD {
 
     public List<GuineaPig> getGuineaPigs() throws IOException, JSONException {
         File f = new File(path + fileName);
-        List<GuineaPig> pigs = new ArrayList<>();
+        List<GuineaPig> guineaPigs = new ArrayList<>();
         if (f.exists()) {
             FileInputStream input = new FileInputStream(f);
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -85,10 +89,70 @@ public class GuineaPigCRUD {
             input = null;
             if (!json.equals("")) {
                 JsonReader jsonReader = new JsonReader(mContext);
-                pigs.addAll(jsonReader.getGuineaListFromString(json));
+                guineaPigs.addAll(jsonReader.getGuineaListFromString(json));
             }
         }
-        return pigs;
+        return guineaPigs;
+    }
+
+    private GuineaPigOptionalData getOptionalDataForID(int id) {
+        GuineaPigOptionalData optionalData = new GuineaPigOptionalData();
+        GuineaPigDbHelper dbHelper = new GuineaPigDbHelper(mContext);
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        String selection = GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID + " = ?";
+        String[] arguments = new String[] {"" + id};
+        Cursor cursor = database.query(GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME, null, selection, arguments, null, null, null);
+        if (cursor.moveToFirst()) {
+            optionalData.setWeight(cursor.getInt(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT)));
+            optionalData.setLastBirth(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH)));
+            optionalData.setOrigin(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN)));
+            optionalData.setLimitations(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS)));
+            optionalData.setCastrationDate(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE)));
+            optionalData.setPicturePath(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH)));
+        }
+        database.close();
+        return optionalData;
+    }
+
+    private void storeOptionalData(int id, GuineaPigOptionalData optionalData) {
+        GuineaPigDbHelper dbHelper = new GuineaPigDbHelper(mContext);
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID, id);
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT, optionalData.getWeight());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getWeight());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN, optionalData.getOrigin());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getOrigin());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH, optionalData.getPicturePath());
+        database.insert(GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME, null, values);
+        database.close();
+    }
+
+    private void updateOptionalData(int id, GuineaPigOptionalData optionalData) {
+        GuineaPigDbHelper dbHelper = new GuineaPigDbHelper(mContext);
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID, id);
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT, optionalData.getWeight());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getWeight());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN, optionalData.getOrigin());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getOrigin());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH, optionalData.getPicturePath());
+        String whereClause = GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID + " = ?";
+        String[] arguments = new String[] {"" + id};
+        database.update(GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME, values, whereClause, arguments);
+        database.close();
+    }
+
+    private void deleteOptionalData(int id) {
+        GuineaPigDbHelper dbHelper = new GuineaPigDbHelper(mContext);
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        String selection = GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID + " = ?";
+        String[] arguments = new String[] {"" + id};
+        database.delete(GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME, selection, arguments);
+        database.close();
     }
 
     private int getHighestID(List<GuineaPig> pigs) {
