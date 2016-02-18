@@ -10,6 +10,7 @@ public final class GuineaPigDbContract {
         public static final String TABLE_NAME = "GuineaPig";
         public static final String COLUMN_NAME_ID = "GuineaPigId";
         public static final String COLUMN_NAME_NAME = "Name";
+        public static final String COLUMN_NAME_BIRTH = "BirthDay";
         public static final String COLUMN_NAME_GENDER = "Gender";
         public static final String COLUMN_NAME_COLOR = "Color";
         public static final String COLUMN_NAME_BREED = "Breed";
