@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class GuineaPigDbHelper extends SQLiteOpenHelper{
 
+    private static GuineaPigDbHelper mInstance;
+
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "GuineaPig.db";
     private static final String CREATE_TABLE = "CREATE TABLE ";
@@ -13,7 +15,14 @@ public class GuineaPigDbHelper extends SQLiteOpenHelper{
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
 
-    public GuineaPigDbHelper(Context context){
+    public static GuineaPigDbHelper getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new GuineaPigDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
+    private GuineaPigDbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
