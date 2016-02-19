@@ -15,20 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-
 import de.brunsen.guineatrack.R;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
-import de.brunsen.guineatrack.services.JsonReader;
-import de.brunsen.guineatrack.services.JsonWriter;
 
 public class GuineaPigDetailActivity extends BaseActivity {
-    private GuineaPig pig;
+    private GuineaPig mGuineaPig;
     private ImageView pigImage;
     private TextView nameText;
     private TextView birthText;
@@ -48,13 +44,13 @@ public class GuineaPigDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guinea_pig_detail);
-        JsonReader reader = new JsonReader(this);
+        GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            pig = reader.getGuineaPigFromString(getIntent().getStringExtra(getString(R.string.pig_identifier)));
+            mGuineaPig = crud.getGuineaPigForId(getIntent().getIntExtra(getString(R.string.pig_identifier), 0));
             initComponents();
             initToolbar();
             setData();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             finish();
         }
@@ -100,14 +96,14 @@ public class GuineaPigDetailActivity extends BaseActivity {
     }
 
     private void setData() {
-        GuineaPigOptionalData optionalData = pig.getOptionalData();
+        GuineaPigOptionalData optionalData = mGuineaPig.getOptionalData();
         setPicture(optionalData);
-        nameText.setText(pig.getName());
-        birthText.setText(pig.getBirth());
-        colorText.setText(pig.getColor());
-        genderText.setText(pig.getGender().getText());
-        raceText.setText(pig.getBreed());
-        typeText.setText(pig.getType().getText());
+        nameText.setText(mGuineaPig.getName());
+        birthText.setText(mGuineaPig.getBirth());
+        colorText.setText(mGuineaPig.getColor());
+        genderText.setText(mGuineaPig.getGender().getText());
+        raceText.setText(mGuineaPig.getBreed());
+        typeText.setText(mGuineaPig.getType().getText());
         setOptionalData(optionalData);
     }
 
@@ -132,7 +128,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
     }
 
     private void setOptionalData(GuineaPigOptionalData optionalData) {
-        if (pig.getGender() == Gender.Female) {
+        if (mGuineaPig.getGender() == Gender.Female) {
             lastBirthGroup.setVisibility(View.VISIBLE);
             String lastBirthText = optionalData.getLastBirth();
             if (lastBirthText.equals("")) {
@@ -140,7 +136,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
             }
             lastBirth.setText(lastBirthText);
         }
-        if (pig.getGender() != Gender.Male && pig.getType() != Type.BREED) {
+        if (mGuineaPig.getGender() != Gender.Male && mGuineaPig.getType() != Type.BREED) {
             castrationDateGroup.setVisibility(View.VISIBLE);
             String castrationDate = optionalData.getCastrationDate();
             if (castrationDate.equals("")) {
@@ -150,12 +146,12 @@ public class GuineaPigDetailActivity extends BaseActivity {
         }
         weightText.setText("" + optionalData.getWeight());
         String originText = optionalData.getOrigin();
-        if (originText.equals("")){
+        if (originText.equals("")) {
             originText = getString(R.string.unknown);
         }
         originTextView.setText(originText);
         String limitationsText = optionalData.getLimitations();
-        if (limitationsText.equals("")){
+        if (limitationsText.equals("")) {
             limitationsText = getString(R.string.no_limitations);
         }
         limitationsTextView.setText(limitationsText);
@@ -164,7 +160,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
     public void deletePig() {
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            crud.deleteGuineaPig(pig);
+            crud.deleteGuineaPig(mGuineaPig);
             finish();
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.error_pig_not_deleted_message),
@@ -173,22 +169,16 @@ public class GuineaPigDetailActivity extends BaseActivity {
     }
 
     public void callEditor() {
-        try {
-            Intent intent = new Intent(getApplicationContext(),
-                    GuineaPigEditActivity.class);
-            JsonWriter writer = new JsonWriter(this);
-            String json = writer.createGuineaJson(pig).toString();
-            intent.putExtra(getString(R.string.pig_identifier), json);
-            startActivity(intent);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Intent intent = new Intent(getApplicationContext(),
+                GuineaPigEditActivity.class);
+        intent.putExtra(getString(R.string.pig_identifier), mGuineaPig.getId());
+        startActivity(intent);
     }
 
     public void showDeleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         builder.setTitle(getString(R.string.confirm));
-        builder.setMessage(getString(R.string.deletion_confirmation_text, pig.getName()));
+        builder.setMessage(getString(R.string.deletion_confirmation_text, mGuineaPig.getName()));
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

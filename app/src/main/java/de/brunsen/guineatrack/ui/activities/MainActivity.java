@@ -10,24 +10,21 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import de.brunsen.guineatrack.R;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
-import de.brunsen.guineatrack.database.GuineaPigCRUD;
-import de.brunsen.guineatrack.services.JsonWriter;
 import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class MainActivity extends BaseActivity implements OnClickListener,
         OnItemClickListener {
 
-    private List<GuineaPig> pigs;
+    private List<GuineaPig> mGuineaPigs;
     private StickyListHeadersListView listView;
     private FloatingActionButton addButton;
 
@@ -59,12 +56,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             e.printStackTrace();
         }
         Collections.sort(tempPigs, new GuineaPigComparator());
-        pigs = tempPigs;
-        MainListAdapter adapter = new MainListAdapter(this, pigs);
+        mGuineaPigs = tempPigs;
+        MainListAdapter adapter = new MainListAdapter(this, mGuineaPigs);
         setGenderText();
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
-        if (pigs.isEmpty()) {
+        if (mGuineaPigs.isEmpty()) {
             handleEmptyList();
         }
     }
@@ -73,10 +70,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         int totalMale = 0;
         int totalFemale = 0;
         int totalCastrato = 0;
-        int total = pigs.size();
+        int total = mGuineaPigs.size();
 
         for (int i = 0; i < total; i++) {
-            GuineaPig pig = pigs.get(i);
+            GuineaPig pig = mGuineaPigs.get(i);
             switch (pig.getGender()) {
                 case Male:
                     totalMale++;
@@ -106,18 +103,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        GuineaPig pig = pigs.get(position);
-        if (pig != null) {
-            try {
-                Intent intent = new Intent(getApplicationContext(),
-                        GuineaPigDetailActivity.class);
-                JsonWriter writer = new JsonWriter(this);
-                String json = writer.createGuineaJson(pig).toString();
-                intent.putExtra(getString(R.string.pig_identifier), json);
-                startActivity(intent);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        GuineaPig guineaPig = mGuineaPigs.get(position);
+        if (guineaPig != null) {
+            Intent intent = new Intent(getApplicationContext(),
+                    GuineaPigDetailActivity.class);
+            intent.putExtra(getString(R.string.pig_identifier), guineaPig.getId());
+            startActivity(intent);
         }
     }
 
