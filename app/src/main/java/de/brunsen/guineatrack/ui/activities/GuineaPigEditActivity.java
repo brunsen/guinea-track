@@ -4,27 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import org.json.JSONException;
-
 import de.brunsen.guineatrack.R;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.services.GuineaPigCRUD;
-import de.brunsen.guineatrack.services.JsonReader;
 
 public class GuineaPigEditActivity extends AbstractPigActivity {
-    GuineaPig pig;
+    GuineaPig mGuineaPig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        JsonReader reader = new JsonReader(this);
+        GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            pig = reader.getGuineaPigFromString(getIntent().getStringExtra(getString(R.string.pig_identifier)));
+            mGuineaPig = crud.getGuineaPigForId(getIntent().getIntExtra(getString(R.string.pig_identifier), 0));
             setData();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             finish();
         }
@@ -32,10 +29,10 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
 
     @Override
     protected void storeWithCrud(GuineaPig updatedPig) {
-        updatedPig.setId(pig.getId());
+        updatedPig.setId(mGuineaPig.getId());
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            crud.updatePig(updatedPig);
+            crud.updateGuineaPig(updatedPig);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -48,36 +45,36 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
 
     @Override
     protected void setData() {
-        nameEdit.setText(pig.getName());
-        birthEdit.setText(pig.getBirth());
-        weightEdit.setText("" + pig.getOptionalData().getWeight());
-        colorEdit.setText(pig.getColor());
-        genderSpinner.setSelection(pig.getGender().getPosition());
-        typeSpinner.setSelection(pig.getType().getPosition());
-        breedEdit.setText(pig.getBreed());
-        selectedImage = pig.getOptionalData().getPicturePath();
+        nameEdit.setText(mGuineaPig.getName());
+        birthEdit.setText(mGuineaPig.getBirth());
+        weightEdit.setText("" + mGuineaPig.getOptionalData().getWeight());
+        colorEdit.setText(mGuineaPig.getColor());
+        genderSpinner.setSelection(mGuineaPig.getGender().getPosition());
+        typeSpinner.setSelection(mGuineaPig.getType().getPosition());
+        breedEdit.setText(mGuineaPig.getBreed());
+        selectedImage = mGuineaPig.getOptionalData().getPicturePath();
         setImage(selectedImage);
-        selectedGender = pig.getGender();
-        selectedType = pig.getType();
+        selectedGender = mGuineaPig.getGender();
+        selectedType = mGuineaPig.getType();
         toggleCastrationDateArea();
-        if (pig.getGender() == Gender.Female) {
+        if (mGuineaPig.getGender() == Gender.Female) {
             setLastBirthAreaVisible(true);
-            lastBirthEdit.setText(pig.getOptionalData().getLastBirth());
+            lastBirthEdit.setText(mGuineaPig.getOptionalData().getLastBirth());
         }
-        originEdit.setText(pig.getOptionalData().getOrigin());
-        castrationDateEdit.setText(pig.getOptionalData().getCastrationDate());
-        limitationsEdit.setText(pig.getOptionalData().getLimitations());
+        originEdit.setText(mGuineaPig.getOptionalData().getOrigin());
+        castrationDateEdit.setText(mGuineaPig.getOptionalData().getCastrationDate());
+        limitationsEdit.setText(mGuineaPig.getOptionalData().getLimitations());
     }
 
     private boolean newData() {
         boolean noUpdate = true;
-        GuineaPigOptionalData optionalData = pig.getOptionalData();
-        noUpdate &= nameEdit.getText().toString().equals(pig.getName());
-        noUpdate &= birthEdit.getText().toString().equals(pig.getBirth());
-        noUpdate &= colorEdit.getText().toString().equals(pig.getColor());
-        noUpdate &= breedEdit.getText().toString().equals(pig.getBreed());
-        noUpdate &= pig.getType().equals(selectedType);
-        noUpdate &= pig.getGender().equals(selectedGender);
+        GuineaPigOptionalData optionalData = mGuineaPig.getOptionalData();
+        noUpdate &= nameEdit.getText().toString().equals(mGuineaPig.getName());
+        noUpdate &= birthEdit.getText().toString().equals(mGuineaPig.getBirth());
+        noUpdate &= colorEdit.getText().toString().equals(mGuineaPig.getColor());
+        noUpdate &= breedEdit.getText().toString().equals(mGuineaPig.getBreed());
+        noUpdate &= mGuineaPig.getType().equals(selectedType);
+        noUpdate &= mGuineaPig.getGender().equals(selectedGender);
         noUpdate &= optionalData.getPicturePath().equals(selectedImage);
         if (selectedGender != null && selectedGender == Gender.Female) {
             noUpdate &= lastBirthEdit.getText().toString().equals(optionalData.getLastBirth());
@@ -92,7 +89,7 @@ public class GuineaPigEditActivity extends AbstractPigActivity {
         if (weightEdit.getText().equals("")) {
             noUpdate = true;
         }
-        noUpdate &= optionalData.getWeight() == Double.valueOf(weightEdit.getText().toString());
+        noUpdate &= optionalData.getWeight() == Integer.valueOf(weightEdit.getText().toString());
         return !noUpdate;
     }
 

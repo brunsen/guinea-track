@@ -71,7 +71,7 @@ public class JsonReader {
         if (jsonObject.has(mContext.getString(R.string.optional_data_key))) {
             JSONObject optionalData = jsonObject.getJSONObject(mContext.getString(R.string.optional_data_key));
             if (optionalData.has(mContext.getString(R.string.weight_key)))
-                restoredPig.getOptionalData().setWeight(optionalData.getDouble(mContext.getString(R.string.weight_key)));
+                restoredPig.getOptionalData().setWeight(optionalData.getInt(mContext.getString(R.string.weight_key)));
             if (optionalData.has(mContext.getString(R.string.origin_key)))
                 restoredPig.getOptionalData().setOrigin(optionalData.getString((mContext.getString(R.string.origin_key))));
             if (optionalData.has(mContext.getString(R.string.castration_date_key)))

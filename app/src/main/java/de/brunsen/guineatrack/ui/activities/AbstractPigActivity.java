@@ -224,9 +224,9 @@ public abstract class AbstractPigActivity extends BaseActivity implements
                 castrationDate = castrationDateEdit.getText().toString();
             }
             String weightText = weightEdit.getText().toString();
-            double weight = 0.0;
+            int weight = 0;
             if (!weightText.equals("")) {
-                weight = Double.valueOf(weightText);
+                weight = Integer.valueOf(weightText);
             }
             String origin = originEdit.getText().toString();
             String limitations = limitationsEdit.getText().toString();

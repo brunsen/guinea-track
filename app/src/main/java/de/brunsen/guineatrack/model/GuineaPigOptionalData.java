@@ -1,7 +1,7 @@
 package de.brunsen.guineatrack.model;
 
 public class GuineaPigOptionalData {
-    private double weight;
+    private int weight;
     private String lastBirth;
     private String origin;
     private String limitations;
@@ -9,10 +9,10 @@ public class GuineaPigOptionalData {
     private String picturePath;
 
     public GuineaPigOptionalData() {
-        this(0.0, "", "", "", "", "");
+        this(0, "", "", "", "", "");
     }
 
-    public GuineaPigOptionalData(double weight, String lastBirth, String origin, String limitations, String castrationDate, String picturePath) {
+    public GuineaPigOptionalData(int weight, String lastBirth, String origin, String limitations, String castrationDate, String picturePath) {
         this.setWeight(weight);
         this.setPicturePath(picturePath);
         this.setLastBirth(lastBirth);
@@ -37,11 +37,11 @@ public class GuineaPigOptionalData {
         this.lastBirth = lastBirth;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
