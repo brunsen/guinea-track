@@ -5,6 +5,8 @@
     <string name="main_activity_subtitle">M:%1$d W:%2$d K:%3$d</string>
     <string name="set">Setzen</string>
     <string name="pigs_total">Gesamt: %d</string>
+    <string name="import_guinea_pigs">Import guinea pigs</string>
+    <string name="export_guinea_pigs">Export guinea pigs</string>
     <string name="add">Hinzufügen</string>
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>

@@ -38,7 +38,7 @@ import de.brunsen.guineatrack.ui.adapter.GenderSpinnerAdapter;
 import de.brunsen.guineatrack.ui.adapter.TypeSpinnerAdapter;
 import de.brunsen.guineatrack.ui.dialogs.DatePickDialog;
 
-public abstract class AbstractPigActivity extends BaseActivity implements
+public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
         OnItemSelectedListener, OnClickListener {
     protected EditText nameEdit;
     protected EditText birthEdit;

@@ -8,12 +8,14 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.brunsen.guineatrack.R;
+import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
 
 public class JsonImporter {
@@ -22,7 +24,7 @@ public class JsonImporter {
     private Context mContext;
 
     public JsonImporter(Context c) {
-        path = Environment.getExternalStorageDirectory().getAbsolutePath() + c.getString(R.string.folder_path);
+        path = Environment.getExternalStoragePublicDirectory("").getAbsolutePath() + c.getString(R.string.folder_path);
         fileName = c.getString(R.string.storage_file_name);
         mContext = c;
     }
@@ -46,11 +48,10 @@ public class JsonImporter {
                 guineaPigs.addAll(jsonReader.getGuineaListFromString(json));
             }
         } else {
-            // TODO: Throw accurate exception and create feedback for user
+            throw new FileNotFoundException();
         }
-        for (GuineaPig guineaPig: guineaPigs) {
-            // TODO: Store each guineaPig inside database
-        }
+        GuineaPigCRUD crud = new GuineaPigCRUD(mContext);
+        crud.storeGuineaPigs(guineaPigs);
         // TODO: Show toast with successful import notification
     }
 }

@@ -1,6 +1,7 @@
 package de.brunsen.guineatrack.services;
 
 import android.content.Context;
+import android.media.MediaScannerConnection;
 import android.os.Environment;
 
 import org.json.JSONException;
@@ -19,15 +20,19 @@ public class JsonExporter {
     private Context mContext;
 
     public JsonExporter(Context c) {
-        path = Environment.getExternalStorageDirectory().getAbsolutePath() + c.getString(R.string.folder_path);
+        path = Environment.getExternalStoragePublicDirectory("").getAbsolutePath() + c.getString(R.string.folder_path);
         fileName = c.getString(R.string.storage_file_name);
         mContext = c;
     }
 
-    public void storeGuineaPigs(List<GuineaPig> guineaPigs) throws IOException, JSONException {
-        JsonWriter writer = new JsonWriter(mContext);
-        String json = writer.createJsonArrayFromList(guineaPigs).toString();
-        storeJson(json);
+    public void exportGuineaPigs(List<GuineaPig> guineaPigs) throws IOException, JSONException {
+        if (!guineaPigs.isEmpty()) {
+            JsonWriter writer = new JsonWriter(mContext);
+            String json = writer.createJsonArrayFromList(guineaPigs).toString();
+            storeJson(json);
+        } else {
+            // TODO: Show dialog with explanation why nothing can be exported
+        }
     }
 
     private void storeJson(String json) throws IOException {
@@ -43,5 +48,6 @@ public class JsonExporter {
         outputStream = new FileOutputStream(f);
         outputStream.write(json.getBytes());
         outputStream.close();
+        MediaScannerConnection.scanFile(mContext, new String[]{f.getAbsolutePath()}, null, null);
     }
 }
