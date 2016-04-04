@@ -2,6 +2,7 @@ package de.brunsen.guineatrack.services;
 
 import android.content.Context;
 import android.os.Environment;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -52,6 +53,6 @@ public class JsonImporter {
         }
         GuineaPigCRUD crud = new GuineaPigCRUD(mContext);
         crud.storeGuineaPigs(guineaPigs);
-        // TODO: Show toast with successful import notification
+        Toast.makeText(mContext, R.string.successful_import, Toast.LENGTH_SHORT).show();
     }
 }

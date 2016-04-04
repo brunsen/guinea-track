@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class MainActivity extends BaseActivity implements OnClickListener,
         OnItemClickListener {
 
+    private static final String TAG = MainActivity.class.getName();
     private List<GuineaPig> mGuineaPigs;
     private StickyListHeadersListView listView;
     private MainListAdapter mMainListAdapter;
@@ -136,11 +138,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             mMainListAdapter.setGuineaPigs(mGuineaPigs);
             mMainListAdapter.notifyDataSetChanged();
         } catch (IOException e) {
-            // TODO: show dialog with helpful text: file not found
-            e.printStackTrace();
+            Log.e(TAG, "No file found to import guinea pigs");
+            handleNoFileError();
         } catch (JSONException e) {
-            // TODO: show dialog with helpful text: json file corrupt
-            e.printStackTrace();
+            Log.e(TAG, "Corrupted import file");
+            handleCorruptedFileError();
         }
     }
 
@@ -153,11 +155,32 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         }
     }
 
+    private void handleNoFileError() {
+        String title = getString(R.string.error);
+        String message = getString(R.string.error_no_file);
+        String okMessage = getString(android.R.string.ok);
+        showError(title, message, okMessage);
+    }
+
+    private void handleCorruptedFileError() {
+        String title = getString(R.string.error);
+        String message = getString(R.string.error_corrupted_file);
+        String okMessage = getString(android.R.string.ok);
+        showError(title, message, okMessage);
+    }
+
     private void handleEmptyList() {
+        String title = getString(R.string.no_guinea_pigs_title);
+        String message = getString(R.string.no_guinea_pigs_message);
+        String okMessage = getString(android.R.string.ok);
+        showError(title, message, okMessage);
+    }
+
+    private void showError(String title, String message, String okMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
-        builder.setTitle(getString(R.string.no_guinea_pigs_title));
-        builder.setMessage(getString(R.string.no_guinea_pigs_message));
-        builder.setPositiveButton(getString(android.R.string.ok), null);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(okMessage, null);
         builder.show();
     }
 
