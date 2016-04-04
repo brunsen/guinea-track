@@ -13,5 +13,5 @@
     <string name="no_guinea_pigs_message">Currently you got no guinea pigs stored. You can add a new guinea pig by tapping the plus button.</string>
     <string name="error_no_file">There is no file to export guinea pigs from.</string>
     <string name="error_corrupted_file">The import file is not compatible with this app.</string>
-    <string name="error_no_guinea_pigs_to_export">You don't have any guinea piags to export.</string>
+    <string name="error_no_guinea_pigs_to_export">You do not have any guinea pigs to export.</string>
 </resources>

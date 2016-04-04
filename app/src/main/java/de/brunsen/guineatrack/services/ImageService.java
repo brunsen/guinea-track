@@ -1,13 +1,19 @@
 package de.brunsen.guineatrack.services;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.widget.ImageView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.io.File;
+import java.lang.ref.WeakReference;
 
 import de.brunsen.guineatrack.R;
 
@@ -62,32 +68,108 @@ public class ImageService {
         }
 
         return inSampleSize;
-
     }
 
-    public Drawable getDefaultListImage(Context context) {
-        Drawable drawable;
+    private Bitmap getDefaultBitmap(Context context) {
+        return BitmapFactory.decodeResource(context.getResources(), R.drawable.unknown_guinea_pig);
+    }
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            drawable = context.getResources().getDrawable(R.drawable.unknown_guineapig);
-        } else {
-            drawable = context.getDrawable(R.drawable.unknown_guineapig);
+    public void setListImage(RoundedImageView imageView, File file, int width, int height) {
+        if (cancelPotentialWork(file, imageView)) {
+            final AsyncImageTask imageTask = new AsyncImageTask(imageView);
+            final AsyncDrawable asyncDrawable =
+                    new AsyncDrawable(imageView.getContext().getResources(), getDefaultBitmap(imageView.getContext()), imageTask);
+            imageView.setImageDrawable(asyncDrawable);
+            imageTask.execute(file, width, height);
         }
-        
-        return drawable;
     }
 
     public void setDefaultImage(ImageView iv) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            Drawable defaultImage = iv.getResources().getDrawable(R.drawable.unknown_guineapig);
+            Drawable defaultImage = iv.getResources().getDrawable(R.drawable.unknown_guinea_pig);
             iv.setImageDrawable(defaultImage);
         } else {
-            iv.setImageResource(R.drawable.unknown_guineapig);
+            iv.setImageResource(R.drawable.unknown_guinea_pig);
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             iv.setBackgroundColor(iv.getResources().getColor(R.color.primary_color));
         } else {
             iv.setBackgroundColor(iv.getResources().getColor(R.color.primary_color, null));
+        }
+    }
+
+    private boolean cancelPotentialWork(File file, ImageView imageView) {
+        final AsyncImageTask asyncImageTask = getBitmapWorkerTask(imageView);
+
+        if (asyncImageTask != null) {
+            final File fileData = asyncImageTask.file;
+            // If bitmapData is not yet set or it differs from the new data
+            if (fileData != null || fileData != file) {
+                // Cancel previous task
+                asyncImageTask.cancel(true);
+            } else {
+                // The same work is already in progress
+                return false;
+            }
+        }
+        // No task associated with the ImageView, or an existing task was cancelled
+        return true;
+    }
+
+    private AsyncImageTask getBitmapWorkerTask(ImageView imageView) {
+        if (imageView != null) {
+            final Drawable drawable = imageView.getDrawable();
+            if (drawable instanceof AsyncDrawable) {
+                final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
+                return asyncDrawable.getAsyncImageTask();
+            }
+        }
+        return null;
+    }
+
+    private class AsyncImageTask extends AsyncTask<Object, Void, Bitmap> {
+
+        private final WeakReference<RoundedImageView> imageViewReference;
+        private File file;
+
+        public AsyncImageTask(RoundedImageView imageView) {
+            imageViewReference = new WeakReference<>(imageView);
+        }
+
+        @Override
+        protected Bitmap doInBackground(Object[] params) {
+            file = (File) params[0];
+            Integer height = (Integer) params[1];
+            Integer width = (Integer) params[2];
+
+            return getPicture(file.getAbsolutePath(), width, height);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if (isCancelled()) {
+                bitmap = null;
+            }
+
+            if (imageViewReference != null && bitmap != null) {
+                final RoundedImageView imageView = imageViewReference.get();
+                if (imageView != null) {
+                    imageView.setImageBitmap(bitmap);
+                }
+            }
+        }
+    }
+
+    private class AsyncDrawable extends BitmapDrawable {
+        WeakReference<AsyncImageTask> taskWeakReference;
+
+        public AsyncDrawable(Resources res, Bitmap bitmap, AsyncImageTask asyncImageTask) {
+            super(res, bitmap);
+            taskWeakReference = new WeakReference<>(asyncImageTask);
+        }
+
+        public AsyncImageTask getAsyncImageTask() {
+            return taskWeakReference.get();
         }
     }
 }
