@@ -13,4 +13,5 @@
     <string name="no_guinea_pigs_message">Zur Zeit haben Sie keine Meeris hinterlegt. Sie können ein Meeri durch Tappen des Plus Knopfes hinzufügen.</string>
     <string name="error_no_file">Es wurde keine Datei gefunden, mit der Meerschweinchen importiert werden können.</string>
     <string name="error_corrupted_file">Die Importdatei ist leider nicht mit dieser App kompatibel.</string>
+    <string name="error_no_guinea_pigs_to_export">Es gibt keine Meerschweinchen zum exportieren.</string>
 </resources>

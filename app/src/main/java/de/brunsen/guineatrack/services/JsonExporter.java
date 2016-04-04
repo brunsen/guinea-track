@@ -3,6 +3,8 @@ package de.brunsen.guineatrack.services;
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -31,7 +33,7 @@ public class JsonExporter {
             String json = writer.createJsonArrayFromList(guineaPigs).toString();
             storeJson(json);
         } else {
-            // TODO: Show dialog with explanation why nothing can be exported
+            showNoGuineaPigsError();
         }
     }
 
@@ -49,5 +51,14 @@ public class JsonExporter {
         outputStream.write(json.getBytes());
         outputStream.close();
         MediaScannerConnection.scanFile(mContext, new String[]{f.getAbsolutePath()}, null, null);
+        Toast.makeText(mContext, R.string.successful_export, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showNoGuineaPigsError() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(R.string.error);
+        builder.setMessage(R.string.error_no_guinea_pigs_to_export);
+        builder.setPositiveButton(android.R.string.ok, null);
+        builder.show();
     }
 }

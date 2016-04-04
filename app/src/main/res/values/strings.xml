@@ -41,4 +41,5 @@
     <string name="date_picker_title">Pick a date</string>
     <string name="no_limitations">No limitation</string>
     <string name="successful_import">Guinea pigs were successfully imported.</string>
+    <string name="successful_export">Guinea pigs were successfully exported.</string>
 </resources>
