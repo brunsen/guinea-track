@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error">Fehler</string>
+    <string name="error_loading_pigs">Fehler beim Laden der Schweinchen</string>
+    <string name="deletion_confirmation_text">Soll %s wirklich gelöscht werden?</string>
+    <string name="error_empty_fields">Bitte alle Pflichfelder ausfüllen</string>
+    <string name="save_error_message">Speichern fehlgeschlagen</string>
+    <string name="update_error_message">Die neuen Werte vom Meeri konnten nicht gespeichert werden</string>
+    <string name="message_unsaved_update">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle neuen Eingaben gehen dann verloren.</string>
+    <string name="message_unsaved_guinea_pig">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle bisherigen Eingaben gehen dann verloren.</string>
+    <string name="error_pig_not_deleted_message">Meeri konnte nicht gelöscht werden</string>
+    <string name="no_guinea_pigs_title">Keine Meeris</string>
+    <string name="no_guinea_pigs_message">Zur Zeit haben Sie keine Meeris hinterlegt. Sie können ein Meeri durch Tappen des Plus Knopfes hinzufügen.</string>
+    <string name="error_no_file">Es wurde keine Datei gefunden, mit der Meerschweinchen importiert werden können.</string>
+    <string name="error_corrupted_file">Die Importdatei ist leider nicht mit dieser App kompatibel.</string>
+    <string name="error_no_guinea_pigs_to_export">Es gibt keine Meerschweinchen zum exportieren.</string>
+</resources>

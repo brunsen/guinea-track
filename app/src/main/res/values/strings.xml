@@ -6,6 +6,8 @@
     <string name="main_activity_subtitle">M:%1$d F:%2$d C:%3$d</string>
     <string name="set">Set</string>
     <string name="pigs_total">Total: %d</string>
+    <string name="import_guinea_pigs">Import guinea pigs</string>
+    <string name="export_guinea_pigs">Export guinea pigs</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
@@ -24,13 +26,9 @@
     <string name="pig_castration_date">Castrated at:</string>
     <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Edit Guinea Pig</string>
-    <string name="error_empty_fields">Please fill out all mandatory fields</string>
-    <string name="save_error_message">Saving failing</string>
-    <string name="update_error_message">The new values could not be stored for this guinea pig</string>
     <string name="image_description">No picture available</string>
     <string name="pick_picture">Pick new picture</string>
     <string name="remove_picture">Remove picture</string>
-    <string name="error_loading_pigs">An error occurred while loading the guinea pigs</string>
     <string name="last_birth">Last Birth:</string>
     <string name="unknown">Unknown</string>
     <string name="pig_identifier" translatable="false">guinea pig</string>
@@ -40,12 +38,8 @@
     <string name="type_sale">Sale</string>
     <string name="type_breed">Breed</string>
     <string name="type_rescue">Rescue</string>
-    <string name="deletion_confirmation_text">Are you sure you want to remove %s?</string>
-    <string name="message_unsaved_update">Are you sure you want to leave without saving? Any updated information about the guinea pig, will be lost.</string>
-    <string name="message_unsaved_guinea_pig">Are you sure you don\'t want to add the guinea pig? Any information you typed in so far will be lost.</string>
-    <string name="error_pig_not_deleted_message">Guinea pig could not be deleted</string>
-    <string name="no_guinea_pigs_title">No guinea pigs</string>
-    <string name="no_guinea_pigs_message">Currently you got no guinea pigs stored. You can add a new guinea pig by tapping the plus button.</string>
     <string name="date_picker_title">Pick a date</string>
     <string name="no_limitations">No limitation</string>
+    <string name="successful_import">Guinea pigs were successfully imported.</string>
+    <string name="successful_export">Guinea pigs were successfully exported.</string>
 </resources>

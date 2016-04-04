@@ -4,12 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,14 +25,18 @@ import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
+import de.brunsen.guineatrack.services.JsonExporter;
+import de.brunsen.guineatrack.services.JsonImporter;
 import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class MainActivity extends BaseActivity implements OnClickListener,
         OnItemClickListener {
 
+    private static final String TAG = MainActivity.class.getName();
     private List<GuineaPig> mGuineaPigs;
     private StickyListHeadersListView listView;
+    private MainListAdapter mMainListAdapter;
     private FloatingActionButton addButton;
 
     @Override
@@ -37,6 +48,28 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         addButton.setOnClickListener(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.option_import:
+                importGuineaPigs();
+                return true;
+            case R.id.option_export:
+                exportGuineaPigs();
+                return true;
+            default:
+                return true;
+        }
+    }
+
     private void initComponents() {
         listView = (StickyListHeadersListView) findViewById(R.id.guinea_pig_list);
         addButton = (FloatingActionButton) findViewById(R.id.add_button);
@@ -45,6 +78,17 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     @Override
     protected void onResume() {
         super.onResume();
+        loadGuineaPigs();
+        mMainListAdapter = new MainListAdapter(this, mGuineaPigs);
+        setGenderText();
+        listView.setAdapter(mMainListAdapter);
+        listView.setOnItemClickListener(this);
+        if (mGuineaPigs.isEmpty()) {
+            handleEmptyList();
+        }
+    }
+
+    private void loadGuineaPigs() {
         List<GuineaPig> tempPigs = new ArrayList<>();
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
@@ -57,13 +101,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         }
         Collections.sort(tempPigs, new GuineaPigComparator());
         mGuineaPigs = tempPigs;
-        MainListAdapter adapter = new MainListAdapter(this, mGuineaPigs);
-        setGenderText();
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
-        if (mGuineaPigs.isEmpty()) {
-            handleEmptyList();
-        }
     }
 
     private void setGenderText() {
@@ -92,11 +129,58 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         getToolbar().setSubtitle(getString(R.string.main_activity_subtitle, totalMale, totalFemale, totalCastrato));
     }
 
+    private void importGuineaPigs() {
+        JsonImporter importer = new JsonImporter(this);
+        try {
+            importer.loadGuineaPigs();
+            loadGuineaPigs();
+            setGenderText();
+            mMainListAdapter.setGuineaPigs(mGuineaPigs);
+            mMainListAdapter.notifyDataSetChanged();
+        } catch (IOException e) {
+            Log.e(TAG, "No file found to import guinea pigs");
+            handleNoFileError();
+        } catch (JSONException e) {
+            Log.e(TAG, "Corrupted import file");
+            handleCorruptedFileError();
+        }
+    }
+
+    private void exportGuineaPigs() {
+        JsonExporter exporter = new JsonExporter(this);
+        try {
+            exporter.exportGuineaPigs(mGuineaPigs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleNoFileError() {
+        String title = getString(R.string.error);
+        String message = getString(R.string.error_no_file);
+        String okMessage = getString(android.R.string.ok);
+        showError(title, message, okMessage);
+    }
+
+    private void handleCorruptedFileError() {
+        String title = getString(R.string.error);
+        String message = getString(R.string.error_corrupted_file);
+        String okMessage = getString(android.R.string.ok);
+        showError(title, message, okMessage);
+    }
+
     private void handleEmptyList() {
+        String title = getString(R.string.no_guinea_pigs_title);
+        String message = getString(R.string.no_guinea_pigs_message);
+        String okMessage = getString(android.R.string.ok);
+        showError(title, message, okMessage);
+    }
+
+    private void showError(String title, String message, String okMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
-        builder.setTitle(getString(R.string.no_guinea_pigs_title));
-        builder.setMessage(getString(R.string.no_guinea_pigs_message));
-        builder.setPositiveButton(getString(android.R.string.ok), null);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(okMessage, null);
         builder.show();
     }
 
@@ -116,7 +200,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     public void onClick(View v) {
         if (v.getId() == R.id.add_button) {
             Intent intent = new Intent(getApplicationContext(),
-                    GuineaPigAddActivity.class);
+                    GuineaPigAddEditActivity.class);
             startActivity(intent);
         }
     }

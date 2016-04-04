@@ -5,6 +5,8 @@
     <string name="main_activity_subtitle">M:%1$d W:%2$d K:%3$d</string>
     <string name="set">Setzen</string>
     <string name="pigs_total">Gesamt: %d</string>
+    <string name="import_guinea_pigs">Import guinea pigs</string>
+    <string name="export_guinea_pigs">Export guinea pigs</string>
     <string name="add">Hinzufügen</string>
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>
@@ -23,13 +25,9 @@
     <string name="pig_castration_date">Kastriert am:</string>
     <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Meeri bearbeiten</string>
-    <string name="error_empty_fields">Bitte alle Pflichfelder ausfüllen</string>
-    <string name="save_error_message">Speichern fehlgeschlagen</string>
-    <string name="update_error_message">Die neuen Werte vom Meeri konnten nicht gespeichert werden</string>
     <string name="image_description">Kein Bild vorhanden</string>
     <string name="pick_picture">Neues Bild auswählen</string>
     <string name="remove_picture">Bild entfernen</string>
-    <string name="error_loading_pigs">Fehler beim Laden der Schweinchen</string>
     <string name="last_birth">Letzter Wurf:</string>
     <string name="unknown">Unbekannt</string>
     <string name="male">Bock</string>
@@ -38,12 +36,8 @@
     <string name="type_sale">Verkauf</string>
     <string name="type_breed">Zucht</string>
     <string name="type_rescue">Nottier</string>
-    <string name="deletion_confirmation_text">Soll %s wirklich gelöscht werden?</string>
-    <string name="message_unsaved_update">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle neuen Eingaben gehen dann verloren.</string>
-    <string name="message_unsaved_guinea_pig">Sind Sie sicher, dass Sie das Meeri nicht speichern wollen? Alle bisherigen Eingaben gehen dann verloren.</string>
-    <string name="error_pig_not_deleted_message">Meeri konnte nicht gelöscht werden</string>
-    <string name="no_guinea_pigs_title">Keine Meeris</string>
-    <string name="no_guinea_pigs_message">Zur Zeit haben Sie keine Meeris hinterlegt. Sie können ein Meeri durch Tappen des Plus Knopfes hinzufügen.</string>
     <string name="date_picker_title">Wählen Sie ein Datum</string>
     <string name="no_limitations">Keine Einschränkung</string>
+    <string name="successful_import">Import der Meerschweinchen war erfolgreich.</string>
+    <string name="successful_export">Export der Meerschweinchen war erfolgreich.</string>
 </resources>

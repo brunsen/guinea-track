@@ -154,9 +154,9 @@ public class GuineaPigCRUD {
         ContentValues values = new ContentValues();
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID, id);
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT, optionalData.getWeight());
-        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getWeight());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getLastBirth());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN, optionalData.getOrigin());
-        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getOrigin());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getLimitations());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH, optionalData.getPicturePath());
         database.insert(GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME, null, values);
@@ -169,9 +169,9 @@ public class GuineaPigCRUD {
         ContentValues values = new ContentValues();
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID, id);
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT, optionalData.getWeight());
-        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getWeight());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getLastBirth());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN, optionalData.getOrigin());
-        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getOrigin());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getLimitations());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH, optionalData.getPicturePath());
         String whereClause = GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID + " = ?";

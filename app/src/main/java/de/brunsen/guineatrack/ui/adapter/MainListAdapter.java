@@ -28,9 +28,13 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
 
     public MainListAdapter(Context context, List<GuineaPig> list) {
         mInflater = LayoutInflater.from(context);
-        guineaPigs = list;
+        setGuineaPigs(list);
         pigImages = new ArrayList<>();
         mContext = context;
+    }
+
+    public void setGuineaPigs(List<GuineaPig> list) {
+        guineaPigs = list;
     }
 
     @Override
