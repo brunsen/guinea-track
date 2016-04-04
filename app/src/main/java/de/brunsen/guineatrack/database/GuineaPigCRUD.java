@@ -77,7 +77,7 @@ public class GuineaPigCRUD {
         return guineaPigs;
     }
 
-    public void storeGuineaPig(GuineaPig guineaPig) throws IOException, JSONException {
+    public void storeGuineaPig(GuineaPig guineaPig) {
         int id = getHighestID() + 1;
         GuineaPigDbHelper dbHelper = GuineaPigDbHelper.getInstance(mContext);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -112,13 +112,13 @@ public class GuineaPigCRUD {
         updateOptionalData(guineaPig.getId(), guineaPig.getOptionalData());
     }
 
-    public void storeGuineaPigs(List<GuineaPig> guineaPigs) throws IOException, JSONException {
+    public void storeGuineaPigs(List<GuineaPig> guineaPigs) {
         for (GuineaPig guineaPig : guineaPigs) {
             storeGuineaPig(guineaPig);
         }
     }
 
-    public void deleteGuineaPig(GuineaPig guineaPig) throws IOException, JSONException {
+    public void deleteGuineaPig(GuineaPig guineaPig) {
         GuineaPigDbHelper dbHelper = GuineaPigDbHelper.getInstance(mContext);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         String selection = GuineaPigDbContract.GuineaPigEntry.COLUMN_NAME_ID + " = ?";

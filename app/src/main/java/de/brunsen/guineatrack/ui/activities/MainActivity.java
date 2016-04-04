@@ -1,5 +1,6 @@
 package de.brunsen.guineatrack.ui.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -31,7 +33,7 @@ import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class MainActivity extends BaseActivity implements OnClickListener,
-        OnItemClickListener {
+        OnItemClickListener, OnItemLongClickListener {
 
     private static final String TAG = MainActivity.class.getName();
     private List<GuineaPig> mGuineaPigs;
@@ -83,6 +85,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         setGenderText();
         listView.setAdapter(mMainListAdapter);
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
         if (mGuineaPigs.isEmpty()) {
             handleEmptyList();
         }
@@ -155,6 +158,13 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         }
     }
 
+    private void deleteGuineaPig(GuineaPig guineaPig) {
+        GuineaPigCRUD crud = new GuineaPigCRUD(this);
+        crud.deleteGuineaPig(guineaPig);
+        mGuineaPigs.remove(guineaPig);
+        mMainListAdapter.notifyDataSetChanged();
+    }
+
     private void handleNoFileError() {
         String title = getString(R.string.error);
         String message = getString(R.string.error_no_file);
@@ -184,6 +194,26 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         builder.show();
     }
 
+    public void showDeleteDialog(final GuineaPig guineaPig) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle(getString(R.string.confirm));
+        builder.setMessage(getString(R.string.deletion_confirmation_text, guineaPig.getName()));
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteGuineaPig(guineaPig);
+                setGenderText();
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -203,5 +233,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                     GuineaPigAddEditActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        showDeleteDialog(mGuineaPigs.get(position));
+        return true;
     }
 }

@@ -157,7 +157,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
         limitationsTextView.setText(limitationsText);
     }
 
-    public void deletePig() {
+    public void deleteGuineaPig() {
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
             crud.deleteGuineaPig(mGuineaPig);
@@ -182,7 +182,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                deletePig();
+                deleteGuineaPig();
             }
         });
         builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
