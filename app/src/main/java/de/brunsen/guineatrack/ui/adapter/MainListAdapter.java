@@ -2,7 +2,8 @@ package de.brunsen.guineatrack.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 
 import de.brunsen.guineatrack.R;
@@ -22,32 +23,17 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 public class MainListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
     private List<GuineaPig> guineaPigs;
-    private List<Bitmap> pigImages;
     private LayoutInflater mInflater;
     private Context mContext;
 
     public MainListAdapter(Context context, List<GuineaPig> list) {
         mInflater = LayoutInflater.from(context);
         setGuineaPigs(list);
-        pigImages = new ArrayList<>();
         mContext = context;
     }
 
     public void setGuineaPigs(List<GuineaPig> list) {
         guineaPigs = list;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        populatePigImageList();
-    }
-
-    private void populatePigImageList() {
-        pigImages.clear();
-        for (int i = 0; i < guineaPigs.size(); i++) {
-            pigImages.add(getImage(guineaPigs.get(i).getOptionalData().getPicturePath()));
-        }
     }
 
     @Override
@@ -79,16 +65,16 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
             holder = (ItemViewHolder) convertView.getTag();
         }
 
-        GuineaPig pig = guineaPigs.get(position);
-        String limitationText = pig.getOptionalData().getLimitations();
+        GuineaPig guineaPig = guineaPigs.get(position);
+        String limitationText = guineaPig.getOptionalData().getLimitations();
         if(limitationText.equals("")){
             limitationText = mContext.getString(R.string.no_limitations);
         }
-        String subInfoText = pig.getType().getText() + ", " + limitationText;
+        String subInfoText = guineaPig.getType().getText() + ", " + limitationText;
 
-        holder.nameTextView.setText(pig.getName());
+        holder.nameTextView.setText(guineaPig.getName());
         holder.subInfoTextView.setText(subInfoText);
-        holder.imageView.setImageBitmap(pigImages.get(position));
+        setListImage(holder.imageView, guineaPig.getOptionalData().getPicturePath());
 
         return convertView;
     }
@@ -111,21 +97,20 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
         return convertView;
     }
 
-    protected Bitmap getImage(String filePath) {
-        Bitmap pigImage;
-        if (!filePath.equals("")) {
+    private void setListImage(RoundedImageView imageView, String filePath) {
+        File file = new File(filePath);
+        if (!filePath.equals("") && file.exists()) {
             int requiredWidth = (int) mContext.getResources().getDimension(R.dimen.list_item_image_width);
             int requiredHeight = (int) mContext.getResources().getDimension(R.dimen.list_item_image_height);
-            Bitmap picture = ImageService.getInstance().getPicture(filePath, requiredWidth, requiredHeight);
-            if (picture != null) {
-                pigImage = picture;
-            } else {
-                pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultListImage(mContext)).getBitmap();
-            }
+            ImageService.getInstance().setListImage(imageView, file, requiredWidth, requiredHeight);
         } else {
-            pigImage = ((BitmapDrawable) ImageService.getInstance().getDefaultListImage(mContext)).getBitmap();
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                Drawable defaultImage = imageView.getResources().getDrawable(R.drawable.unknown_guinea_pig);
+                imageView.setImageDrawable(defaultImage);
+            } else {
+                imageView.setImageResource(R.drawable.unknown_guinea_pig);
+            }
         }
-        return pigImage;
     }
 
     @Override
