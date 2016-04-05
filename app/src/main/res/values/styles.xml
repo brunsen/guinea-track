@@ -42,7 +42,7 @@
         <item name="android:alpha">0.54</item>
     </style>
 
-    <style name="AlertDialogStyle" parent="android:Theme.DeviceDefault.Dialog.Alert">
+    <style name="AlertDialogStyle" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
         <!-- Used for the buttons -->
         <item name="colorAccent">@color/accent_color</item>
         <!-- Used for the title and text -->
