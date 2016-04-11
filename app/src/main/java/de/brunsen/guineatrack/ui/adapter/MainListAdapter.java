@@ -1,9 +1,12 @@
 package de.brunsen.guineatrack.ui.adapter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,7 +102,13 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
 
     private void setListImage(RoundedImageView imageView, String filePath) {
         File file = new File(filePath);
-        if (!filePath.equals("") && file.exists()) {
+        boolean permissionGranted = true;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissionGranted = ContextCompat.checkSelfPermission(mContext,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED;
+        }
+        if (!filePath.equals("") && file.exists() && permissionGranted) {
             int requiredWidth = (int) mContext.getResources().getDimension(R.dimen.list_item_image_width);
             int requiredHeight = (int) mContext.getResources().getDimension(R.dimen.list_item_image_height);
             ImageService.getInstance().setListImage(imageView, file, requiredWidth, requiredHeight);
