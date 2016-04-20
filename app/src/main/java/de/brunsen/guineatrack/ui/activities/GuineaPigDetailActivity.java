@@ -1,9 +1,16 @@
 package de.brunsen.guineatrack.ui.activities;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +29,10 @@ import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.services.ImageService;
+import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 
 public class GuineaPigDetailActivity extends BaseActivity {
+    protected static final int PERMISSION_REQUEST_PICTURE = 42;
     private GuineaPig mGuineaPig;
     private ImageView pigImage;
     private TextView nameText;
@@ -78,6 +87,38 @@ public class GuineaPigDetailActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_PICTURE) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setPicture(mGuineaPig.getOptionalData());
+            }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void askForExternalStorageReadAccess(final int request) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    String rationaleMessage = getString(R.string.rationale_message_image_display);
+                    PermissionDialog dialog = new PermissionDialog(this, rationaleMessage, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(GuineaPigDetailActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
+                        }
+                    });
+                    dialog.show();
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
+                }
+            }
+        }
+    }
+
     private void initComponents() {
         pigImage = (ImageView) findViewById(R.id.detail_image);
         nameText = (TextView) findViewById(R.id.detail_name_text);
@@ -115,7 +156,9 @@ public class GuineaPigDetailActivity extends BaseActivity {
         pigImage.setLayoutParams(imageLayoutParams);
         if (picturePath.equals("")) {
             ImageService.getInstance().setDefaultImage(pigImage);
-        } else {
+        } else if (!hasExternalReadAccess()) {
+            askForExternalStorageReadAccess(PERMISSION_REQUEST_PICTURE);
+        }else {
             int requiredWidth = imageLayoutParams.width / 2;
             int requiredHeight = imageLayoutParams.height / 2;
             Bitmap picture = ImageService.getInstance().getPicture(picturePath, requiredWidth, requiredHeight);

@@ -1,13 +1,20 @@
 package de.brunsen.guineatrack.ui.activities;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +44,7 @@ import de.brunsen.guineatrack.services.ImageService;
 import de.brunsen.guineatrack.ui.adapter.GenderSpinnerAdapter;
 import de.brunsen.guineatrack.ui.adapter.TypeSpinnerAdapter;
 import de.brunsen.guineatrack.ui.dialogs.DatePickDialog;
+import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 
 public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
         OnItemSelectedListener, OnClickListener {
@@ -61,7 +69,7 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
     protected TableRow castrationDateRow;
     protected EditText lastBirthEdit;
     private static final int RESULT_GALLERY = 0;
-
+    protected static final int PERMISSION_REQUEST_PICTURE = 42;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +97,39 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_PICTURE) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED && !selectedImage.equals("")) {
+                setImage(selectedImage);
+
+            }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void askForExternalStorageReadAccess(final int request) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    String rationaleMessage = getString(R.string.rationale_message_image_display);
+                    PermissionDialog dialog = new PermissionDialog(this, rationaleMessage, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(BaseGuineaPigEditActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
+                        }
+                    });
+                    dialog.show();
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
+                }
+            }
         }
     }
 
@@ -178,13 +219,18 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
 
     protected void setImage(String filePath) {
         if (!filePath.equals("")) {
-            int requiredWidth = (int) getResources().getDimension(R.dimen.edit_image_width);
-            int requiredHeight = (int) getResources().getDimension(R.dimen.edit_image_height);
-            Bitmap picture = ImageService.getInstance().getPicture(filePath, requiredWidth, requiredHeight);
-            if (picture != null) {
-                editImage.setImageBitmap(picture);
+            if (hasExternalReadAccess()) {
+                int requiredWidth = (int) getResources().getDimension(R.dimen.edit_image_width);
+                int requiredHeight = (int) getResources().getDimension(R.dimen.edit_image_height);
+                Bitmap picture = ImageService.getInstance().getPicture(filePath, requiredWidth, requiredHeight);
+                if (picture != null) {
+                    editImage.setImageBitmap(picture);
+                } else {
+                    ImageService.getInstance().setDefaultImage(editImage);
+                }
             } else {
                 ImageService.getInstance().setDefaultImage(editImage);
+                askForExternalStorageReadAccess(PERMISSION_REQUEST_PICTURE);
             }
         } else {
             ImageService.getInstance().setDefaultImage(editImage);

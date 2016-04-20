@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         if (mGuineaPigs.isEmpty()) {
             handleEmptyList();
         } else {
-            if (initialPermissionRequest) {
+            if (initialPermissionRequest && !hasExternalReadAccess()) {
                 initialPermissionRequest = false;
                 askForExternalStorageReadAccess(PERMISSION_REQUEST_LIST_PICTURES);
             }
@@ -163,14 +163,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                 }
             }
         }
-    }
-
-    private boolean hasExternalReadAccess() {
-        boolean readAccess = true;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            readAccess = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-        }
-        return readAccess;
     }
 
     private void loadGuineaPigs() {

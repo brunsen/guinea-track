@@ -3,4 +3,5 @@
     <string name="required_permission">Required Permission</string>
     <string name="rationale_message_list">Die App benötigt Zugriff auf Ihre Dateien, um die ausgewählten Bilder Ihrer Meerschweinchen in der Liste anzuzeigen. Bitte gewähren Sie die Berechtigung, um diese Funktion zu nutzen.</string>
     <string name="rationale_message_import">Die App benötigt Zugriff auf Ihre Dateien, um Meerschweinchen zu importieren. Bitte gewähren Sie die Berechtigung und versuchen es noch ein mal.</string>
+    <string name="rationale_message_image_display">Die App benötigt Zugriff auf Ihre Dateien, um das von Ihnen gewählte Bild des Meerschweinchens zu zeigen. Ohne den Zugriff kann nur das Standardbild angezeigt werden und Sie werden gegebenenfalls keine Änderung trotz korrekt ausgewählten Bildes wahrnehmen.</string>
 </resources>
