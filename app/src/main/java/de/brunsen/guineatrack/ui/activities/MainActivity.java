@@ -312,7 +312,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     public void onClick(View v) {
         if (v.getId() == R.id.add_button) {
             Intent intent = new Intent(getApplicationContext(),
-                    GuineaPigAddEditActivity.class);
+                    GuineaPigAddActivity.class);
             startActivity(intent);
         }
     }

@@ -10,7 +10,7 @@ import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.services.ImageService;
 
-public class GuineaPigAddEditActivity extends BaseGuineaPigEditActivity {
+public class GuineaPigAddActivity extends BaseGuineaPigEditActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
