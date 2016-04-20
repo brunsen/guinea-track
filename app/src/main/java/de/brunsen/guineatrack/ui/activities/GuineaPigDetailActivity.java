@@ -163,7 +163,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
             crud.deleteGuineaPig(mGuineaPig);
             finish();
         } catch (Exception e) {
-            Toast.makeText(this, getString(R.string.error_pig_not_deleted_message),
+            Toast.makeText(getApplicationContext(), getString(R.string.error_pig_not_deleted_message),
                     Toast.LENGTH_LONG).show();
         }
     }

@@ -51,7 +51,7 @@ public class JsonExporter {
         outputStream.write(json.getBytes());
         outputStream.close();
         MediaScannerConnection.scanFile(mContext, new String[]{f.getAbsolutePath()}, null, null);
-        Toast.makeText(mContext, R.string.successful_export, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext.getApplicationContext(), R.string.successful_export, Toast.LENGTH_SHORT).show();
     }
 
     private void showNoGuineaPigsError() {

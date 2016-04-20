@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="required_permission">Required Permission</string>
+    <string name="rationale_message_list">This app requires access to your files to display selected pictures of your guinea pigs. Please grant access to enable this feature.</string>
+    <string name="rationale_message_import">This app requires access to your files to import guinea pigs. Please grant access and retry.</string>
+</resources>

@@ -50,7 +50,7 @@ public class GuineaPigAddEditActivity extends BaseGuineaPigEditActivity {
             crud.storeGuineaPig(pig);
             finish();
         } catch (Exception e) {
-            Toast.makeText(this, getString(R.string.save_error_message),
+            Toast.makeText(getApplicationContext(), getString(R.string.save_error_message),
                     Toast.LENGTH_LONG).show();
         }
     }

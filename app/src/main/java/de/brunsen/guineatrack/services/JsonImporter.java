@@ -53,6 +53,6 @@ public class JsonImporter {
         }
         GuineaPigCRUD crud = new GuineaPigCRUD(mContext);
         crud.storeGuineaPigs(guineaPigs);
-        Toast.makeText(mContext, R.string.successful_import, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext.getApplicationContext(), R.string.successful_import, Toast.LENGTH_SHORT).show();
     }
 }

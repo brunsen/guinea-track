@@ -1,6 +1,7 @@
 package de.brunsen.guineatrack.ui.activities;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,6 +37,7 @@ import de.brunsen.guineatrack.model.GuineaPigComparator;
 import de.brunsen.guineatrack.services.JsonExporter;
 import de.brunsen.guineatrack.services.JsonImporter;
 import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
+import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class MainActivity extends BaseActivity implements OnClickListener,
@@ -43,6 +45,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
     private static final String TAG = MainActivity.class.getName();
     private static final int PERMISSION_REQUEST_LIST_PICTURES = 1;
+    private static final int PERMISSION_REQUEST_IMPORT = 2;
     private boolean initialPermissionRequest;
     private List<GuineaPig> mGuineaPigs;
     private StickyListHeadersListView listView;
@@ -71,7 +74,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.option_import:
-                importGuineaPigs();
+                if (hasExternalReadAccess()) {
+                    importGuineaPigs();
+                } else {
+                    askForExternalStorageReadAccess(PERMISSION_REQUEST_IMPORT);
+                }
                 return true;
             case R.id.option_export:
                 exportGuineaPigs();
@@ -116,20 +123,54 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                 }
                 break;
             }
+            case PERMISSION_REQUEST_IMPORT: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    importGuineaPigs();
+                }
+                break;
+            }
         }
     }
 
-    private void askForExternalStorageReadAccess(int request) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void askForExternalStorageReadAccess(final int request) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    // TODO: Show explanation why this permission is necessary and ask for permission again
+                    String rationaleMessage;
+                    switch (request) {
+                        case PERMISSION_REQUEST_IMPORT: {
+                            rationaleMessage = getString(R.string.rationale_message_import);
+                            break;
+                        }
+                        case PERMISSION_REQUEST_LIST_PICTURES: {
+                            rationaleMessage = getString(R.string.rationale_message_list);
+                            break;
+                        } default:
+                            rationaleMessage = "";
+                    }
+                    PermissionDialog dialog = new PermissionDialog(this, rationaleMessage, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
+                        }
+                    });
+                    dialog.show();
                 } else {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
                 }
             }
         }
+    }
+
+    private boolean hasExternalReadAccess() {
+        boolean readAccess = true;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            readAccess = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        }
+        return readAccess;
     }
 
     private void loadGuineaPigs() {
@@ -138,7 +179,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         try {
             tempPigs.addAll(crud.getGuineaPigs());
         } catch (Exception e) {
-            Toast.makeText(this, getString(R.string.error_loading_pigs),
+            Toast.makeText(getApplicationContext(), getString(R.string.error_loading_pigs),
                     Toast.LENGTH_LONG).show();
             tempPigs = new ArrayList<>();
             e.printStackTrace();

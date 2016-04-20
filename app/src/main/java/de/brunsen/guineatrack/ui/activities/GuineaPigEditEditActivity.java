@@ -37,7 +37,7 @@ public class GuineaPigEditEditActivity extends BaseGuineaPigEditActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } catch (Exception e) {
-            Toast.makeText(this,
+            Toast.makeText(getApplicationContext(),
                     getString(R.string.update_error_message),
                     Toast.LENGTH_LONG).show();
         }

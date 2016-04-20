@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="required_permission">Required Permission</string>
+    <string name="rationale_message_list">Die App benötigt Zugriff auf Ihre Dateien, um die ausgewählten Bilder Ihrer Meerschweinchen in der Liste anzuzeigen. Bitte gewähren Sie die Berechtigung, um diese Funktion zu nutzen.</string>
+    <string name="rationale_message_import">Die App benötigt Zugriff auf Ihre Dateien, um Meerschweinchen zu importieren. Bitte gewähren Sie die Berechtigung und versuchen es noch ein mal.</string>
+</resources>
