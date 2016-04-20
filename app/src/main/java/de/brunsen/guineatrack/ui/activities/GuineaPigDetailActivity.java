@@ -170,7 +170,7 @@ public class GuineaPigDetailActivity extends BaseActivity {
 
     public void callEditor() {
         Intent intent = new Intent(getApplicationContext(),
-                GuineaPigEditEditActivity.class);
+                GuineaPigEditActivity.class);
         intent.putExtra(getString(R.string.pig_identifier), mGuineaPig.getId());
         startActivity(intent);
     }

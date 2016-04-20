@@ -11,7 +11,7 @@ import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
 
-public class GuineaPigEditEditActivity extends BaseGuineaPigEditActivity {
+public class GuineaPigEditActivity extends BaseGuineaPigEditActivity {
     GuineaPig mGuineaPig;
 
     @Override
