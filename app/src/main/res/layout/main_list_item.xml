@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:background="@color/background"
     android:orientation="horizontal">
 
     <RelativeLayout
-
         android:layout_width="@dimen/list_item_image_width"
         android:layout_height="@dimen/list_item_image_height"
         android:layout_marginTop="@dimen/list_vertical_spacing">
@@ -45,18 +45,20 @@
 
         <TextView
             android:id="@+id/main_list_item_name"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:textSize="16sp" />
+            android:textSize="16dp"
+            tools:text="Guinea Pig" />
 
         <TextView
             android:id="@+id/main_list_item_sub_info"
             style="@style/Secondary_Text_Style"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:textSize="14sp" />
+            android:textSize="14dp"
+            tools:text="Guinea pig data" />
 
     </LinearLayout>
 
