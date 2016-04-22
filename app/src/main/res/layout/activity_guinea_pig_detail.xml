@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="de.brunsen.meeribestand.ui.activities.GuineaPigDetailActivity">
+    tools:context="de.brunsen.guineatrack.ui.activities.GuineaPigDetailActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/image_description"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop"
+                tools:src="@drawable/icon_launcher"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -26,7 +26,7 @@
             android:id="@+id/main_list_item_image"
             android:background="@android:color/transparent"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:riv_corner_radius="30dip"
             app:riv_oval="false" />
 

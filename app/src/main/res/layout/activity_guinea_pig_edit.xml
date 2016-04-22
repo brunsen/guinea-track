@@ -281,7 +281,7 @@
                     android:layout_height="@dimen/edit_image_height"
                     android:layout_marginRight="20dp"
                     android:adjustViewBounds="true"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
 
                 <Button
                     android:id="@+id/add_picture"
