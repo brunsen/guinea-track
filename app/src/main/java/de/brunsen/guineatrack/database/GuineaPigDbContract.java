@@ -22,6 +22,7 @@ public final class GuineaPigDbContract {
         public static final String COLUMN_NAME_ID = "GuineaPigId";
         public static final String COLUMN_NAME_WEIGHT = "Weight";
         public static final String COLUMN_NAME_LAST_BIRTH = "LastBirth";
+        public static final String COLUMN_NAME_DUE_DATE = "DueDate";
         public static final String COLUMN_NAME_ORIGIN = "Origin";
         public static final String COLUMN_NAME_LIMITATIONS = "Limitations";
         public static final String COLUMN_NAME_CASTRATION_DATE = "CastrationDate";

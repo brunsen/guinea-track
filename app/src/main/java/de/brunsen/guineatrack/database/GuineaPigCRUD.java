@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,6 +135,7 @@ public class GuineaPigCRUD {
         if (cursor.moveToFirst()) {
             optionalData.setWeight(cursor.getInt(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT)));
             optionalData.setLastBirth(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH)));
+            optionalData.setDueDate(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_DUE_DATE)));
             optionalData.setOrigin(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN)));
             optionalData.setLimitations(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS)));
             optionalData.setCastrationDate(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE)));
@@ -155,6 +153,7 @@ public class GuineaPigCRUD {
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID, id);
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT, optionalData.getWeight());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getLastBirth());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_DUE_DATE, optionalData.getDueDate());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN, optionalData.getOrigin());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getLimitations());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());
@@ -170,6 +169,7 @@ public class GuineaPigCRUD {
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID, id);
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT, optionalData.getWeight());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH, optionalData.getLastBirth());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_DUE_DATE, optionalData.getDueDate());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN, optionalData.getOrigin());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getLimitations());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());

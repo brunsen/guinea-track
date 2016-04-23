@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -37,6 +36,14 @@ public class DatePickDialog extends DatePickerDialog {
                 dismiss();
             }
         });
+        setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.reset), new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                editText.getText().clear();
+                editText.clearFocus();
+                dismiss();
+            }
+        });
     }
 
     public void setPermanentTitle(String title) {
@@ -47,7 +54,6 @@ public class DatePickDialog extends DatePickerDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getButton(DialogInterface.BUTTON_NEUTRAL).setVisibility(View.INVISIBLE);
         datePicker = getDatePicker();
     }
 

@@ -59,7 +59,9 @@ public class GuineaPigEditActivity extends BaseGuineaPigEditActivity {
         toggleCastrationDateArea();
         if (mGuineaPig.getGender() == Gender.Female) {
             setLastBirthAreaVisible(true);
+            setDueDateAreaVisible(true);
             lastBirthEdit.setText(mGuineaPig.getOptionalData().getLastBirth());
+            dueDateEdit.setText(mGuineaPig.getOptionalData().getDueDate());
         }
         originEdit.setText(mGuineaPig.getOptionalData().getOrigin());
         castrationDateEdit.setText(mGuineaPig.getOptionalData().getCastrationDate());
@@ -78,6 +80,7 @@ public class GuineaPigEditActivity extends BaseGuineaPigEditActivity {
         noUpdate &= optionalData.getPicturePath().equals(selectedImage);
         if (selectedGender != null && selectedGender == Gender.Female) {
             noUpdate &= lastBirthEdit.getText().toString().equals(optionalData.getLastBirth());
+            noUpdate &= dueDateEdit.getText().toString().equals(optionalData.getDueDate());
         }
         if (selectedGender != null && !selectedGender.equals(Gender.Male)) {
             if (selectedType != null && !selectedType.equals(Type.BREED)) {
@@ -86,10 +89,11 @@ public class GuineaPigEditActivity extends BaseGuineaPigEditActivity {
         }
         noUpdate &= optionalData.getLimitations().equals(limitationsEdit.getText().toString());
         noUpdate &= optionalData.getOrigin().equals(originEdit.getText().toString());
-        if (weightEdit.getText().equals("")) {
-            noUpdate = true;
+        if (weightEdit.getText().toString().equals("")) {
+            noUpdate &= optionalData.getWeight() == 0;
+        } else {
+            noUpdate &= optionalData.getWeight() == Integer.valueOf(weightEdit.getText().toString());
         }
-        noUpdate &= optionalData.getWeight() == Integer.valueOf(weightEdit.getText().toString());
         return !noUpdate;
     }
 

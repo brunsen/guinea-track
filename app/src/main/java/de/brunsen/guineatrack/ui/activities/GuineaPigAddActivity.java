@@ -31,6 +31,7 @@ public class GuineaPigAddActivity extends BaseGuineaPigEditActivity {
         empty &= breedEdit.getText().toString().equals("");
         if (selectedGender == Gender.Female) {
             empty &= lastBirthEdit.getText().toString().equals("");
+            empty &= dueDateEdit.getText().toString().equals("");
         }
         if (selectedGender != null && !selectedGender.equals(Gender.Male)) {
             if (selectedType != null && !selectedType.equals(Type.BREED)) {

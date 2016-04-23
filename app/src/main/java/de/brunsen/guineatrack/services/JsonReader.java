@@ -34,11 +34,6 @@ public class JsonReader {
         return restoredPigs;
     }
 
-    public GuineaPig getGuineaPigFromString(String jsonString) throws JSONException {
-        JSONObject jsonObject = new JSONObject(jsonString);
-        return getGuineaPigFromJson(jsonObject);
-    }
-
     private GuineaPig getGuineaPigFromJson(JSONObject jsonObject) throws JSONException {
         GuineaPig restoredPig = new GuineaPig();
         if (jsonObject.has(mContext.getString(R.string.id_key)))
@@ -85,6 +80,8 @@ public class JsonReader {
                 restoredPig.getOptionalData().setLimitations(optionalData.getString(mContext.getString(R.string.limitations_key)));
             if (optionalData.has(mContext.getString(R.string.last_birth_key)))
                 restoredPig.getOptionalData().setLastBirth(optionalData.getString(mContext.getString(R.string.last_birth_key)));
+            if (optionalData.has(mContext.getString(R.string.due_date_key)))
+                restoredPig.getOptionalData().setDueDate(optionalData.getString(mContext.getString(R.string.due_date_key)));
             if (optionalData.has(mContext.getString(R.string.picture_key)))
                 restoredPig.getOptionalData().setPicturePath(optionalData.getString(mContext.getString(R.string.picture_key)));
         }

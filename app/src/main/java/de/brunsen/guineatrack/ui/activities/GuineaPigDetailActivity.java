@@ -43,7 +43,9 @@ public class GuineaPigDetailActivity extends BaseActivity {
     private TextView raceText;
     private TextView typeText;
     private LinearLayout lastBirthGroup;
-    private TextView lastBirth;
+    private TextView lastBirthText;
+    private LinearLayout dueDateGroup;
+    private TextView dueDateText;
     private LinearLayout castrationDateGroup;
     private TextView castrationDateTextView;
     private TextView originTextView;
@@ -128,7 +130,9 @@ public class GuineaPigDetailActivity extends BaseActivity {
         raceText = (TextView) findViewById(R.id.detail_breed_text);
         typeText = (TextView) findViewById(R.id.detail_type_text);
         lastBirthGroup = (LinearLayout) findViewById(R.id.detail_last_birth);
-        lastBirth = (TextView) findViewById(R.id.detail_last_birth_text);
+        lastBirthText = (TextView) findViewById(R.id.detail_last_birth_text);
+        dueDateGroup = (LinearLayout) findViewById(R.id.detail_due_date);
+        dueDateText = (TextView) findViewById(R.id.detail_due_date_text);
         castrationDateGroup = (LinearLayout) findViewById(R.id.detail_castration_data_area);
         castrationDateTextView = (TextView) findViewById(R.id.detail_castration_date_text);
         weightText = (TextView) findViewById(R.id.detail_weight_text);
@@ -172,12 +176,18 @@ public class GuineaPigDetailActivity extends BaseActivity {
 
     private void setOptionalData(GuineaPigOptionalData optionalData) {
         if (mGuineaPig.getGender() == Gender.Female) {
+            dueDateGroup.setVisibility(View.VISIBLE);
             lastBirthGroup.setVisibility(View.VISIBLE);
-            String lastBirthText = optionalData.getLastBirth();
-            if (lastBirthText.equals("")) {
-                lastBirthText = getString(R.string.unknown);
+            String lastBirthDisplayText = optionalData.getLastBirth();
+            String dueDateDisplayText = optionalData.getDueDate();
+            if (lastBirthDisplayText.equals("")) {
+                lastBirthDisplayText = getString(R.string.unknown);
             }
-            lastBirth.setText(lastBirthText);
+            if (dueDateDisplayText.equals("")) {
+                dueDateDisplayText = getString(R.string.unknown);
+            }
+            lastBirthText.setText(lastBirthDisplayText);
+            dueDateText.setText(dueDateDisplayText);
         }
         if (mGuineaPig.getGender() != Gender.Male && mGuineaPig.getType() != Type.BREED) {
             castrationDateGroup.setVisibility(View.VISIBLE);

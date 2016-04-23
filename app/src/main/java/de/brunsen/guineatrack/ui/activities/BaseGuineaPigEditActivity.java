@@ -66,8 +66,10 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
     protected List<Type> typeSpinnerItems;
     protected String selectedImage;
     protected TableRow lastBirthRow;
+    protected TableRow dueDateRow;
     protected TableRow castrationDateRow;
     protected EditText lastBirthEdit;
+    protected EditText dueDateEdit;
     private static final int RESULT_GALLERY = 0;
     protected static final int PERMISSION_REQUEST_PICTURE = 42;
 
@@ -143,8 +145,10 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
         selectImageButton = (Button) findViewById(R.id.add_picture);
         editImage = (ImageView) findViewById(R.id.edit_image);
         lastBirthRow = (TableRow) findViewById(R.id.last_birth_row);
+        dueDateRow = (TableRow) findViewById(R.id.due_date_row);
         castrationDateRow = (TableRow) findViewById(R.id.castration_edit_area);
         lastBirthEdit = (EditText) findViewById(R.id.last_birth_edit_text);
+        dueDateEdit = (EditText) findViewById(R.id.due_date_edit_text);
         castrationDateEdit = (EditText) findViewById(R.id.pig_castration_edit_text);
         weightEdit = (EditText) findViewById(R.id.pig_weight_edit_text);
         originEdit = (EditText) findViewById(R.id.pig_origin_edit_text);
@@ -166,6 +170,7 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
         selectImageButton.setOnClickListener(this);
         birthEdit.setOnFocusChangeListener(new TimePickerCaller());
         lastBirthEdit.setOnFocusChangeListener(new TimePickerCaller());
+        dueDateEdit.setOnFocusChangeListener(new TimePickerCaller());
         castrationDateEdit.setOnFocusChangeListener(new TimePickerCaller());
     }
 
@@ -174,11 +179,9 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
                                long id) {
         if (parent.getId() == R.id.detail_gender_spinner) {
             selectedGender = genderSpinnerItems.get(position);
-            if (selectedGender == Gender.Female) {
-                setLastBirthAreaVisible(true);
-            } else {
-                setLastBirthAreaVisible(false);
-            }
+            boolean female = selectedGender == Gender.Female;
+            setLastBirthAreaVisible(female);
+            setDueDateAreaVisible(female);
         } else if (parent.getId() == R.id.detail_type_text) {
             selectedType = typeSpinnerItems.get(position);
         }
@@ -262,8 +265,10 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
                     .show();
         } else {
             String lastBirth = "";
+            String dueDate = "";
             if (selectedGender == Gender.Female) {
                 lastBirth = lastBirthEdit.getText().toString();
+                dueDate = dueDateEdit.getText().toString();
             }
             String castrationDate = "";
             if (!selectedGender.equals(Gender.Male) && !selectedType.equals(Type.BREED)) {
@@ -276,7 +281,7 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
             }
             String origin = originEdit.getText().toString();
             String limitations = limitationsEdit.getText().toString();
-            GuineaPigOptionalData optionalData = new GuineaPigOptionalData(weight, lastBirth, origin, limitations, castrationDate, selectedImage);
+            GuineaPigOptionalData optionalData = new GuineaPigOptionalData(weight, lastBirth, dueDate, origin, limitations, castrationDate, selectedImage);
             GuineaPig pig = new GuineaPig(name, birth, selectedGender, color, breed, selectedType, optionalData);
             storeWithCrud(pig);
         }
@@ -290,6 +295,14 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
             lastBirthRow.setVisibility(View.VISIBLE);
         } else {
             lastBirthRow.setVisibility(View.GONE);
+        }
+    }
+
+    protected void setDueDateAreaVisible(boolean visible) {
+        if (visible) {
+            dueDateRow.setVisibility(View.VISIBLE);
+        } else {
+            dueDateRow.setVisibility(View.GONE);
         }
     }
 

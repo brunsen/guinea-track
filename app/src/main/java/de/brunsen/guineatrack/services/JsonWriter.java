@@ -37,6 +37,7 @@ public class JsonWriter {
         json.put(mContext.getString(R.string.type_key), pig.getType());
         JSONObject optionalObject = new JSONObject();
         optionalObject.put(mContext.getString(R.string.last_birth_key), pig.getOptionalData().getLastBirth());
+        optionalObject.put(mContext.getString(R.string.due_date_key), pig.getOptionalData().getDueDate());
         optionalObject.put(mContext.getString(R.string.weight_key), pig.getOptionalData().getWeight());
         optionalObject.put((mContext.getString(R.string.origin_key)), pig.getOptionalData().getOrigin());
         optionalObject.put(mContext.getString(R.string.limitations_key), pig.getOptionalData().getLimitations());

@@ -43,6 +43,7 @@ public class GuineaPigDbHelper extends SQLiteOpenHelper{
                 GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID + INTEGER_TYPE + COMMA_SEP +
                 GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_WEIGHT + INTEGER_TYPE + COMMA_SEP +
                 GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LAST_BIRTH + TEXT_TYPE + COMMA_SEP +
+                GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_DUE_DATE + TEXT_TYPE + COMMA_SEP +
                 GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ORIGIN + TEXT_TYPE + COMMA_SEP +
                 GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS + TEXT_TYPE + COMMA_SEP +
                 GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE + TEXT_TYPE + COMMA_SEP +
