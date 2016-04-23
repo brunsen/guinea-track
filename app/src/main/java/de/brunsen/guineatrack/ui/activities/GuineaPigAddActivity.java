@@ -3,6 +3,9 @@ package de.brunsen.guineatrack.ui.activities;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
@@ -12,6 +15,8 @@ import de.brunsen.guineatrack.services.ImageService;
 
 public class GuineaPigAddActivity extends BaseGuineaPigEditActivity {
 
+    private String mDefaultDateText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +25,17 @@ public class GuineaPigAddActivity extends BaseGuineaPigEditActivity {
 
     @Override
     protected void setData() {
+        DateFormat dateFormat = DateFormat.getDateInstance();
+        mDefaultDateText = dateFormat.format(new Date());
+        birthEdit.setText(mDefaultDateText);
         ImageService.getInstance().setDefaultImage(editImage);
     }
 
     private boolean fieldsEmpty() {
         boolean empty = true;
         empty &= nameEdit.getText().toString().equals("");
-        empty &= birthEdit.getText().toString().equals("");
+        String currentDateText = birthEdit.getText().toString();
+        empty &= currentDateText.equals(mDefaultDateText) || currentDateText.equals("");
         empty &= colorEdit.getText().toString().equals("");
         empty &= breedEdit.getText().toString().equals("");
         if (selectedGender == Gender.Female) {
