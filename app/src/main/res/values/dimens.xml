@@ -5,7 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="detail_information_top_margin">10dp</dimen>
     <dimen name="detail_information_bottom_margin">10dp</dimen>
-    <dimen name="spacer_height">3dp</dimen>
+    <dimen name="spacer_height">1dp</dimen>
     <dimen name="list_divider_height">2dp</dimen>
     <dimen name="list_vertical_spacing">16dp</dimen>
     <dimen name="main_list_side_margin">16dp</dimen>
