@@ -3,7 +3,6 @@ package de.brunsen.guineatrack.ui.adapter;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -109,9 +108,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
                     == PackageManager.PERMISSION_GRANTED;
         }
         if (!filePath.equals("") && file.exists() && permissionGranted) {
-            int requiredWidth = (int) mContext.getResources().getDimension(R.dimen.list_item_image_width);
-            int requiredHeight = (int) mContext.getResources().getDimension(R.dimen.list_item_image_height);
-            ImageService.getInstance().setListImage(imageView, file, requiredWidth, requiredHeight);
+            ImageService.getInstance().setListImage(imageView, file);
         } else {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 Drawable defaultImage = imageView.getResources().getDrawable(R.drawable.unknown_guinea_pig);

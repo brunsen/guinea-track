@@ -1,19 +1,19 @@
 package de.brunsen.guineatrack.services;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 
 import de.brunsen.guineatrack.R;
 
@@ -70,18 +70,15 @@ public class ImageService {
         return inSampleSize;
     }
 
-    private Bitmap getDefaultBitmap(Context context) {
-        return BitmapFactory.decodeResource(context.getResources(), R.drawable.unknown_guinea_pig);
-    }
-
-    public void setListImage(RoundedImageView imageView, File file, int width, int height) {
-        if (cancelPotentialWork(file, imageView)) {
-            final AsyncImageTask imageTask = new AsyncImageTask(imageView);
-            final AsyncDrawable asyncDrawable =
-                    new AsyncDrawable(imageView.getContext().getResources(), getDefaultBitmap(imageView.getContext()), imageTask);
-            imageView.setImageDrawable(asyncDrawable);
-            imageTask.execute(file, width, height);
-        }
+    public void setListImage(RoundedImageView imageView, File file) {
+        Context context = imageView.getContext();
+        CircleImageViewTarget viewTarget = new CircleImageViewTarget(imageView);
+        Glide.with(context)
+                .load(file)
+                .asBitmap()
+                .centerCrop()
+                .placeholder(R.drawable.unknown_guinea_pig)
+                .into(viewTarget);
     }
 
     public void setDefaultImage(ImageView iv) {
@@ -98,78 +95,22 @@ public class ImageService {
         }
     }
 
-    private boolean cancelPotentialWork(File file, ImageView imageView) {
-        final AsyncImageTask asyncImageTask = getBitmapWorkerTask(imageView);
+    private class CircleImageViewTarget extends BitmapImageViewTarget {
+        private Context context;
+        private RoundedImageView imageView;
 
-        if (asyncImageTask != null) {
-            final File fileData = asyncImageTask.file;
-            // If bitmapData is not yet set or it differs from the new data
-            if (fileData != null || fileData != file) {
-                // Cancel previous task
-                asyncImageTask.cancel(true);
-            } else {
-                // The same work is already in progress
-                return false;
-            }
-        }
-        // No task associated with the ImageView, or an existing task was cancelled
-        return true;
-    }
-
-    private AsyncImageTask getBitmapWorkerTask(ImageView imageView) {
-        if (imageView != null) {
-            final Drawable drawable = imageView.getDrawable();
-            if (drawable instanceof AsyncDrawable) {
-                final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
-                return asyncDrawable.getAsyncImageTask();
-            }
-        }
-        return null;
-    }
-
-    private class AsyncImageTask extends AsyncTask<Object, Void, Bitmap> {
-
-        private final WeakReference<RoundedImageView> imageViewReference;
-        private File file;
-
-        public AsyncImageTask(RoundedImageView imageView) {
-            imageViewReference = new WeakReference<>(imageView);
+        public CircleImageViewTarget(RoundedImageView imageView) {
+            super(imageView);
+            this.imageView = imageView;
+            context = imageView.getContext();
         }
 
         @Override
-        protected Bitmap doInBackground(Object[] params) {
-            file = (File) params[0];
-            Integer height = (Integer) params[1];
-            Integer width = (Integer) params[2];
-
-            return getPicture(file.getAbsolutePath(), width, height);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            if (isCancelled()) {
-                bitmap = null;
-            }
-
-            if (imageViewReference != null && bitmap != null) {
-                final RoundedImageView imageView = imageViewReference.get();
-                if (imageView != null) {
-                    imageView.setImageBitmap(bitmap);
-                }
-            }
-        }
-    }
-
-    private class AsyncDrawable extends BitmapDrawable {
-        WeakReference<AsyncImageTask> taskWeakReference;
-
-        public AsyncDrawable(Resources res, Bitmap bitmap, AsyncImageTask asyncImageTask) {
-            super(res, bitmap);
-            taskWeakReference = new WeakReference<>(asyncImageTask);
-        }
-
-        public AsyncImageTask getAsyncImageTask() {
-            return taskWeakReference.get();
+        protected void setResource(Bitmap resource) {
+            RoundedBitmapDrawable circularBitmapDrawable =
+                    RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+            circularBitmapDrawable.setCircular(true);
+            imageView.setImageDrawable(circularBitmapDrawable);
         }
     }
 }
