@@ -4,13 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.File;
@@ -72,45 +69,18 @@ public class ImageService {
 
     public void setListImage(RoundedImageView imageView, File file) {
         Context context = imageView.getContext();
-        CircleImageViewTarget viewTarget = new CircleImageViewTarget(imageView);
         Glide.with(context)
                 .load(file)
                 .asBitmap()
                 .centerCrop()
                 .placeholder(R.drawable.unknown_guinea_pig)
-                .into(viewTarget);
+                .error(R.drawable.unknown_guinea_pig)
+                .into(imageView);
     }
 
     public void setDefaultImage(ImageView iv) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            Drawable defaultImage = iv.getResources().getDrawable(R.drawable.unknown_guinea_pig);
-            iv.setImageDrawable(defaultImage);
-        } else {
-            iv.setImageResource(R.drawable.unknown_guinea_pig);
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            iv.setBackgroundColor(iv.getResources().getColor(R.color.primary_color));
-        } else {
-            iv.setBackgroundColor(iv.getResources().getColor(R.color.primary_color, null));
-        }
-    }
-
-    private class CircleImageViewTarget extends BitmapImageViewTarget {
-        private Context context;
-        private RoundedImageView imageView;
-
-        public CircleImageViewTarget(RoundedImageView imageView) {
-            super(imageView);
-            this.imageView = imageView;
-            context = imageView.getContext();
-        }
-
-        @Override
-        protected void setResource(Bitmap resource) {
-            RoundedBitmapDrawable circularBitmapDrawable =
-                    RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-            circularBitmapDrawable.setCircular(true);
-            imageView.setImageDrawable(circularBitmapDrawable);
-        }
+        Context context = iv.getContext();
+        Drawable defaultImage = ContextCompat.getDrawable(context, R.drawable.unknown_guinea_pig);
+        iv.setImageDrawable(defaultImage);
     }
 }

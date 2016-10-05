@@ -311,6 +311,7 @@
                     android:layout_height="@dimen/edit_image_height"
                     android:layout_marginRight="20dp"
                     android:adjustViewBounds="true"
+                    android:background="@color/primary_color"
                     android:scaleType="centerCrop" />
 
                 <Button
