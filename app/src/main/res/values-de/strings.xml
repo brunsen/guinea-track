@@ -3,10 +3,12 @@
     <string name="title_activity_guinea_pig_detail">Eigenschaften</string>
     <string name="title_activity_guinea_pig_add">Neues Meeri</string>
     <string name="main_activity_subtitle">M:%1$d W:%2$d K:%3$d</string>
+    <string name="title_activity_backup_recovery">Sichern und Wiederherstellen</string>
     <string name="set">Setzen</string>
     <string name="pigs_total">Gesamt: %d</string>
+    <string name="menu_item_backup_restore">Sichern und Wiederherstellen</string>
     <string name="import_guinea_pigs">Meerschweinchen importieren</string>
-    <string name="export_guinea_pigs">Meerschweinchen exportieren</string>
+    <string name="export_guinea_pigs">Meerschweinchen sichern</string>
     <string name="add">Hinzufügen</string>
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>
@@ -41,5 +43,6 @@
     <string name="date_picker_title">Wählen Sie ein Datum</string>
     <string name="no_limitations">Keine Einschränkung</string>
     <string name="successful_import">Import der Meerschweinchen war erfolgreich.</string>
-    <string name="successful_export">Export der Meerschweinchen war erfolgreich.</string>
+    <string name="successful_export">Sicherung der Meerschweinchen war erfolgreich.</string>
+    <string name="export_import_instruction">Falls Sie eine Sicherung Ihrer Guinea Track Daten vornehmen möchten, drücken Sie den Button \"Meerschweinchen sichern\". Diese Aktion legt eine Sicherungs-Datei auf Ihrem Gerät an. Falls Sie ihre Daten auf ein anderes Gerät übertragen möchten, kopieren Sie einfach den Guinea Track Ordner auf das Gerät und betätigen Sie den Button \"Meerschweinchen importieren\" auf dem neuen Gerät.</string>
 </resources>

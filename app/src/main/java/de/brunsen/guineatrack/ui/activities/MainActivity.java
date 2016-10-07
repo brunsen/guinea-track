@@ -12,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,9 +22,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Toast;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,8 +30,6 @@ import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
-import de.brunsen.guineatrack.services.JsonExporter;
-import de.brunsen.guineatrack.services.JsonImporter;
 import de.brunsen.guineatrack.ui.adapter.MainListAdapter;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -45,7 +39,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
     private static final String TAG = MainActivity.class.getName();
     private static final int PERMISSION_REQUEST_LIST_PICTURES = 1;
-    private static final int PERMISSION_REQUEST_IMPORT = 2;
     private boolean initialPermissionRequest;
     private List<GuineaPig> mGuineaPigs;
     private StickyListHeadersListView listView;
@@ -73,16 +66,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.option_import:
-                if (hasExternalReadAccess()) {
-                    importGuineaPigs();
-                } else {
-                    askForExternalStorageReadAccess(PERMISSION_REQUEST_IMPORT);
-                }
-                return true;
-            case R.id.option_export:
-                exportGuineaPigs();
-                return true;
+            case R.id.option_backup_recovery:
+                startBackupActivity();
             default:
                 return true;
         }
@@ -107,7 +92,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         } else {
             if (initialPermissionRequest && !hasExternalReadAccess()) {
                 initialPermissionRequest = false;
-                askForExternalStorageReadAccess(PERMISSION_REQUEST_LIST_PICTURES);
+                askForExternalStorageReadAccess();
             }
         }
     }
@@ -123,34 +108,17 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                 }
                 break;
             }
-            case PERMISSION_REQUEST_IMPORT: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    importGuineaPigs();
-                }
-                break;
-            }
         }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void askForExternalStorageReadAccess(final int request) {
+    private void askForExternalStorageReadAccess() {
+        final int request = PERMISSION_REQUEST_LIST_PICTURES;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    String rationaleMessage;
-                    switch (request) {
-                        case PERMISSION_REQUEST_IMPORT: {
-                            rationaleMessage = getString(R.string.rationale_message_import);
-                            break;
-                        }
-                        case PERMISSION_REQUEST_LIST_PICTURES: {
-                            rationaleMessage = getString(R.string.rationale_message_list);
-                            break;
-                        } default:
-                            rationaleMessage = "";
-                    }
+                    String rationaleMessage = getString(R.string.rationale_message_list);
                     PermissionDialog dialog = new PermissionDialog(this, rationaleMessage, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -166,18 +134,18 @@ public class MainActivity extends BaseActivity implements OnClickListener,
     }
 
     private void loadGuineaPigs() {
-        List<GuineaPig> tempPigs = new ArrayList<>();
+        List<GuineaPig> tempGuineaPigs = new ArrayList<>();
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
-            tempPigs.addAll(crud.getGuineaPigs());
+            tempGuineaPigs.addAll(crud.getGuineaPigs());
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), getString(R.string.error_loading_pigs),
                     Toast.LENGTH_LONG).show();
-            tempPigs = new ArrayList<>();
+            tempGuineaPigs = new ArrayList<>();
             e.printStackTrace();
         }
-        Collections.sort(tempPigs, new GuineaPigComparator());
-        mGuineaPigs = tempPigs;
+        Collections.sort(tempGuineaPigs, new GuineaPigComparator());
+        mGuineaPigs = tempGuineaPigs;
     }
 
     private void setGenderText() {
@@ -206,51 +174,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         getToolbar().setSubtitle(getString(R.string.main_activity_subtitle, totalMale, totalFemale, totalCastrato));
     }
 
-    private void importGuineaPigs() {
-        JsonImporter importer = new JsonImporter(this);
-        try {
-            importer.loadGuineaPigs();
-            loadGuineaPigs();
-            setGenderText();
-            mMainListAdapter.setGuineaPigs(mGuineaPigs);
-            mMainListAdapter.notifyDataSetChanged();
-        } catch (IOException e) {
-            Log.e(TAG, "No file found to import guinea pigs");
-            handleNoFileError();
-        } catch (JSONException e) {
-            Log.e(TAG, "Corrupted import file");
-            handleCorruptedFileError();
-        }
-    }
-
-    private void exportGuineaPigs() {
-        JsonExporter exporter = new JsonExporter(this);
-        try {
-            exporter.exportGuineaPigs(mGuineaPigs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void deleteGuineaPig(GuineaPig guineaPig) {
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         crud.deleteGuineaPig(guineaPig);
         mGuineaPigs.remove(guineaPig);
         mMainListAdapter.notifyDataSetChanged();
-    }
-
-    private void handleNoFileError() {
-        String title = getString(R.string.error);
-        String message = getString(R.string.error_no_file);
-        String okMessage = getString(android.R.string.ok);
-        showError(title, message, okMessage);
-    }
-
-    private void handleCorruptedFileError() {
-        String title = getString(R.string.error);
-        String message = getString(R.string.error_corrupted_file);
-        String okMessage = getString(android.R.string.ok);
-        showError(title, message, okMessage);
     }
 
     private void handleEmptyList() {
@@ -260,12 +188,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
         showError(title, message, okMessage);
     }
 
-    private void showError(String title, String message, String okMessage) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setPositiveButton(okMessage, null);
-        builder.show();
+    private void startBackupActivity() {
+        Intent intent = new Intent(this, BackupRecoveryActivity.class);
+        startActivity(intent);
     }
 
     public void showDeleteDialog(final GuineaPig guineaPig) {

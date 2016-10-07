@@ -25,6 +25,7 @@
         <item name="android:textColorPrimary">@color/toolbar_title</item>
         <item name="android:textColorSecondary">@color/toolbar_subtitle</item>
         <item name="android:itemTextAppearance">@style/PopUpMenuTextAppearance</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
     </style>
 
     <style name="Primary_Text_Style" parent="@android:style/TextAppearance">
@@ -49,6 +50,11 @@
 
     <style name="PopUpMenuTextAppearance" parent="Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
         <item name="android:textColor">@color/toolbar_title</item>
+    </style>
+
+    <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">-4.0dip</item>
     </style>
 
 </resources>

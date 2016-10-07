@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -29,5 +30,13 @@ public class BaseActivity extends AppCompatActivity {
             readAccess = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         }
         return readAccess;
+    }
+
+    protected void showError(String title, String message, String okMessage) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(okMessage, null);
+        builder.show();
     }
 }

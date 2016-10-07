@@ -3,11 +3,13 @@
     <string name="app_name" translatable="false">Guinea Track</string>
     <string name="title_activity_guinea_pig_detail">Characteristics</string>
     <string name="title_activity_guinea_pig_add">New Guinea Pig</string>
+    <string name="title_activity_backup_recovery">Backup and Recovery</string>
     <string name="main_activity_subtitle">M:%1$d F:%2$d C:%3$d</string>
     <string name="set">Set</string>
     <string name="pigs_total">Total: %d</string>
+    <string name="menu_item_backup_restore">Backup and Recovery</string>
     <string name="import_guinea_pigs">Import guinea pigs</string>
-    <string name="export_guinea_pigs">Export guinea pigs</string>
+    <string name="export_guinea_pigs">Backup guinea pigs</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
@@ -43,5 +45,6 @@
     <string name="date_picker_title">Pick a date</string>
     <string name="no_limitations">No limitation</string>
     <string name="successful_import">Guinea pigs were successfully imported.</string>
-    <string name="successful_export">Guinea pigs were successfully exported.</string>
+    <string name="successful_export">Backup of guinea pigs was successfully.</string>
+    <string name="export_import_instruction">If you want to backup your guinea track data, press the button \"Backup Guinea Pigs\". This will create a backup file on your device. If you want to transfer your data to another phone, simply move the guinea track folder with the back up file to your new phone and press the button \"Import guinea pigs\" on the new device.</string>
 </resources>
