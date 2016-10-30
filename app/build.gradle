@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.2'
     }
 }
 
@@ -44,7 +44,7 @@ dependencies {
     compile "com.android.support:support-v4:$supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile "com.android.support:design:$supportLibraryVersion"
-    compile 'se.emilsjolander:stickylistheaders:2.7.0'
-    compile 'com.makeramen:roundedimageview:2.2.1'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile group:'se.emilsjolander', name:"stickylistheaders", version:'2.7.0'
+    compile group:'com.makeramen', name:"roundedimageview", version:'2.2.1'
+    compile group:'com.github.bumptech.glide', name:"glide", version:'3.7.0'
 }

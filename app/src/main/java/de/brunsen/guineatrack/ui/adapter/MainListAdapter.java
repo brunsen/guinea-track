@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
         mContext = context;
     }
 
-    public void setGuineaPigs(List<GuineaPig> list) {
+    private void setGuineaPigs(List<GuineaPig> list) {
         guineaPigs = list;
     }
 
@@ -110,12 +111,8 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
         if (!filePath.equals("") && file.exists() && permissionGranted) {
             ImageService.getInstance().setListImage(imageView, file);
         } else {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                Drawable defaultImage = imageView.getResources().getDrawable(R.drawable.unknown_guinea_pig);
-                imageView.setImageDrawable(defaultImage);
-            } else {
-                imageView.setImageResource(R.drawable.unknown_guinea_pig);
-            }
+            Drawable defaultImage = ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.unknown_guinea_pig, null);
+            imageView.setImageDrawable(defaultImage);
         }
     }
 
