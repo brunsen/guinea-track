@@ -1,7 +1,8 @@
 package de.brunsen.guineatrack.model;
 
+import android.content.Context;
+
 import de.brunsen.guineatrack.R;
-import de.brunsen.guineatrack.services.ContextProvider;
 
 public enum Type {
     SALE(0), BREED(1), RESCUE(2);
@@ -15,17 +16,17 @@ public enum Type {
         return position;
     }
 
-    public String getText() {
+    public String getText(Context context) {
         String value = "";
         switch (this) {
             case SALE:
-                value = ContextProvider.getContext().getString(R.string.type_sale);
+                value = context.getString(R.string.type_sale);
                 break;
             case BREED:
-                value = ContextProvider.getContext().getString(R.string.type_breed);
+                value = context.getString(R.string.type_breed);
                 break;
             case RESCUE:
-                value = ContextProvider.getContext().getString(R.string.type_rescue);
+                value = context.getString(R.string.type_rescue);
                 break;
         }
         return value;

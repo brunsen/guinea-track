@@ -146,9 +146,9 @@ public class GuineaPigDetailActivity extends BaseActivity {
         nameText.setText(mGuineaPig.getName());
         birthText.setText(mGuineaPig.getBirth());
         colorText.setText(mGuineaPig.getColor());
-        genderText.setText(mGuineaPig.getGender().getText());
+        genderText.setText(mGuineaPig.getGender().getText(this));
         raceText.setText(mGuineaPig.getBreed());
-        typeText.setText(mGuineaPig.getType().getText());
+        typeText.setText(mGuineaPig.getType().getText(this));
         setOptionalData(optionalData);
     }
 

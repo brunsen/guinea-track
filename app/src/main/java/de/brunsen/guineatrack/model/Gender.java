@@ -1,7 +1,8 @@
 package de.brunsen.guineatrack.model;
 
+import android.content.Context;
+
 import de.brunsen.guineatrack.R;
-import de.brunsen.guineatrack.services.ContextProvider;
 
 public enum Gender {
     Male(0), Female(1), CASTRATO(2);
@@ -15,17 +16,17 @@ public enum Gender {
         return position;
     }
 
-    public String getText() {
+    public String getText(Context context) {
         String value = "";
         switch (this) {
             case Male:
-                value = ContextProvider.getContext().getString(R.string.male);
+                value = context.getString(R.string.male);
                 break;
             case Female:
-                value = ContextProvider.getContext().getString(R.string.female);
+                value = context.getString(R.string.female);
                 break;
             case CASTRATO:
-                value = ContextProvider.getContext().getString(R.string.castrato);
+                value = context.getString(R.string.castrato);
                 break;
         }
         return value;

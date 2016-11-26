@@ -73,7 +73,7 @@ public class MainListAdapter extends BaseAdapter implements StickyListHeadersAda
         if(limitationText.equals("")){
             limitationText = mContext.getString(R.string.no_limitations);
         }
-        String subInfoText = guineaPig.getType().getText() + ", " + limitationText;
+        String subInfoText = guineaPig.getType().getText(mContext) + ", " + limitationText;
 
         holder.nameTextView.setText(guineaPig.getName());
         holder.subInfoTextView.setText(subInfoText);
