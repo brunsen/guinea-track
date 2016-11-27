@@ -28,7 +28,7 @@ import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.services.ImageService;
+import de.brunsen.guineatrack.util.ImageService;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 
 public class GuineaPigDetailActivity extends BaseActivity {

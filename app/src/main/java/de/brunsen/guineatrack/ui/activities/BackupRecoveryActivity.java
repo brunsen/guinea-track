@@ -21,8 +21,8 @@ import java.util.List;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
-import de.brunsen.guineatrack.services.JsonExporter;
-import de.brunsen.guineatrack.services.JsonImporter;
+import de.brunsen.guineatrack.util.JsonExporter;
+import de.brunsen.guineatrack.util.JsonImporter;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 
 public class BackupRecoveryActivity extends BaseActivity {

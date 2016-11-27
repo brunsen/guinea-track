@@ -10,6 +10,7 @@ import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
+import de.brunsen.guineatrack.overview.OverviewActivity;
 
 public class GuineaPigEditActivity extends BaseGuineaPigEditActivity {
     GuineaPig mGuineaPig;
@@ -33,7 +34,7 @@ public class GuineaPigEditActivity extends BaseGuineaPigEditActivity {
         GuineaPigCRUD crud = new GuineaPigCRUD(this);
         try {
             crud.updateGuineaPig(updatedPig);
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), OverviewActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-package de.brunsen.guineatrack.services;
+package de.brunsen.guineatrack.util;
 
 import android.content.Context;
 import android.os.Environment;

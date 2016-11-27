@@ -11,7 +11,7 @@ import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
-import de.brunsen.guineatrack.services.ImageService;
+import de.brunsen.guineatrack.util.ImageService;
 
 public class GuineaPigAddActivity extends BaseGuineaPigEditActivity {
 

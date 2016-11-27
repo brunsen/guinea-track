@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId "de.brunsen.guineatrack"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
     }
 
@@ -49,4 +49,5 @@ dependencies {
     compile group:'com.github.bumptech.glide', name:"glide", version:'3.7.0'
     compile group:'com.tbruyelle.rxpermissions2', name:'rxpermissions', version:'0.8.2'
     compile group:'io.reactivex.rxjava2', name:'rxandroid', version:'2.0.1'
+    compile group:'io.reactivex.rxjava2', name:'rxjava', version:'2.0.1'
 }
