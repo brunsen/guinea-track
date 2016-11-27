@@ -37,7 +37,7 @@ android {
 }
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -47,4 +47,6 @@ dependencies {
     compile group:'se.emilsjolander', name:"stickylistheaders", version:'2.7.0'
     compile group:'com.makeramen', name:"roundedimageview", version:'2.2.1'
     compile group:'com.github.bumptech.glide', name:"glide", version:'3.7.0'
+    compile group:'com.tbruyelle.rxpermissions2', name:'rxpermissions', version:'0.8.2'
+    compile group:'io.reactivex.rxjava2', name:'rxandroid', version:'2.0.1'
 }
