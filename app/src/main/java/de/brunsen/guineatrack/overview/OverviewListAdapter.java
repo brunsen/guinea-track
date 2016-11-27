@@ -115,6 +115,11 @@ public class OverviewListAdapter extends BaseAdapter implements StickyListHeader
         return id;
     }
 
+    public void clear() {
+        mPresenter = null;
+        mContext = null;
+    }
+
     private class HeaderViewHolder {
         TextView text;
     }
