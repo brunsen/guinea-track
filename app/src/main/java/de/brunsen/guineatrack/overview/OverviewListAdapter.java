@@ -52,10 +52,10 @@ public class OverviewListAdapter extends BaseAdapter implements StickyListHeader
         ItemViewHolder holder;
         if (convertView == null) {
             holder = new ItemViewHolder();
-            convertView = mInflater.inflate(R.layout.main_list_item, parent, false);
-            holder.imageView = (RoundedImageView) convertView.findViewById(R.id.main_list_item_image);
-            holder.nameTextView = (TextView) convertView.findViewById(R.id.main_list_item_name);
-            holder.subInfoTextView = (TextView) convertView.findViewById(R.id.main_list_item_sub_info);
+            convertView = mInflater.inflate(R.layout.overview_list_item, parent, false);
+            holder.imageView = (RoundedImageView) convertView.findViewById(R.id.overview_list_item_image);
+            holder.nameTextView = (TextView) convertView.findViewById(R.id.overview_list_item_name);
+            holder.subInfoTextView = (TextView) convertView.findViewById(R.id.overview_list_item_sub_info);
             convertView.setTag(holder);
         } else {
             holder = (ItemViewHolder) convertView.getTag();
@@ -81,7 +81,7 @@ public class OverviewListAdapter extends BaseAdapter implements StickyListHeader
 
         if (convertView == null) {
             holder = new HeaderViewHolder();
-            convertView = mInflater.inflate(R.layout.main_list_header, parent, false);
+            convertView = mInflater.inflate(R.layout.overview_list_header, parent, false);
             holder.text = (TextView) convertView.findViewById(R.id.textSeparator);
             convertView.setTag(holder);
         } else {

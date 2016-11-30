@@ -11,6 +11,8 @@ public interface OverViewPresenter extends BasePresenter {
 
     void onItemLongClick(int position);
 
+    void onAddButtonClicked();
+
     int getItemCount();
 
     GuineaPig getGuineaPig(int position);

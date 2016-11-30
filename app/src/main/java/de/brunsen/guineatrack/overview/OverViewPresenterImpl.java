@@ -17,6 +17,7 @@ import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
+import de.brunsen.guineatrack.ui.activities.GuineaPigAddActivity;
 import de.brunsen.guineatrack.ui.activities.GuineaPigDetailActivity;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import io.reactivex.functions.Consumer;
@@ -66,6 +67,12 @@ public class OverViewPresenterImpl implements OverViewPresenter {
     @Override
     public void onItemLongClick(int position) {
         showDeleteDialog(mGuineaPigs.get(position));
+    }
+
+    @Override
+    public void onAddButtonClicked() {
+        Intent intent = new Intent(mContext, GuineaPigAddActivity.class);
+        mContext.startActivity(intent);
     }
 
     @Override

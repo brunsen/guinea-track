@@ -23,7 +23,7 @@
         <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/main_list_item_image"
+            android:id="@+id/overview_list_item_image"
             android:background="@android:color/transparent"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
@@ -44,7 +44,7 @@
         android:paddingTop="@dimen/list_vertical_spacing">
 
         <TextView
-            android:id="@+id/main_list_item_name"
+            android:id="@+id/overview_list_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -52,7 +52,7 @@
             tools:text="Guinea Pig" />
 
         <TextView
-            android:id="@+id/main_list_item_sub_info"
+            android:id="@+id/overview_list_item_sub_info"
             style="@style/Secondary_Text_Style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
