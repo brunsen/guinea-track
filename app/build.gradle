@@ -50,4 +50,6 @@ dependencies {
     compile group:'com.tbruyelle.rxpermissions2', name:'rxpermissions', version:'0.8.2'
     compile group:'io.reactivex.rxjava2', name:'rxandroid', version:'2.0.1'
     compile group:'io.reactivex.rxjava2', name:'rxjava', version:'2.0.1'
+    compile group:'com.jakewharton', name:'butterknife', version:'8.4.0'
+    annotationProcessor group:'com.jakewharton', name:'butterknife-compiler', version:'8.4.0'
 }
