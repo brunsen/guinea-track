@@ -15,10 +15,10 @@ import java.util.List;
 
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
+import de.brunsen.guineatrack.detail.GuineaPigDetailActivity;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
 import de.brunsen.guineatrack.ui.activities.GuineaPigAddActivity;
-import de.brunsen.guineatrack.ui.activities.GuineaPigDetailActivity;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import io.reactivex.functions.Consumer;
 

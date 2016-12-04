@@ -83,4 +83,8 @@ public class ImageService {
         Drawable defaultImage = ContextCompat.getDrawable(context, R.drawable.unknown_guinea_pig);
         iv.setImageDrawable(defaultImage);
     }
+
+    public Drawable getGetDefaultImage(Context context) {
+        return ContextCompat.getDrawable(context, R.drawable.unknown_guinea_pig);
+    }
 }

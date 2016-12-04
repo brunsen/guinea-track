@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.GuineaPigDetailActivity"
+            android:name=".detail.GuineaPigDetailActivity"
             android:label="@string/title_activity_guinea_pig_detail"
             android:screenOrientation="portrait" />
         <activity
