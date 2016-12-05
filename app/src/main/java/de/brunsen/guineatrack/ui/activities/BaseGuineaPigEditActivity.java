@@ -20,9 +20,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,6 +32,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
+import butterknife.Unbinder;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
@@ -46,41 +48,65 @@ import de.brunsen.guineatrack.ui.dialogs.DatePickDialog;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import de.brunsen.guineatrack.util.ImageService;
 
-public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
-        OnItemSelectedListener, OnClickListener {
+public abstract class BaseGuineaPigEditActivity extends BaseActivity {
+
+    protected static final int PERMISSION_REQUEST_PICTURE = 42;
+    private static final int RESULT_GALLERY = 0;
+    @BindView(R.id.edit_name_text)
     protected EditText nameEdit;
+    @BindView(R.id.edit_birth_text)
     protected EditText birthEdit;
+    @BindView(R.id.edit_color_text)
     protected EditText colorEdit;
+    @BindView(R.id.edit_breed_text)
     protected EditText breedEdit;
+    @BindView(R.id.edit_weight_text)
     protected EditText weightEdit;
+    @BindView(R.id.edit_castration_text)
     protected EditText castrationDateEdit;
+    @BindView(R.id.edit_limitations_text)
     protected EditText limitationsEdit;
+    @BindView(R.id.edit_origin_text)
     protected EditText originEdit;
+    @BindView(R.id.edit_gender_spinner)
     protected Spinner genderSpinner;
+    @BindView(R.id.edit_type_spinner)
     protected Spinner typeSpinner;
+    @BindView(R.id.edit_last_birth_row)
+    protected TableRow lastBirthRow;
+    @BindView(R.id.edit_due_date_row)
+    protected TableRow dueDateRow;
+    @BindView(R.id.edit_castration_row)
+    protected TableRow castrationDateRow;
+    @BindView(R.id.edit_last_birth_text)
+    protected EditText lastBirthEdit;
+    @BindView(R.id.edit_due_date_text)
+    protected EditText dueDateEdit;
+    @BindView(R.id.edit_image)
+    protected ImageView editImage;
+    @BindView(R.id.edit_add_picture)
+    protected Button selectImageButton;
     protected Gender selectedGender;
     protected Type selectedType;
-    protected ImageView editImage;
-    protected Button selectImageButton;
     protected List<Gender> genderSpinnerItems;
     protected List<Type> typeSpinnerItems;
     protected String selectedImage;
-    protected TableRow lastBirthRow;
-    protected TableRow dueDateRow;
-    protected TableRow castrationDateRow;
-    protected EditText lastBirthEdit;
-    protected EditText dueDateEdit;
-    private static final int RESULT_GALLERY = 0;
-    protected static final int PERMISSION_REQUEST_PICTURE = 42;
+    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guinea_pig_edit);
         initToolbar();
-        initComponents();
+        mUnbinder = ButterKnife.bind(this);
         setAdaptersAndListeners();
         selectedImage = "";
+    }
+
+    @Override
+    protected void onDestroy() {
+        mUnbinder.unbind();
+        super.onDestroy();
     }
 
     @Override
@@ -109,7 +135,6 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED && !selectedImage.equals("")) {
                 setImage(selectedImage);
-
             }
         }
     }
@@ -135,89 +160,56 @@ public abstract class BaseGuineaPigEditActivity extends BaseActivity implements
         }
     }
 
-    protected void initComponents() {
-        nameEdit = (EditText) findViewById(R.id.detail_name_text);
-        birthEdit = (EditText) findViewById(R.id.detail_birth_text);
-        colorEdit = (EditText) findViewById(R.id.detail_color_text);
-        breedEdit = (EditText) findViewById(R.id.detail_breed_text);
-        genderSpinner = (Spinner) findViewById(R.id.detail_gender_spinner);
-        typeSpinner = (Spinner) findViewById(R.id.detail_type_text);
-        selectImageButton = (Button) findViewById(R.id.add_picture);
-        editImage = (ImageView) findViewById(R.id.edit_image);
-        lastBirthRow = (TableRow) findViewById(R.id.last_birth_row);
-        dueDateRow = (TableRow) findViewById(R.id.due_date_row);
-        castrationDateRow = (TableRow) findViewById(R.id.castration_edit_area);
-        lastBirthEdit = (EditText) findViewById(R.id.last_birth_edit_text);
-        dueDateEdit = (EditText) findViewById(R.id.due_date_edit_text);
-        castrationDateEdit = (EditText) findViewById(R.id.pig_castration_edit_text);
-        weightEdit = (EditText) findViewById(R.id.pig_weight_edit_text);
-        originEdit = (EditText) findViewById(R.id.pig_origin_edit_text);
-        limitationsEdit = (EditText) findViewById(R.id.pig_limitations_edit_text);
-    }
-
     protected void setAdaptersAndListeners() {
         typeSpinnerItems = new ArrayList<>(Arrays.asList(Type.values()));
         TypeSpinnerAdapter typeAdapter = new TypeSpinnerAdapter(this,
                 android.R.layout.simple_list_item_1, typeSpinnerItems);
         typeSpinner.setAdapter(typeAdapter);
-        typeSpinner.setOnItemSelectedListener(this);
         genderSpinnerItems = new ArrayList<>(Arrays.asList(Gender
                 .values()));
         GenderSpinnerAdapter genderAdapter = new GenderSpinnerAdapter(this,
                 android.R.layout.simple_list_item_1, genderSpinnerItems);
         genderSpinner.setAdapter(genderAdapter);
-        genderSpinner.setOnItemSelectedListener(this);
-        selectImageButton.setOnClickListener(this);
         birthEdit.setOnFocusChangeListener(new TimePickerCaller());
         lastBirthEdit.setOnFocusChangeListener(new TimePickerCaller());
         dueDateEdit.setOnFocusChangeListener(new TimePickerCaller());
         castrationDateEdit.setOnFocusChangeListener(new TimePickerCaller());
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                               long id) {
-        if (parent.getId() == R.id.detail_gender_spinner) {
-            selectedGender = genderSpinnerItems.get(position);
-            boolean female = selectedGender == Gender.Female;
-            setLastBirthAreaVisible(female);
-            setDueDateAreaVisible(female);
-        } else if (parent.getId() == R.id.detail_type_text) {
-            selectedType = typeSpinnerItems.get(position);
-        }
+    @OnItemSelected(R.id.edit_type_spinner)
+    protected void onTypeItemSelected(int position) {
+        selectedType = typeSpinnerItems.get(position);
         toggleCastrationDateArea();
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        if (parent.getId() == R.id.detail_gender_spinner) {
-            selectedGender = null;
-        } else if (parent.getId() == R.id.detail_type_text) {
-            selectedType = null;
-        }
+    @OnItemSelected(R.id.edit_gender_spinner)
+    protected void onGenderItemSelected(int position) {
+        selectedGender = genderSpinnerItems.get(position);
+        boolean female = selectedGender == Gender.Female;
+        setLastBirthAreaVisible(female);
+        setDueDateAreaVisible(female);
+        toggleCastrationDateArea();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.add_picture) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setItems(R.array.picture_actions, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case 0:
-                            callGallery();
-                            break;
-                        case 1:
-                            removePicture();
-                            break;
-                        default:
-                            break;
-                    }
+    @OnClick(R.id.edit_add_picture)
+    public void onAddButtonClicked() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setItems(R.array.picture_actions, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        callGallery();
+                        break;
+                    case 1:
+                        removePicture();
+                        break;
+                    default:
+                        break;
                 }
-            });
-            adb.show();
-        }
+            }
+        });
+        adb.show();
     }
 
     protected void setImage(String filePath) {
