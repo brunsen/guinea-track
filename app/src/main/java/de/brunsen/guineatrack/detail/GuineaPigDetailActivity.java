@@ -78,7 +78,7 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
         mUnbinder= ButterKnife.bind(this);
         initToolbar();
         setupImageView();
-        int id = getIntent().getIntExtra(getString(R.string.pig_identifier), 0);
+        int id = getIntent().getIntExtra(getString(R.string.guinea_pig_identifier), 0);
         presenter = new GuineaPigDetailPresenterImpl(this, this, id);
     }
 

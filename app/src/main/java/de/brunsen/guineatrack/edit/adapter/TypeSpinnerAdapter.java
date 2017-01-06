@@ -1,4 +1,4 @@
-package de.brunsen.guineatrack.ui.adapter;
+package de.brunsen.guineatrack.edit.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,22 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import de.brunsen.guineatrack.edit.BaseEditPresenter;
+import de.brunsen.guineatrack.model.Type;
 
-import de.brunsen.guineatrack.model.Gender;
+public class TypeSpinnerAdapter extends ArrayAdapter<Type> {
 
-public class GenderSpinnerAdapter extends ArrayAdapter<Gender> {
     private Context context;
-    private List<Gender> items;
+    private BaseEditPresenter presenter;
     private int resource;
 
-    public GenderSpinnerAdapter(Context context, int resource,
-                                List<Gender> objects) {
-        super(context, resource, objects);
+    public TypeSpinnerAdapter(Context context, int resource,
+                              BaseEditPresenter presenter) {
+        super(context, resource, presenter.getTypeList());
         this.context = context;
         this.resource = resource;
-        items = objects;
-
+        this.presenter = presenter;
     }
 
     @Override
@@ -32,7 +31,8 @@ public class GenderSpinnerAdapter extends ArrayAdapter<Gender> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(android.R.layout.simple_dropdown_item_1line, parent, false);
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
-        textView.setText(items.get(position).getText(context));
+        Type type = presenter.getTypeList().get(position);
+        textView.setText(type.getText(context));
         return row;
     }
 
@@ -45,7 +45,8 @@ public class GenderSpinnerAdapter extends ArrayAdapter<Gender> {
             row = inflater.inflate(resource, parent, false);
         }
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
-        textView.setText(items.get(position).getText(context));
+        Type type = presenter.getTypeList().get(position);
+        textView.setText(type.getText(context));
         return row;
     }
 }

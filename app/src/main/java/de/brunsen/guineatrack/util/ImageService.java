@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -76,12 +75,6 @@ public class ImageService {
                 .placeholder(R.drawable.unknown_guinea_pig)
                 .error(R.drawable.unknown_guinea_pig)
                 .into(imageView);
-    }
-
-    public void setDefaultImage(ImageView iv) {
-        Context context = iv.getContext();
-        Drawable defaultImage = ContextCompat.getDrawable(context, R.drawable.unknown_guinea_pig);
-        iv.setImageDrawable(defaultImage);
     }
 
     public Drawable getGetDefaultImage(Context context) {

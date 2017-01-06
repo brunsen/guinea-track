@@ -16,9 +16,9 @@ import java.util.List;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.detail.GuineaPigDetailActivity;
+import de.brunsen.guineatrack.edit.GuineaPigEditActivity;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
-import de.brunsen.guineatrack.ui.activities.GuineaPigAddActivity;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import io.reactivex.functions.Consumer;
 
@@ -59,7 +59,7 @@ public class OverViewPresenterImpl implements OverViewPresenter {
         if (guineaPig != null) {
             Intent intent = new Intent(mContext,
                     GuineaPigDetailActivity.class);
-            intent.putExtra(mContext.getString(R.string.pig_identifier), guineaPig.getId());
+            intent.putExtra(mContext.getString(R.string.guinea_pig_identifier), guineaPig.getId());
             mContext.startActivity(intent);
         }
     }
@@ -71,7 +71,7 @@ public class OverViewPresenterImpl implements OverViewPresenter {
 
     @Override
     public void onAddButtonClicked() {
-        Intent intent = new Intent(mContext, GuineaPigAddActivity.class);
+        Intent intent = new Intent(mContext, GuineaPigEditActivity.class);
         mContext.startActivity(intent);
     }
 

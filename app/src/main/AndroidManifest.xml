@@ -27,13 +27,7 @@
             android:label="@string/title_activity_guinea_pig_detail"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.GuineaPigAddActivity"
-            android:label="@string/title_activity_guinea_pig_add"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ui.activities.GuineaPigEditActivity"
-            android:label="@string/title_activity_edit"
+            android:name=".edit.GuineaPigEditActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

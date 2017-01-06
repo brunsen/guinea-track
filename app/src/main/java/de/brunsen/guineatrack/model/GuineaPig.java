@@ -93,4 +93,35 @@ public class GuineaPig {
     public void setOptionalData(GuineaPigOptionalData guineaPigOptionalData) {
         this.guineaPigOptionalData = guineaPigOptionalData;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GuineaPig guineaPig = (GuineaPig) o;
+
+        if (id != guineaPig.id) return false;
+        if (!name.equals(guineaPig.name)) return false;
+        if (!birth.equals(guineaPig.birth)) return false;
+        if (gender != guineaPig.gender) return false;
+        if (!color.equals(guineaPig.color)) return false;
+        if (!breed.equals(guineaPig.breed)) return false;
+        if (type != guineaPig.type) return false;
+        return guineaPigOptionalData.equals(guineaPig.guineaPigOptionalData);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + birth.hashCode();
+        result = 31 * result + gender.hashCode();
+        result = 31 * result + color.hashCode();
+        result = 31 * result + breed.hashCode();
+        result = 31 * result + type.hashCode();
+        result = 31 * result + guineaPigOptionalData.hashCode();
+        return result;
+    }
 }

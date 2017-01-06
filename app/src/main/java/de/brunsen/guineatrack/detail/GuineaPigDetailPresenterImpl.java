@@ -17,7 +17,7 @@ import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.ui.activities.GuineaPigEditActivity;
+import de.brunsen.guineatrack.edit.GuineaPigEditActivity;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import de.brunsen.guineatrack.util.ImageService;
 import de.brunsen.guineatrack.util.TextUtils;
@@ -61,15 +61,18 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
         switch (item.getItemId()) {
             case R.id.call_edit:
                 callEditor();
+                break;
             case R.id.call_delete:
                 showDeleteDialog();
+                break;
         }
     }
 
     public void callEditor() {
         Intent intent = new Intent(mContext,
                 GuineaPigEditActivity.class);
-        intent.putExtra(mContext.getString(R.string.pig_identifier), mGuineaPig.getId());
+        intent.putExtra(mContext.getString(R.string.guinea_pig_identifier), mGuineaPig.getId());
+        intent.putExtra(mContext.getString(R.string.editor_mode_flag), true);
         mContext.startActivity(intent);
     }
 

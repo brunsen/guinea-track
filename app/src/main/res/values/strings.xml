@@ -35,7 +35,8 @@
     <string name="last_birth">Last Birth (Date):</string>
     <string name="pig_due_date">Due date:</string>
     <string name="unknown">Unknown</string>
-    <string name="pig_identifier" translatable="false">guinea pig</string>
+    <string name="guinea_pig_identifier" translatable="false">guinea pig</string>
+    <string name="editor_mode_flag" translatable="false">editor_mode</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="castrato">Castrato</string>
