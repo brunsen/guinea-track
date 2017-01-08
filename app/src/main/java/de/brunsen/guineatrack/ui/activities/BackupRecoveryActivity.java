@@ -1,12 +1,9 @@
 package de.brunsen.guineatrack.ui.activities;
 
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.tbruyelle.rxpermissions2.Permission;
@@ -17,6 +14,10 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
@@ -29,45 +30,42 @@ public class BackupRecoveryActivity extends BaseActivity {
 
     private static String TAG = BackupRecoveryActivity.class.getName();
 
-    private Button mBackupButton;
-    private Button mRecoveryButton;
+    @BindView(R.id.backup_button)
+    protected Button mBackupButton;
+    @BindView(R.id.import_button)
+    protected Button mRecoveryButton;
 
-    private static final int PERMISSION_REQUEST_IMPORT = 2;
+    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup_recovery);
         initToolbar();
+        mUnbinder = ButterKnife.bind(this);
         mToolbar.setTitle(R.string.title_activity_backup_recovery);
-        initComponents();
-        setListeners();
     }
 
-    private void setListeners() {
-        mBackupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                exportGuineaPigs();
-            }
-        });
-        mRecoveryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RxPermissions permissions = RxPermissions.getInstance(BackupRecoveryActivity.this);
-                boolean hasExternalReadAccess = permissions.isGranted(android.Manifest.permission.READ_EXTERNAL_STORAGE);
-                if (hasExternalReadAccess) {
-                    importGuineaPigs();
-                } else {
-                    askForExternalStorageReadAccess();
-                }
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        mUnbinder.unbind();
+        super.onDestroy();
     }
 
-    private void initComponents() {
-        mBackupButton = (Button) findViewById(R.id.backup_button);
-        mRecoveryButton = (Button) findViewById(R.id.restore_button);
+    @OnClick(R.id.backup_button)
+    protected void onBackupButtonClicked() {
+        exportGuineaPigs();
+    }
+
+    @OnClick(R.id.import_button)
+    protected void onImportButtonClicked() {
+        RxPermissions permissions = RxPermissions.getInstance(BackupRecoveryActivity.this);
+        boolean hasExternalReadAccess = permissions.isGranted(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (hasExternalReadAccess) {
+            importGuineaPigs();
+        } else {
+            askForExternalStorageReadAccess();
+        }
     }
 
     private void exportGuineaPigs() {
@@ -108,19 +106,6 @@ public class BackupRecoveryActivity extends BaseActivity {
         showError(title, message, okMessage);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_IMPORT: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    importGuineaPigs();
-                }
-                break;
-            }
-        }
-    }
-
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void askForExternalStorageReadAccess() {
         RxPermissions permissions = RxPermissions.getInstance(this);
@@ -129,7 +114,7 @@ public class BackupRecoveryActivity extends BaseActivity {
                     @Override
                     public void accept(Permission permission) throws Exception {
                         if (permission.granted) {
-                            // TODO: Trigger import
+                            importGuineaPigs();
                         } else if (permission.shouldShowRequestPermissionRationale) {
                             String rationaleMessage = getString(R.string.rationale_message_import);
                             PermissionDialog dialog = new PermissionDialog(BackupRecoveryActivity.this, rationaleMessage, null);
