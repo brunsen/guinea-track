@@ -1,17 +1,16 @@
 package de.brunsen.guineatrack.ui.activities;
 
-import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.json.JSONException;
 
@@ -24,6 +23,7 @@ import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import de.brunsen.guineatrack.util.JsonExporter;
 import de.brunsen.guineatrack.util.JsonImporter;
+import io.reactivex.functions.Consumer;
 
 public class BackupRecoveryActivity extends BaseActivity {
 
@@ -54,7 +54,9 @@ public class BackupRecoveryActivity extends BaseActivity {
         mRecoveryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (hasExternalReadAccess()) {
+                RxPermissions permissions = RxPermissions.getInstance(BackupRecoveryActivity.this);
+                boolean hasExternalReadAccess = permissions.isGranted(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+                if (hasExternalReadAccess) {
                     importGuineaPigs();
                 } else {
                     askForExternalStorageReadAccess();
@@ -121,19 +123,20 @@ public class BackupRecoveryActivity extends BaseActivity {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void askForExternalStorageReadAccess() {
-        final int request = PERMISSION_REQUEST_IMPORT;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                String rationaleMessage = getString(R.string.rationale_message_import);PermissionDialog dialog = new PermissionDialog(this, rationaleMessage, new DialogInterface.OnClickListener() {
+        RxPermissions permissions = RxPermissions.getInstance(this);
+        permissions.requestEach(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Permission>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(BackupRecoveryActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
-                    }
-                });
-                dialog.show();
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, request);
-            }
-        }
+                    public void accept(Permission permission) throws Exception {
+                        if (permission.granted) {
+                            // TODO: Trigger import
+                        } else if (permission.shouldShowRequestPermissionRationale) {
+                            String rationaleMessage = getString(R.string.rationale_message_import);
+                            PermissionDialog dialog = new PermissionDialog(BackupRecoveryActivity.this, rationaleMessage, null);
+                            dialog.show();
+                        } else {
+                            // TODO: Inform user about the grave mistake...
+                        }
+                    }});
     }
 }
