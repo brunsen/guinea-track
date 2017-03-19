@@ -1,7 +1,5 @@
-package de.brunsen.guineatrack.ui.activities;
+package de.brunsen.guineatrack.backup;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -21,12 +19,13 @@ import butterknife.Unbinder;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.ui.activities.BaseActivity;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import de.brunsen.guineatrack.util.JsonExporter;
 import de.brunsen.guineatrack.util.JsonImporter;
 import io.reactivex.functions.Consumer;
 
-public class BackupRecoveryActivity extends BaseActivity {
+public class BackupRecoveryActivity extends BaseActivity implements BackupRecoveryView {
 
     private static String TAG = BackupRecoveryActivity.class.getName();
 
@@ -34,6 +33,8 @@ public class BackupRecoveryActivity extends BaseActivity {
     protected Button mBackupButton;
     @BindView(R.id.import_button)
     protected Button mRecoveryButton;
+
+    private BackupRecoveryPresenter mRecoveryPresenter;
 
     private Unbinder mUnbinder;
 
@@ -44,6 +45,7 @@ public class BackupRecoveryActivity extends BaseActivity {
         initToolbar();
         mUnbinder = ButterKnife.bind(this);
         mToolbar.setTitle(R.string.title_activity_backup_recovery);
+        mRecoveryPresenter = new
     }
 
     @Override
@@ -106,7 +108,6 @@ public class BackupRecoveryActivity extends BaseActivity {
         showError(title, message, okMessage);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void askForExternalStorageReadAccess() {
         RxPermissions permissions = RxPermissions.getInstance(this);
         permissions.requestEach(android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -123,5 +124,10 @@ public class BackupRecoveryActivity extends BaseActivity {
                             // TODO: Inform user about the grave mistake...
                         }
                     }});
+    }
+
+    @Override
+    public void showErrorDialog(String title, String message, String okMessage) {
+        showError(title, message, okMessage);
     }
 }

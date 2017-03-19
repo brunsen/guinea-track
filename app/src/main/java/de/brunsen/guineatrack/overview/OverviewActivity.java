@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.brunsen.guineatrack.R;
-import de.brunsen.guineatrack.ui.activities.BackupRecoveryActivity;
+import de.brunsen.guineatrack.backup.BackupRecoveryActivity;
 import de.brunsen.guineatrack.ui.activities.BaseActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 

@@ -4,7 +4,7 @@
     android:id="@+id/activity_backup_recovery"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.brunsen.guineatrack.ui.activities.BackupRecoveryActivity">
+    tools:context="de.brunsen.guineatrack.backup.BackupRecoveryActivity">
 
     <include
         android:id="@+id/toolbar"
