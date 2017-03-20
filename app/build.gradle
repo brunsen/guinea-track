@@ -3,24 +3,24 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0'
     }
 }
 
 apply plugin: 'com.android.application'
 
 ext {
-    supportLibraryVersion="23.4.0"
+    supportLibraryVersion="25.3.0"
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "de.brunsen.guineatrack"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 25
     }
 
     buildTypes {
@@ -50,6 +50,6 @@ dependencies {
     compile group:'com.tbruyelle.rxpermissions2', name:'rxpermissions', version:'0.8.2'
     compile group:'io.reactivex.rxjava2', name:'rxandroid', version:'2.0.1'
     compile group:'io.reactivex.rxjava2', name:'rxjava', version:'2.0.1'
-    compile group:'com.jakewharton', name:'butterknife', version:'8.4.0'
-    annotationProcessor group:'com.jakewharton', name:'butterknife-compiler', version:'8.4.0'
+    compile group:'com.jakewharton', name:'butterknife', version:'8.5.1'
+    annotationProcessor group:'com.jakewharton', name:'butterknife-compiler', version:'8.5.1'
 }

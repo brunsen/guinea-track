@@ -15,10 +15,6 @@ public class GuineaPig {
         this(0, "", "", Gender.CASTRATO, "", "", Type.RESCUE, new GuineaPigOptionalData());
     }
 
-    public GuineaPig(String name, String birthday, Gender g, String color, String breed, Type t, GuineaPigOptionalData optionalData) {
-        this(0, name, birthday, g, color, breed, t, optionalData);
-    }
-
     public GuineaPig(int id, String name, String birthday, Gender g, String color, String breed, Type t, GuineaPigOptionalData optionalData) {
         this.setId(id);
         this.setName(name);

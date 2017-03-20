@@ -12,7 +12,7 @@ public interface BaseEditPresenter extends BasePresenter {
 
     void onOptionsItemSelected(int id);
 
-    void onActivityResult(int requestCode, int resultCode, Intent data);
+    void onActivityResult(int requestCode, Intent data);
 
     void onAddPictureButtonClicked();
 

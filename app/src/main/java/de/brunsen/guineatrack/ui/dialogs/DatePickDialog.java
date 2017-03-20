@@ -4,10 +4,13 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import de.brunsen.guineatrack.R;
 
@@ -24,7 +27,7 @@ public class DatePickDialog extends DatePickerDialog {
             public void onClick(DialogInterface dialog, int which) {
                 editText.clearFocus();
                 DateFormat dateFormat = DateFormat.getDateInstance();
-                String date = dateFormat.format(datePicker.getCalendarView().getDate());
+                String date = dateFormat.format(getDateFromPicker());
                 editText.setText(date);
                 dismiss();
             }
@@ -46,9 +49,20 @@ public class DatePickDialog extends DatePickerDialog {
         });
     }
 
-    public void setPermanentTitle(String title) {
+    private void setPermanentTitle(String title) {
         this.title = title;
         setTitle(title);
+    }
+
+    private Date getDateFromPicker() {
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year =  datePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+        return calendar.getTime();
     }
 
     @Override
@@ -58,7 +72,7 @@ public class DatePickDialog extends DatePickerDialog {
     }
 
     @Override
-    public void onDateChanged(DatePicker view, int year, int month, int day) {
+    public void onDateChanged(@NonNull DatePicker view, int year, int month, int day) {
         super.onDateChanged(view, year, month, day);
         setTitle(title);
     }

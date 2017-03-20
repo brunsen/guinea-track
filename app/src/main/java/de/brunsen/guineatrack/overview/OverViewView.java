@@ -2,9 +2,9 @@ package de.brunsen.guineatrack.overview;
 
 public interface OverViewView {
 
-    public void refreshList();
+    void refreshList();
 
-    public void setGenderText(String text);
+    void setGenderText(String text);
 
-    public void showErrorDialog(String title, String message, String okMessage);
+    void showErrorDialog(String title, String message, String okMessage);
 }

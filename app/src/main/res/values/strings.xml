@@ -6,11 +6,9 @@
     <string name="title_activity_backup_recovery">Backup and Recovery</string>
     <string name="main_activity_subtitle">M:%1$d F:%2$d C:%3$d</string>
     <string name="set">Set</string>
-    <string name="pigs_total">Total: %d</string>
     <string name="menu_item_backup_restore">Backup and Recovery</string>
     <string name="import_guinea_pigs">Import guinea pigs</string>
     <string name="export_guinea_pigs">Backup guinea pigs</string>
-    <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>

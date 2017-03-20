@@ -5,11 +5,9 @@
     <string name="main_activity_subtitle">M:%1$d W:%2$d K:%3$d</string>
     <string name="title_activity_backup_recovery">Sichern und Wiederherstellen</string>
     <string name="set">Setzen</string>
-    <string name="pigs_total">Gesamt: %d</string>
     <string name="menu_item_backup_restore">Sichern und Wiederherstellen</string>
     <string name="import_guinea_pigs">Meerschweinchen importieren</string>
     <string name="export_guinea_pigs">Meerschweinchen sichern</string>
-    <string name="add">Hinzufügen</string>
     <string name="save">Speichern</string>
     <string name="delete">Löschen</string>
     <string name="edit">Bearbeiten</string>

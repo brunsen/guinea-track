@@ -3,7 +3,6 @@ package de.brunsen.guineatrack.database;
 import android.provider.BaseColumns;
 
 public final class GuineaPigDbContract {
-    public GuineaPigDbContract() {}
 
     /* Inner class that defines the table contents */
     public static abstract class GuineaPigEntry implements BaseColumns {

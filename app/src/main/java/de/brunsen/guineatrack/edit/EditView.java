@@ -23,8 +23,6 @@ public interface EditView {
 
     int getImageViewWidth();
 
-    int getImageViewHeight();
-
     void setNameText(String text);
 
     void setBirthText(String text);

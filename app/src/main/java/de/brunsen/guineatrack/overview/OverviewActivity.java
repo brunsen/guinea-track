@@ -19,8 +19,6 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class OverviewActivity extends BaseActivity implements OverViewView{
 
-    private static final String TAG = OverviewActivity.class.getName();
-
     @BindView(R.id.guinea_pig_list)
     StickyListHeadersListView listView;
 

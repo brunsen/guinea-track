@@ -129,7 +129,7 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, data);
     }
 
     @Override
@@ -189,11 +189,6 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     @Override
     public int getImageViewWidth() {
         return editImage.getWidth();
-    }
-
-    @Override
-    public int getImageViewHeight() {
-        return editImage.getHeight();
     }
 
     @Override
