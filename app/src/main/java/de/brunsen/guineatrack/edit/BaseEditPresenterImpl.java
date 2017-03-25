@@ -213,8 +213,7 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
         }
     }
 
-    @Override
-    public abstract boolean unStoredChanges();
+    protected abstract boolean unStoredChanges();
 
     @Override
     public void updateName(String name) {

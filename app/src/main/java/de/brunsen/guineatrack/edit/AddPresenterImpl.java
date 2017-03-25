@@ -49,7 +49,7 @@ public class AddPresenterImpl extends BaseEditPresenterImpl {
     }
 
     @Override
-    public boolean unStoredChanges() {
+    protected boolean unStoredChanges() {
         boolean empty = true;
         empty &= TextUtils.textEmpty(mCopyGuineaPig.getName());
         String currentDateText = mCopyGuineaPig.getBirth();

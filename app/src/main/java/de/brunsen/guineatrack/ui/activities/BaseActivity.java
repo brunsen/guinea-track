@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import de.brunsen.guineatrack.R;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
 
     public void initToolbar() {

@@ -26,8 +26,6 @@ public interface BaseEditPresenter extends BasePresenter {
 
     void onBackPressed();
 
-    boolean unStoredChanges();
-
     void updateName(String name);
 
     void updateWeight(String weight);

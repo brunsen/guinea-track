@@ -48,7 +48,7 @@ public class EditPresenterImpl extends BaseEditPresenterImpl {
     }
 
     @Override
-    public boolean unStoredChanges() {
+    protected boolean unStoredChanges() {
         return !mCopyGuineaPig.equals(mGuineaPig);
     }
 }

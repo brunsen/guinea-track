@@ -37,13 +37,12 @@ public class JsonImporter {
             FileInputStream input = new FileInputStream(f);
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String json = "";
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 json += line;
             }
             reader.close();
-            reader = null;
-            input = null;
+            input.close();
             if (!json.equals("")) {
                 JsonReader jsonReader = new JsonReader(mContext);
                 guineaPigs.addAll(jsonReader.getGuineaListFromString(json));
