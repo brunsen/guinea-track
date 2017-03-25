@@ -1,7 +1,5 @@
 package de.brunsen.guineatrack.detail;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.ui.activities.BaseActivity;
+import de.brunsen.guineatrack.util.ImageService;
 
 public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDetailView {
 
@@ -171,13 +172,13 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     }
 
     @Override
-    public void setPicture(Bitmap bitmap) {
-        detailImageView.setImageBitmap(bitmap);
+    public void setPicture(File file) {
+        ImageService.getInstance().loadImageIntoView(detailImageView, file);
     }
 
     @Override
-    public void setPicture(Drawable drawable) {
-        detailImageView.setImageDrawable(drawable);
+    public void setPicture(int resId) {
+        ImageService.getInstance().loadImageIntoView(detailImageView, resId);
     }
 
     @Override
@@ -193,15 +194,5 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     @Override
     public void showLastBirthArea() {
         lastBirthGroup.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public int getImageViewWidth() {
-        return detailImageView.getWidth();
-    }
-
-    @Override
-    public int getImageViewHeight() {
-        return detailImageView.getHeight();
     }
 }

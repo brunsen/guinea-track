@@ -5,8 +5,6 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +13,7 @@ import android.widget.Toast;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +25,6 @@ import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
-import de.brunsen.guineatrack.util.ImageService;
 import de.brunsen.guineatrack.util.TextUtils;
 import io.reactivex.functions.Consumer;
 
@@ -93,25 +91,23 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
     }
 
     private void setImage(String filePath) {
-        Drawable defaultDrawable = ImageService.getInstance().getGetDefaultImage(mContext);
+        int defaultDrawableId = R.drawable.unknown_guinea_pig;
         if (!filePath.equals("")) {
             RxPermissions permissions = RxPermissions.getInstance(mContext);
             boolean hasExternalReadAccess = permissions.isGranted(android.Manifest.permission.READ_EXTERNAL_STORAGE);
             if (hasExternalReadAccess) {
-                int requiredWidth = mEditView.getImageViewWidth();
-                int requiredHeight = mEditView.getImageViewWidth();
-                Bitmap picture = ImageService.getInstance().getPicture(filePath, requiredWidth, requiredHeight);
-                if (picture != null) {
-                    mEditView.setPicture(picture);
+                File file = new File(filePath);
+                if (file.exists()) {
+                    mEditView.setPicture(file);
                 } else {
-                    mEditView.setPicture(defaultDrawable);
+                    mEditView.setPicture(defaultDrawableId);
                 }
             } else {
-                mEditView.setPicture(defaultDrawable);
+                mEditView.setPicture(defaultDrawableId);
                 askForExternalStorageReadAccess();
             }
         } else {
-            mEditView.setPicture(defaultDrawable);
+            mEditView.setPicture(defaultDrawableId);
         }
     }
 
@@ -169,8 +165,7 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
 
     private void removePicture() {
         mCopyGuineaPig.getOptionalData().setPicturePath("");
-        Drawable drawable = ImageService.getInstance().getGetDefaultImage(mContext);
-        mEditView.setPicture(drawable);
+        mEditView.setPicture(R.drawable.unknown_guinea_pig);
     }
 
     private void callGallery() {

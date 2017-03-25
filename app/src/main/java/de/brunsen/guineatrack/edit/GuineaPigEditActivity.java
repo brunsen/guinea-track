@@ -2,8 +2,6 @@ package de.brunsen.guineatrack.edit;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -16,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableRow;
 
+import java.io.File;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -32,6 +31,7 @@ import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.ui.activities.BaseActivity;
 import de.brunsen.guineatrack.ui.dialogs.DatePickDialog;
+import de.brunsen.guineatrack.util.ImageService;
 
 public class GuineaPigEditActivity extends BaseActivity implements EditView{
 
@@ -159,13 +159,13 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     }
 
     @Override
-    public void setPicture(Bitmap bitmap) {
-        editImage.setImageBitmap(bitmap);
+    public void setPicture(File file) {
+        ImageService.getInstance().loadImageIntoView(editImage, file);
     }
 
     @Override
-    public void setPicture(Drawable drawable) {
-        editImage.setImageDrawable(drawable);
+    public void setPicture(int resId) {
+        ImageService.getInstance().loadImageIntoView(editImage, resId);
     }
 
     @Override
@@ -184,11 +184,6 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     public void showLastBirthArea(boolean show) {
         int visibility = show ? View.VISIBLE : View.GONE;
         lastBirthRow.setVisibility(visibility);
-    }
-
-    @Override
-    public int getImageViewWidth() {
-        return editImage.getWidth();
     }
 
     @Override

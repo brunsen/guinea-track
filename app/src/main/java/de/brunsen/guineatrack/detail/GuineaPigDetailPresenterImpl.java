@@ -3,7 +3,6 @@ package de.brunsen.guineatrack.detail;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -11,15 +10,16 @@ import android.widget.Toast;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.File;
+
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
+import de.brunsen.guineatrack.edit.GuineaPigEditActivity;
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
-import de.brunsen.guineatrack.edit.GuineaPigEditActivity;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
-import de.brunsen.guineatrack.util.ImageService;
 import de.brunsen.guineatrack.util.TextUtils;
 import io.reactivex.functions.Consumer;
 
@@ -111,7 +111,7 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
         RxPermissions permissions = RxPermissions.getInstance(mContext);
         boolean hasExternalReadAccess = permissions.isGranted(android.Manifest.permission.READ_EXTERNAL_STORAGE);
         if (TextUtils.textEmpty(picturePath)) {
-            mView.setPicture(ImageService.getInstance().getGetDefaultImage(mContext));
+            mView.setPicture(R.drawable.unknown_guinea_pig);
         } else if (!hasExternalReadAccess) {
             askForExternalStorageReadAccess();
         }else {
@@ -120,13 +120,11 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
     }
 
     private void setPicture(String picturePath) {
-        int requiredWidth = mView.getImageViewWidth();
-        int requiredHeight = mView.getImageViewHeight();
-        Bitmap picture = ImageService.getInstance().getPicture(picturePath, requiredWidth, requiredHeight);
-        if (picture != null) {
-            mView.setPicture(picture);
+        File file = new File(picturePath);
+        if (file.exists()) {
+            mView.setPicture(file);
         } else {
-            mView.setPicture(ImageService.getInstance().getGetDefaultImage(mContext));
+            mView.setPicture(R.drawable.unknown_guinea_pig);
         }
     }
 

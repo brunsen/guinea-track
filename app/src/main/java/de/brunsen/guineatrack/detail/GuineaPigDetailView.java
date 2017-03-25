@@ -1,25 +1,20 @@
 package de.brunsen.guineatrack.detail;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import java.io.File;
 
 public interface GuineaPigDetailView {
 
     void finish();
 
-    void setPicture(Bitmap bitmap);
+    void setPicture(File pictureFile);
 
-    void setPicture(Drawable drawable);
+    void setPicture(int resId);
 
     void showCastrationDateArea();
 
     void showDueDateArea();
 
     void showLastBirthArea();
-
-    int getImageViewWidth();
-
-    int getImageViewHeight();
 
     void setNameText(String text);
 

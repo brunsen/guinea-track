@@ -1,8 +1,8 @@
 package de.brunsen.guineatrack.edit;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+
+import java.io.File;
 
 import de.brunsen.guineatrack.model.Gender;
 import de.brunsen.guineatrack.model.Type;
@@ -11,17 +11,15 @@ public interface EditView {
 
     void setTitle(String title);
 
-    void setPicture(Bitmap bitmap);
+    void setPicture(File file);
 
-    void setPicture(Drawable drawable);
+    void setPicture(int resId);
 
     void showCastrationDateArea(boolean show);
 
     void showDueDateArea(boolean show);
 
     void showLastBirthArea(boolean show);
-
-    int getImageViewWidth();
 
     void setNameText(String text);
 

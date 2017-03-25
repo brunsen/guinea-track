@@ -2,8 +2,6 @@ package de.brunsen.guineatrack.overview;
 
 import android.Manifest;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,13 +93,13 @@ public class OverviewListAdapter extends BaseAdapter implements StickyListHeader
 
     private void setListImage(RoundedImageView imageView, String filePath) {
         File file = new File(filePath);
+        ImageService imageService = ImageService.getInstance();
         RxPermissions permissions = RxPermissions.getInstance(mContext);
         boolean permissionGranted = permissions.isGranted(Manifest.permission.READ_EXTERNAL_STORAGE);
         if (!filePath.equals("") && file.exists() && permissionGranted) {
-            ImageService.getInstance().setListImage(imageView, file);
+            imageService.loadImageIntoView(imageView, file);
         } else {
-            Drawable defaultImage = ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.unknown_guinea_pig, null);
-            imageView.setImageDrawable(defaultImage);
+            imageService.loadImageIntoView(imageView, R.drawable.unknown_guinea_pig);
         }
     }
 
