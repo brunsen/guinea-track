@@ -184,8 +184,6 @@ public class OverViewPresenterImpl implements OverViewPresenter {
                             String rationaleMessage = mContext.getString(R.string.rationale_message_list);
                             PermissionDialog dialog = new PermissionDialog(mContext, rationaleMessage, null);
                             dialog.show();
-                        } else {
-                            // TODO: Inform user about the grave mistake...
                         }
                 }});
         }

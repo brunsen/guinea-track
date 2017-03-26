@@ -106,8 +106,6 @@ public class BackupRecoveryPresenterImpl implements BackupRecoveryPresenter {
                             String rationaleMessage = mContext.getString(R.string.rationale_message_import);
                             PermissionDialog dialog = new PermissionDialog(mContext, rationaleMessage, null);
                             dialog.show();
-                        } else {
-                            // TODO: Inform user about the grave mistake...
                         }
                     }});
     }

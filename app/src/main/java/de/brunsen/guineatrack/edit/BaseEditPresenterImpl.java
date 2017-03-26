@@ -187,8 +187,6 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
                             String rationaleMessage = mContext.getString(R.string.rationale_message_image_display);
                             PermissionDialog dialog = new PermissionDialog(mContext, rationaleMessage, null);
                             dialog.show();
-                        } else {
-                            // TODO: Inform user about the grave mistake...
                         }
                     }
                 });
