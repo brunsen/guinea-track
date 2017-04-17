@@ -182,7 +182,7 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
                     @Override
                     public void accept(Permission permission) throws Exception {
                         if (permission.granted) {
-                            setImage(mGuineaPig.getOptionalData().getPicturePath());
+                            setImage(mCopyGuineaPig.getOptionalData().getPicturePath());
                         } else if (permission.shouldShowRequestPermissionRationale) {
                             String rationaleMessage = mContext.getString(R.string.rationale_message_image_display);
                             PermissionDialog dialog = new PermissionDialog(mContext, rationaleMessage, null);
