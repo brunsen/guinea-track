@@ -8,6 +8,8 @@ public class GuineaPigOptionalData {
     private String limitations;
     private String castrationDate;
     private String picturePath;
+    private String entry;
+    private String departure;
 
     public GuineaPigOptionalData() {
         this(0, "", "", "", "", "", "");
@@ -79,6 +81,22 @@ public class GuineaPigOptionalData {
         this.castrationDate = castrationDate;
     }
 
+    public String getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
+    public String getEntry() {
+        return entry;
+    }
+
+    public void setEntry(String entry) {
+        this.entry = entry;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,7 +110,9 @@ public class GuineaPigOptionalData {
         if (!origin.equals(that.origin)) return false;
         if (!limitations.equals(that.limitations)) return false;
         if (!castrationDate.equals(that.castrationDate)) return false;
-        return picturePath.equals(that.picturePath);
+        if (!picturePath.equals(that.picturePath)) return false;
+        if (!entry.equals(that.entry)) return false;
+        return departure.equals(that.departure);
 
     }
 
@@ -105,6 +125,8 @@ public class GuineaPigOptionalData {
         result = 31 * result + limitations.hashCode();
         result = 31 * result + castrationDate.hashCode();
         result = 31 * result + picturePath.hashCode();
+        result = 31 * result + entry.hashCode();
+        result = 31 * result + departure.hashCode();
         return result;
     }
 }
