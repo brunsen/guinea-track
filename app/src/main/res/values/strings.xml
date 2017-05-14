@@ -15,23 +15,25 @@
     <string name="reset">Reset</string>
     <string name="confirm">Confirm</string>
     <string name="change_picture">Change Picture</string>
-    <string name="pig_name">Name:</string>
-    <string name="pig_breed">Breed:</string>
-    <string name="pig_color">Color:</string>
-    <string name="pig_birthday">Birthday:</string>
-    <string name="pig_gender">Gender:</string>
-    <string name="pig_type">Type:</string>
-    <string name="pig_weight">Weight (in gram):</string>
-    <string name="pig_limitations">Limitations:</string>
-    <string name="pig_origin">Origin:</string>
-    <string name="pig_castration_date">Castrated at:</string>
+    <string name="guinea_pig_name">Name:</string>
+    <string name="guinea_pig_breed">Breed:</string>
+    <string name="guinea_pig_color">Color:</string>
+    <string name="guinea_pig_birthday">Birthday:</string>
+    <string name="guinea_pig_gender">Gender:</string>
+    <string name="guinea_pig_type">Type:</string>
+    <string name="guinea_pig_weight">Weight (in gram):</string>
+    <string name="guinea_pig_limitations">Limitations:</string>
+    <string name="guinea_pig_origin">Origin:</string>
+    <string name="guinea_pig_castration_date">Castrated at:</string>
+    <string name="guinea_pig_entry">Move in:</string>
+    <string name="guinea_pig_departure">Departure:</string>
     <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Edit Guinea Pig</string>
     <string name="image_description">No picture available</string>
     <string name="pick_picture">Pick new picture</string>
     <string name="remove_picture">Remove picture</string>
     <string name="last_birth">Last Birth (Date):</string>
-    <string name="pig_due_date">Due date:</string>
+    <string name="guinea_pig_due_date">Due date:</string>
     <string name="unknown">Unknown</string>
     <string name="guinea_pig_identifier" translatable="false">guinea pig</string>
     <string name="editor_mode_flag" translatable="false">editor_mode</string>
@@ -41,6 +43,7 @@
     <string name="type_sale">Sale</string>
     <string name="type_breed">Breed</string>
     <string name="type_rescue">Rescue</string>
+    <string name="type_lover">Lover</string>
     <string name="date_picker_title">Pick a date</string>
     <string name="no_limitations">No limitation</string>
     <string name="successful_import">Guinea pigs were successfully imported.</string>

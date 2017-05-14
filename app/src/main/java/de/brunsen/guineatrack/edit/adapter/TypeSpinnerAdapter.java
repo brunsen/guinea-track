@@ -18,8 +18,7 @@ public class TypeSpinnerAdapter extends ArrayAdapter<Type> {
     private BaseEditPresenter presenter;
     private int resource;
 
-    public TypeSpinnerAdapter(Context context, int resource,
-                              BaseEditPresenter presenter) {
+    public TypeSpinnerAdapter(Context context, int resource, BaseEditPresenter presenter) {
         super(context, resource, presenter.getTypeList());
         this.context = context;
         this.resource = resource;

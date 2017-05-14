@@ -66,7 +66,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_name"
+                        android:text="@string/guinea_pig_name"
                         android:textStyle="bold" />
 
                     <View
@@ -96,7 +96,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_gender"
+                        android:text="@string/guinea_pig_gender"
                         android:textStyle="bold" />
 
                     <View
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_weight"
+                        android:text="@string/guinea_pig_weight"
                         android:textStyle="bold" />
 
                     <View
@@ -156,7 +156,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_birthday"
+                        android:text="@string/guinea_pig_birthday"
                         android:textStyle="bold" />
 
                     <View
@@ -186,7 +186,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_color"
+                        android:text="@string/guinea_pig_color"
                         android:textStyle="bold" />
 
                     <View
@@ -216,7 +216,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_breed"
+                        android:text="@string/guinea_pig_breed"
                         android:textStyle="bold" />
 
                     <View
@@ -246,7 +246,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_type"
+                        android:text="@string/guinea_pig_type"
                         android:textStyle="bold" />
 
                     <View
@@ -276,7 +276,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_origin"
+                        android:text="@string/guinea_pig_origin"
                         android:textStyle="bold" />
 
                     <View
@@ -306,7 +306,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pig_limitations"
+                        android:text="@string/guinea_pig_limitations"
                         android:textStyle="bold" />
 
                     <View
@@ -383,7 +383,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/pig_due_date"
+                            android:text="@string/guinea_pig_due_date"
                             android:textStyle="bold" />
 
                         <View
@@ -423,7 +423,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/pig_castration_date"
+                            android:text="@string/guinea_pig_castration_date"
                             android:textStyle="bold" />
 
                         <View
