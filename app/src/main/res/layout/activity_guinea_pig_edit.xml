@@ -228,6 +228,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/edit_input_left_margin"
                         android:layout_marginStart="@dimen/edit_input_left_margin"
+                        android:maxLength="6"
                         android:layout_weight="1"
                         android:gravity="start"
                         android:inputType="date" />
