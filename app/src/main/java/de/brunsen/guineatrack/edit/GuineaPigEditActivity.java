@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.Calendar;
@@ -46,8 +46,12 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     protected EditText breedEdit;
     @BindView(R.id.edit_weight_text)
     protected EditText weightEdit;
+    @BindView(R.id.edit_castration_label)
+    protected TextView castrationDateLabel;
     @BindView(R.id.edit_castration_text)
     protected EditText castrationDateEdit;
+    @BindView(R.id.edit_castration_optional_label)
+    protected TextView castrationDateOptionalLabel;
     @BindView(R.id.edit_limitations_text)
     protected EditText limitationsEdit;
     @BindView(R.id.edit_origin_text)
@@ -56,16 +60,18 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     protected Spinner genderSpinner;
     @BindView(R.id.edit_type_spinner)
     protected Spinner typeSpinner;
-    @BindView(R.id.edit_last_birth_row)
-    protected TableRow lastBirthRow;
-    @BindView(R.id.edit_due_date_row)
-    protected TableRow dueDateRow;
-    @BindView(R.id.edit_castration_row)
-    protected TableRow castrationDateRow;
+    @BindView(R.id.edit_last_birth_label)
+    protected TextView lastBirthLabel;
     @BindView(R.id.edit_last_birth_text)
     protected EditText lastBirthEdit;
+    @BindView(R.id.edit_last_birth_optional_label)
+    protected TextView lastBirthOptionalLabel;
+    @BindView(R.id.edit_due_date_label)
+    protected TextView dueDateLabel;
     @BindView(R.id.edit_due_date_text)
     protected EditText dueDateEdit;
+    @BindView(R.id.edit_due_date_optional_label)
+    protected TextView dueDateOptionalLabel;
     @BindView(R.id.edit_image)
     protected ImageView editImage;
 
@@ -175,19 +181,25 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     @Override
     public void showCastrationDateArea(boolean show) {
         int visibility = show ? View.VISIBLE : View.GONE;
-        castrationDateRow.setVisibility(visibility);
+        castrationDateLabel.setVisibility(visibility);
+        castrationDateEdit.setVisibility(visibility);
+        castrationDateOptionalLabel.setVisibility(visibility);
     }
 
     @Override
     public void showDueDateArea(boolean show) {
         int visibility = show ? View.VISIBLE : View.GONE;
-        dueDateRow.setVisibility(visibility);
+        dueDateLabel.setVisibility(visibility);
+        dueDateEdit.setVisibility(visibility);
+        dueDateOptionalLabel.setVisibility(visibility);
     }
 
     @Override
     public void showLastBirthArea(boolean show) {
         int visibility = show ? View.VISIBLE : View.GONE;
-        lastBirthRow.setVisibility(visibility);
+        lastBirthLabel.setVisibility(visibility);
+        lastBirthEdit.setVisibility(visibility);
+        lastBirthOptionalLabel.setVisibility(visibility);
     }
 
     @Override

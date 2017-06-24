@@ -1,6 +1,9 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
@@ -23,6 +26,7 @@ android {
         versionName "1.2"
         minSdkVersion 16
         targetSdkVersion 25
+        project.ext.set("archivesBaseName", "Guinea Track-" + defaultConfig.versionName);
     }
 
     buildTypes {
@@ -46,6 +50,7 @@ dependencies {
     compile "com.android.support:support-v4:$supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:1.0.2"
     compile group:'se.emilsjolander', name:"stickylistheaders", version:'2.7.0'
     compile group:'com.makeramen', name:"roundedimageview", version:'2.2.1'
     compile group:'com.github.bumptech.glide', name:"glide", version:'3.7.0'

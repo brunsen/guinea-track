@@ -11,8 +11,9 @@
     <dimen name="main_list_side_margin">16dp</dimen>
     <dimen name="list_item_image_width">40dp</dimen>
     <dimen name="list_item_image_height">40dp</dimen>
-    <dimen name="edit_input_left_margin">20dp</dimen>
-    <dimen name="edit_spinner_width">150dp</dimen>
+    <dimen name="edit_side_margin">16dp</dimen>
+    <dimen name="edit_label_top_margin">24dp</dimen>
+    <dimen name="edit_input_top_margin">8dp</dimen>
     <dimen name="edit_image_width">50dp</dimen>
     <dimen name="edit_image_height">50dp</dimen>
     <dimen name="button_corner_radius">10dp</dimen>
