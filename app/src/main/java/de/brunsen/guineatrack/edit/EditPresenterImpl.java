@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.GuineaPig;
+import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.overview.OverviewActivity;
 
 public class EditPresenterImpl extends BaseEditPresenterImpl {
@@ -21,7 +22,9 @@ public class EditPresenterImpl extends BaseEditPresenterImpl {
         mCopyGuineaPig.setColor(mGuineaPig.getColor());
         mCopyGuineaPig.setType(mGuineaPig.getType());
         mCopyGuineaPig.setGender(mGuineaPig.getGender());
-        mCopyGuineaPig.setOptionalData(mGuineaPig.getOptionalData());
+        GuineaPigOptionalData optionalData = mGuineaPig.getOptionalData();
+        GuineaPigOptionalData copyOptionalData = new GuineaPigOptionalData(optionalData);
+        mCopyGuineaPig.setOptionalData(copyOptionalData);
     }
 
     @Override

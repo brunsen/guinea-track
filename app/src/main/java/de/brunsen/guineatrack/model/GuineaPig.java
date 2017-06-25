@@ -93,30 +93,30 @@ public class GuineaPig {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof GuineaPig)) return false;
 
         GuineaPig guineaPig = (GuineaPig) o;
 
-        if (id != guineaPig.id) return false;
-        if (!name.equals(guineaPig.name)) return false;
-        if (!birth.equals(guineaPig.birth)) return false;
-        if (gender != guineaPig.gender) return false;
-        if (!color.equals(guineaPig.color)) return false;
-        if (!breed.equals(guineaPig.breed)) return false;
-        if (type != guineaPig.type) return false;
-        return guineaPigOptionalData.equals(guineaPig.guineaPigOptionalData);
+        if (getId() != guineaPig.getId()) return false;
+        if (!getName().equals(guineaPig.getName())) return false;
+        if (!getBirth().equals(guineaPig.getBirth())) return false;
+        if (getGender() != guineaPig.getGender()) return false;
+        if (!getColor().equals(guineaPig.getColor())) return false;
+        if (!getBreed().equals(guineaPig.getBreed())) return false;
+        if (getType() != guineaPig.getType()) return false;
+        return this.guineaPigOptionalData.equals(guineaPig.getOptionalData());
 
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + name.hashCode();
-        result = 31 * result + birth.hashCode();
-        result = 31 * result + gender.hashCode();
-        result = 31 * result + color.hashCode();
-        result = 31 * result + breed.hashCode();
-        result = 31 * result + type.hashCode();
+        int result = getId();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getBirth().hashCode();
+        result = 31 * result + getGender().hashCode();
+        result = 31 * result + getColor().hashCode();
+        result = 31 * result + getBreed().hashCode();
+        result = 31 * result + getType().hashCode();
         result = 31 * result + guineaPigOptionalData.hashCode();
         return result;
     }

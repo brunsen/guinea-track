@@ -29,6 +29,12 @@ public class GuineaPigOptionalData {
         this.setDeparture(departure);
     }
 
+    public GuineaPigOptionalData(GuineaPigOptionalData optionalData) {
+        this(optionalData.getWeight(), optionalData.getLastBirth(), optionalData.getDueDate(),
+                optionalData.getOrigin(), optionalData.getLimitations(), optionalData.getCastrationDate(),
+                optionalData.getPicturePath(), optionalData.getEntry(), optionalData.getDeparture());
+    }
+
     public String getPicturePath() {
         return picturePath;
     }
@@ -104,33 +110,40 @@ public class GuineaPigOptionalData {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof GuineaPigOptionalData)) return false;
 
         GuineaPigOptionalData that = (GuineaPigOptionalData) o;
 
-        if (weight != that.weight) return false;
-        if (!lastBirth.equals(that.lastBirth)) return false;
-        if (!dueDate.equals(that.dueDate)) return false;
-        if (!origin.equals(that.origin)) return false;
-        if (!limitations.equals(that.limitations)) return false;
-        if (!castrationDate.equals(that.castrationDate)) return false;
-        if (!picturePath.equals(that.picturePath)) return false;
-        if (!entry.equals(that.entry)) return false;
-        return departure.equals(that.departure);
+        if (getWeight() != that.getWeight()) return false;
+        if (getLastBirth() != null ? !getLastBirth().equals(that.getLastBirth()) : that.getLastBirth() != null)
+            return false;
+        if (getDueDate() != null ? !getDueDate().equals(that.getDueDate()) : that.getDueDate() != null)
+            return false;
+        if (getOrigin() != null ? !getOrigin().equals(that.getOrigin()) : that.getOrigin() != null)
+            return false;
+        if (getLimitations() != null ? !getLimitations().equals(that.getLimitations()) : that.getLimitations() != null)
+            return false;
+        if (getCastrationDate() != null ? !getCastrationDate().equals(that.getCastrationDate()) : that.getCastrationDate() != null)
+            return false;
+        if (getPicturePath() != null ? !getPicturePath().equals(that.getPicturePath()) : that.getPicturePath() != null)
+            return false;
+        if (getEntry() != null ? !getEntry().equals(that.getEntry()) : that.getEntry() != null)
+            return false;
+        return getDeparture() != null ? getDeparture().equals(that.getDeparture()) : that.getDeparture() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = weight;
-        result = 31 * result + lastBirth.hashCode();
-        result = 31 * result + dueDate.hashCode();
-        result = 31 * result + origin.hashCode();
-        result = 31 * result + limitations.hashCode();
-        result = 31 * result + castrationDate.hashCode();
-        result = 31 * result + picturePath.hashCode();
-        result = 31 * result + entry.hashCode();
-        result = 31 * result + departure.hashCode();
+        int result = getWeight();
+        result = 31 * result + (getLastBirth() != null ? getLastBirth().hashCode() : 0);
+        result = 31 * result + (getDueDate() != null ? getDueDate().hashCode() : 0);
+        result = 31 * result + (getOrigin() != null ? getOrigin().hashCode() : 0);
+        result = 31 * result + (getLimitations() != null ? getLimitations().hashCode() : 0);
+        result = 31 * result + (getCastrationDate() != null ? getCastrationDate().hashCode() : 0);
+        result = 31 * result + (getPicturePath() != null ? getPicturePath().hashCode() : 0);
+        result = 31 * result + (getEntry() != null ? getEntry().hashCode() : 0);
+        result = 31 * result + (getDeparture() != null ? getDeparture().hashCode() : 0);
         return result;
     }
 }
