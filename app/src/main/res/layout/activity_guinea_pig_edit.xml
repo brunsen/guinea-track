@@ -64,9 +64,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/edit_side_margin"
                 android:layout_marginRight="@dimen/edit_side_margin"
-                android:layout_marginTop="@dimen/edit_input_top_margin"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/edit_weight_text"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_gender_label"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_name_text" />
 
@@ -214,9 +214,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/edit_side_margin"
                 android:layout_marginRight="@dimen/edit_side_margin"
-                android:layout_marginTop="@dimen/edit_input_top_margin"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/edit_weight_text"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_type_label"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_breed_text" />
 
@@ -300,6 +300,84 @@
                 app:layout_constraintHorizontal_bias="0.9"
                 app:layout_constraintRight_toRightOf="parent" />
 
+            <!-- Entry Date -->
+            <TextView
+                android:id="@+id/edit_entry_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/edit_side_margin"
+                android:layout_marginStart="@dimen/edit_side_margin"
+                android:layout_marginTop="@dimen/edit_label_top_margin"
+                android:text="@string/guinea_pig_entry"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_limitations_label" />
+
+            <EditText
+                android:id="@+id/edit_entry_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/edit_side_margin"
+                android:layout_marginRight="@dimen/edit_side_margin"
+                android:inputType="date"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_entry_label"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_weight_text"
+                app:layout_constraintRight_toLeftOf="@+id/edit_entry_optional_label"
+                app:layout_constraintTop_toBottomOf="@+id/edit_limitations_text" />
+
+            <TextView
+                android:id="@+id/edit_entry_optional_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/edit_side_margin"
+                android:layout_marginLeft="@dimen/edit_side_margin"
+                android:layout_marginRight="@dimen/edit_side_margin"
+                android:layout_marginStart="@dimen/edit_side_margin"
+                android:text="@string/optional_field"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_entry_label"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <!-- Departure Date -->
+            <TextView
+                android:id="@+id/edit_departure_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/edit_side_margin"
+                android:layout_marginStart="@dimen/edit_side_margin"
+                android:layout_marginTop="@dimen/edit_label_top_margin"
+                android:text="@string/guinea_pig_departure"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_entry_label" />
+
+            <EditText
+                android:id="@+id/edit_departure_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/edit_side_margin"
+                android:layout_marginRight="@dimen/edit_side_margin"
+                android:inputType="date"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_departure_label"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_weight_text"
+                app:layout_constraintRight_toLeftOf="@+id/edit_departure_optional_label"
+                app:layout_constraintTop_toBottomOf="@+id/edit_entry_text" />
+
+            <TextView
+                android:id="@+id/edit_departure_optional_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/edit_side_margin"
+                android:layout_marginLeft="@dimen/edit_side_margin"
+                android:layout_marginRight="@dimen/edit_side_margin"
+                android:layout_marginStart="@dimen/edit_side_margin"
+                android:text="@string/optional_field"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_departure_label"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintRight_toRightOf="parent" />
+
 
             <!-- Castration Date -->
             <TextView
@@ -312,7 +390,7 @@
                 android:text="@string/guinea_pig_castration_date"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_limitations_label" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_departure_label" />
 
             <EditText
                 android:id="@+id/edit_castration_text"
@@ -325,7 +403,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/edit_weight_text"
                 app:layout_constraintRight_toLeftOf="@+id/edit_castration_optional_label"
-                app:layout_constraintTop_toBottomOf="@+id/edit_limitations_text" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_departure_text" />
 
             <TextView
                 android:id="@+id/edit_castration_optional_label"
@@ -336,7 +414,7 @@
                 android:layout_marginRight="@dimen/edit_side_margin"
                 android:layout_marginStart="@dimen/edit_side_margin"
                 android:text="@string/optional_field"
-                app:layout_constraintBaseline_toBaselineOf="@+id/edit_limitations_label"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_castration_label"
                 app:layout_constraintHorizontal_bias="0.9"
                 app:layout_constraintRight_toRightOf="parent" />
 

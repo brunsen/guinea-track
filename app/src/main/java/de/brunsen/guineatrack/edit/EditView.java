@@ -41,6 +41,10 @@ public interface EditView {
 
     void setOriginText(String text);
 
+    void setEntryText(String text);
+
+    void setDepartureText(String text);
+
     void setLimitationsText(String text);
 
     void setCastrationDateText(String text);

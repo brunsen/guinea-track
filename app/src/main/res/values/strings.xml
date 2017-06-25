@@ -25,7 +25,7 @@
     <string name="guinea_pig_limitations">Limitations:</string>
     <string name="guinea_pig_origin">Origin:</string>
     <string name="guinea_pig_castration_date">Castrated at:</string>
-    <string name="guinea_pig_entry">Move in:</string>
+    <string name="guinea_pig_entry">Moves in:</string>
     <string name="guinea_pig_departure">Departure:</string>
     <string name="optional_field"> (optional)</string>
     <string name="title_activity_edit">Edit Guinea Pig</string>

@@ -12,10 +12,12 @@ public class GuineaPigOptionalData {
     private String departure;
 
     public GuineaPigOptionalData() {
-        this(0, "", "", "", "", "", "");
+        this(0, "", "", "", "", "", "", "", "");
     }
 
-    public GuineaPigOptionalData(int weight, String lastBirth, String dueDate, String origin, String limitations, String castrationDate, String picturePath) {
+    public GuineaPigOptionalData(int weight, String lastBirth, String dueDate, String origin,
+                                 String limitations, String castrationDate, String picturePath,
+                                 String entry, String departure) {
         this.setWeight(weight);
         this.setLastBirth(lastBirth);
         this.setDueDate(dueDate);
@@ -23,6 +25,8 @@ public class GuineaPigOptionalData {
         this.setLimitations(limitations);
         this.setCastrationDate(castrationDate);
         this.setPicturePath(picturePath);
+        this.setEntry(entry);
+        this.setDeparture(departure);
     }
 
     public String getPicturePath() {

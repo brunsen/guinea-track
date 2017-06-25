@@ -38,5 +38,9 @@ public interface GuineaPigDetailView {
 
     void setLimitationsText(String text);
 
+    void setEntryText(String text);
+
+    void setDepartureText(String text);
+
     void setCastrationDateText(String text);
 }

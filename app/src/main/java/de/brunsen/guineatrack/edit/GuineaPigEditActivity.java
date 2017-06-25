@@ -60,6 +60,10 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     protected Spinner genderSpinner;
     @BindView(R.id.edit_type_spinner)
     protected Spinner typeSpinner;
+    @BindView(R.id.edit_entry_text)
+    protected EditText entryEdit;
+    @BindView(R.id.edit_departure_text)
+    protected EditText departureEdit;
     @BindView(R.id.edit_last_birth_label)
     protected TextView lastBirthLabel;
     @BindView(R.id.edit_last_birth_text)
@@ -253,6 +257,16 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     }
 
     @Override
+    public void setEntryText(String text) {
+        entryEdit.setText(text);
+    }
+
+    @Override
+    public void setDepartureText(String text) {
+        departureEdit.setText(text);
+    }
+
+    @Override
     public void setLimitationsText(String text) {
         limitationsEdit.setText(text);
     }
@@ -304,6 +318,16 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
         presenter.updateOrigin(editable.toString());
     }
 
+    @OnTextChanged(value = R.id.edit_entry_text, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    protected void onEntryTextChanged(Editable editable){
+        presenter.updateEntry(editable.toString());
+    }
+
+    @OnTextChanged(value = R.id.edit_departure_text, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    protected void onDepartureTextChanged(Editable editable){
+        presenter.updateDeparture(editable.toString());
+    }
+
     @OnTextChanged(value = R.id.edit_last_birth_text, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     protected void onLastBirthTextChanged(Editable editable){
         presenter.updateLastBirthDate(editable.toString());
@@ -329,7 +353,8 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
         presenter.onAddPictureButtonClicked();
     }
 
-    @OnFocusChange(value = {R.id.edit_birth_text, R.id.edit_last_birth_text, R.id.edit_due_date_text, R.id.edit_castration_text})
+    @OnFocusChange(value = {R.id.edit_birth_text, R.id.edit_entry_text, R.id.edit_departure_text,
+            R.id.edit_last_birth_text, R.id.edit_due_date_text, R.id.edit_castration_text})
     protected void focusChanged(View view, boolean hasFocus) {
         if (hasFocus) {
             EditText editText = (EditText) view;

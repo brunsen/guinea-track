@@ -56,6 +56,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin">
 
+                <!-- Name -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,6 +87,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Gender -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -116,6 +118,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Weight -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,6 +149,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Birthday -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -176,6 +180,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Color -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -206,6 +211,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Breed -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -236,6 +242,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Type -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -266,6 +273,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Origin -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -296,6 +304,7 @@
                     android:layout_height="@dimen/spacer_height"
                     android:background="@color/main_list_header_divider" />
 
+                <!-- Limitations -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -316,6 +325,63 @@
 
                     <TextView
                         android:id="@+id/detail_limitations_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10" />
+                </LinearLayout>
+
+                <!-- Entry -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/detail_information_bottom_margin"
+                    android:layout_marginTop="@dimen/detail_information_top_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/guinea_pig_entry"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/detail_entry_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacer_height"
+                    android:background="@color/main_list_header_divider" />
+
+                <!-- Departure -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/detail_information_bottom_margin"
+                    android:layout_marginTop="@dimen/detail_information_top_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/guinea_pig_departure"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/detail_departure_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10" />

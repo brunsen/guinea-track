@@ -69,6 +69,12 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     @BindView(R.id.detail_limitations_text)
     protected TextView limitationsTextView;
 
+    @BindView(R.id.detail_entry_text)
+    protected TextView entryTextView;
+
+    @BindView(R.id.detail_departure_text)
+    protected TextView departureTextView;
+
     private Unbinder mUnbinder;
     private GuineaPigDetailPresenter presenter;
 
@@ -164,6 +170,16 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     @Override
     public void setLimitationsText(String text) {
         limitationsTextView.setText(text);
+    }
+
+    @Override
+    public void setEntryText(String text) {
+        entryTextView.setText(text);
+    }
+
+    @Override
+    public void setDepartureText(String text) {
+        departureTextView.setText(text);
     }
 
     @Override

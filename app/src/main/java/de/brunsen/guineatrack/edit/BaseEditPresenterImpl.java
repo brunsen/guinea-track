@@ -245,6 +245,16 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
     }
 
     @Override
+    public void updateEntry(String entry) {
+        mCopyGuineaPig.getOptionalData().setEntry(entry);
+    }
+
+    @Override
+    public void updateDeparture(String departure){
+        mCopyGuineaPig.getOptionalData().setDeparture(departure);
+    }
+
+    @Override
     public void updateLimitations(String limitations) {
         mCopyGuineaPig.getOptionalData().setLimitations(limitations);
     }
@@ -312,6 +322,8 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
         mEditView.setWeightText("" + optionalData.getWeight());
         mEditView.setOriginText(optionalData.getOrigin());
         mEditView.setLimitationsText(optionalData.getLimitations());
+        mEditView.setEntryText(optionalData.getEntry());
+        mEditView.setDepartureText(optionalData.getDeparture());
         mEditView.setCastrationDateText(optionalData.getCastrationDate());
         mEditView.setLastBirthText(optionalData.getLastBirth());
         mEditView.setDueDateText(optionalData.getDueDate());

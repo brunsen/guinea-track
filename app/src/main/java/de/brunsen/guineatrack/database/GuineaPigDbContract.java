@@ -26,5 +26,7 @@ public final class GuineaPigDbContract {
         public static final String COLUMN_NAME_LIMITATIONS = "Limitations";
         public static final String COLUMN_NAME_CASTRATION_DATE = "CastrationDate";
         public static final String COLUMN_NAME_PICTURE_PATH = "PicturePath";
+        public static final String COLUMN_NAME_ENTRY = "Entry";
+        public static final String COLUMN_NAME_DEPARTURE = "Departure";
     }
 }

@@ -71,6 +71,8 @@ public class AddPresenterImpl extends BaseEditPresenterImpl {
         empty &= copyOptionalData.getWeight() == 0;
         empty &= TextUtils.textEmpty(copyOptionalData.getLimitations());
         empty &= TextUtils.textEmpty(copyOptionalData.getOrigin());
+        empty &= TextUtils.textEmpty(copyOptionalData.getEntry());
+        empty &= TextUtils.textEmpty(copyOptionalData.getDeparture());
         empty &= TextUtils.textEmpty(copyOptionalData.getPicturePath());
         return !empty;
     }

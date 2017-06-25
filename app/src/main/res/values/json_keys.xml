@@ -17,5 +17,7 @@
     <string name="origin_key">origin</string>
     <string name="limitations_key">limitations</string>
     <string name="castration_date_key">castrationDate</string>
+    <string name="entry_key">entry</string>
+    <string name="departure_key">departure</string>
 
 </resources>

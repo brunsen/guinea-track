@@ -140,6 +140,8 @@ public class GuineaPigCRUD {
             optionalData.setLimitations(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS)));
             optionalData.setCastrationDate(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE)));
             optionalData.setPicturePath(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH)));
+            optionalData.setDeparture(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_DEPARTURE)));
+            optionalData.setEntry(cursor.getString(cursor.getColumnIndex(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ENTRY)));
         }
         cursor.close();
         database.close();
@@ -158,6 +160,8 @@ public class GuineaPigCRUD {
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getLimitations());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH, optionalData.getPicturePath());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ENTRY, optionalData.getEntry());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_DEPARTURE, optionalData.getDeparture());
         database.insert(GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME, null, values);
         database.close();
     }
@@ -174,6 +178,8 @@ public class GuineaPigCRUD {
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_LIMITATIONS, optionalData.getLimitations());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_CASTRATION_DATE, optionalData.getCastrationDate());
         values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_PICTURE_PATH, optionalData.getPicturePath());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ENTRY, optionalData.getEntry());
+        values.put(GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_DEPARTURE, optionalData.getDeparture());
         String whereClause = GuineaPigDbContract.GuineaPigOptionalEntry.COLUMN_NAME_ID + " = ?";
         String[] arguments = new String[] {"" + id};
         database.update(GuineaPigDbContract.GuineaPigOptionalEntry.TABLE_NAME, values, whereClause, arguments);

@@ -38,6 +38,10 @@ public interface BaseEditPresenter extends BasePresenter {
 
     void updateOrigin(String origin);
 
+    void updateEntry(String entry);
+
+    void updateDeparture(String departure);
+
     void updateLimitations(String limitations);
 
     void updateCastrationDate(String date);
