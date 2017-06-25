@@ -84,6 +84,10 @@ public class JsonReader {
                 restoredPig.getOptionalData().setDueDate(optionalData.getString(mContext.getString(R.string.due_date_key)));
             if (optionalData.has(mContext.getString(R.string.picture_key)))
                 restoredPig.getOptionalData().setPicturePath(optionalData.getString(mContext.getString(R.string.picture_key)));
+            if (optionalData.has(mContext.getString(R.string.entry_key)))
+                restoredPig.getOptionalData().setEntry(optionalData.getString(mContext.getString(R.string.entry_key)));
+            if (optionalData.has(mContext.getString(R.string.departure_key)))
+                restoredPig.getOptionalData().setDeparture(optionalData.getString(mContext.getString(R.string.departure_key)));
         }
     }
 
