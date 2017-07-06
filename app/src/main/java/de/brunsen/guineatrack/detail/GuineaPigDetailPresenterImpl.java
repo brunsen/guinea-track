@@ -152,8 +152,16 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
             limitationsText = mContext.getString(R.string.no_limitations);
         }
         mView.setLimitationsText(limitationsText);
-        mView.setEntryText(optionalData.getEntry());
-        mView.setDepartureText(optionalData.getDeparture());
+        String entryText = optionalData.getEntry();
+        if (TextUtils.textEmpty(entryText)) {
+            entryText = unknownText;
+        }
+        mView.setEntryText(entryText);
+        String departureText = optionalData.getDeparture();
+        if (TextUtils.textEmpty(departureText)) {
+            departureText = unknownText;
+        }
+        mView.setDepartureText(departureText);
 
         if (mGuineaPig.getGender() == Gender.Female) {
             mView.showDueDateArea();

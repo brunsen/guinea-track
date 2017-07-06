@@ -34,7 +34,7 @@
     <string name="remove_picture">Remove picture</string>
     <string name="last_birth">Last Birth (Date):</string>
     <string name="guinea_pig_due_date">Due date:</string>
-    <string name="unknown">Unknown</string>
+    <string name="unknown" translatable="false">-</string>
     <string name="guinea_pig_identifier" translatable="false">guinea pig</string>
     <string name="editor_mode_flag" translatable="false">editor_mode</string>
     <string name="male">Male</string>
