@@ -69,8 +69,7 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
     }
 
     public void callEditor() {
-        Intent intent = new Intent(mContext,
-                GuineaPigEditActivity.class);
+        Intent intent = new Intent(mContext, GuineaPigEditActivity.class);
         intent.putExtra(mContext.getString(R.string.guinea_pig_identifier), mGuineaPig.getId());
         intent.putExtra(mContext.getString(R.string.editor_mode_flag), true);
         mContext.startActivity(intent);

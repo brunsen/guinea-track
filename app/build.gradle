@@ -27,6 +27,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         project.ext.set("archivesBaseName", "Guinea Track-" + defaultConfig.versionName);
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
