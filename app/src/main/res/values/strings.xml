@@ -43,7 +43,7 @@
     <string name="type_sale">Sale</string>
     <string name="type_breed">Breed</string>
     <string name="type_rescue">Rescue</string>
-    <string name="type_lover">Lover</string>
+    <string name="type_collector">Collector</string>
     <string name="date_picker_title">Pick a date</string>
     <string name="no_limitations">No limitation</string>
     <string name="successful_import">Guinea pigs were successfully imported.</string>

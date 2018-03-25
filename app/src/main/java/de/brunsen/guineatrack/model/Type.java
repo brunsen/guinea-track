@@ -5,7 +5,7 @@ import android.content.Context;
 import de.brunsen.guineatrack.R;
 
 public enum Type {
-    SALE(0), BREED(1), RESCUE(2);
+    SALE(0), BREED(1), RESCUE(2), COLLECTOR(3);
     private int position;
 
     Type(int position) {
@@ -28,17 +28,25 @@ public enum Type {
             case RESCUE:
                 value = context.getString(R.string.type_rescue);
                 break;
+            case COLLECTOR:
+                value = context.getString(R.string.type_collector);
+                break;
         }
         return value;
     }
 
     public static Type fromInt(int value) {
-        if (value == 0) {
-            return SALE;
-        } else if (value == 1) {
-            return BREED;
-        } else {
-            return RESCUE;
+        switch (value) {
+            case 0:
+                return SALE;
+            case 1:
+                return BREED;
+            case 2:
+                return RESCUE;
+            case 3:
+                return COLLECTOR;
+            default:
+                return SALE;
         }
     }
 }

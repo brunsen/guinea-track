@@ -39,7 +39,7 @@
     <string name="type_sale">Verkauf</string>
     <string name="type_breed">Zucht</string>
     <string name="type_rescue">Nottier</string>
-    <string name="type_lover">Liebhaber</string>
+    <string name="type_collector">Liebhaber</string>
     <string name="date_picker_title">Wählen Sie ein Datum</string>
     <string name="no_limitations">Keine Einschränkung</string>
     <string name="successful_import">Import der Meerschweinchen war erfolgreich.</string>

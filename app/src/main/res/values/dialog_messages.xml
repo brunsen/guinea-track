@@ -4,7 +4,7 @@
     <string name="error_loading_pigs">An error occurred while loading the guinea pigs</string>
     <string name="deletion_confirmation_text">Are you sure you want to remove %s?</string>
     <string name="error_empty_fields">Please fill out all mandatory fields</string>
-    <string name="save_error_message">Saving failing</string>
+    <string name="save_error_message">Saving failed</string>
     <string name="update_error_message">The new values could not be stored for this guinea pig</string>
     <string name="message_unsaved_update">Are you sure you want to leave without saving? Any updated information about the guinea pig, will be lost.</string>
     <string name="message_unsaved_guinea_pig">Are you sure you don\'t want to add the guinea pig? Any information you typed in so far will be lost.</string>

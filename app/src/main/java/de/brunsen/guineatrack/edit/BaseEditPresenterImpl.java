@@ -130,7 +130,8 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
     private void toggleCastrationDateArea() {
         Type selectedType = mCopyGuineaPig.getType();
         Gender selectedGender = mCopyGuineaPig.getGender();
-        boolean showCastration = !Gender.Male.equals(selectedGender) && !Type.BREED.equals(selectedType);
+        boolean showCastration = (!Gender.Male.equals(selectedGender) && !Type.BREED.equals(selectedType))
+                || Type.COLLECTOR.equals(selectedType);
         mEditView.showCastrationDateArea(showCastration);
     }
 

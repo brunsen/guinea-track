@@ -164,20 +164,34 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
         mView.setDepartureText(departureText);
 
         if (mGuineaPig.getGender() == Gender.Female) {
-            mView.showDueDateArea();
-            mView.showLastBirthArea();
-            String lastBirthDisplayText = optionalData.getLastBirth();
-            String dueDateDisplayText = optionalData.getDueDate();
-            if (TextUtils.textEmpty(lastBirthDisplayText)) {
-                lastBirthDisplayText = unknownText;
-            }
-            if (TextUtils.textEmpty(dueDateDisplayText)) {
-                dueDateDisplayText = unknownText;
-            }
-            mView.setLastBirthText(lastBirthDisplayText);
-            mView.setDueDateText(dueDateDisplayText);
+            setDueDateData(optionalData, unknownText);
+            setLastBirthData(optionalData, unknownText);
         }
-        if (mGuineaPig.getGender() != Gender.Male && mGuineaPig.getType() != Type.BREED) {
+        setCastrationData(optionalData, unknownText);
+    }
+
+    private void setLastBirthData(GuineaPigOptionalData optionalData, String unknownText) {
+        mView.showLastBirthArea();
+        String lastBirthDisplayText = optionalData.getLastBirth();
+        if (TextUtils.textEmpty(lastBirthDisplayText)) {
+            lastBirthDisplayText = unknownText;
+        }
+        mView.setLastBirthText(lastBirthDisplayText);
+    }
+
+    private void setDueDateData(GuineaPigOptionalData optionalData, String unknownText) {
+        mView.showDueDateArea();
+        String dueDateDisplayText = optionalData.getDueDate();
+        if (TextUtils.textEmpty(dueDateDisplayText)) {
+            dueDateDisplayText = unknownText;
+        }
+        mView.setDueDateText(dueDateDisplayText);
+    }
+
+    private void setCastrationData(GuineaPigOptionalData optionalData, String unknownText) {
+        boolean showCastration = (!Gender.Male.equals(mGuineaPig.getGender()) && !Type.BREED.equals(mGuineaPig.getType()))
+                || Type.COLLECTOR.equals(mGuineaPig.getType());
+        if (showCastration) {
             mView.showCastrationDateArea();
             String castrationDate = optionalData.getCastrationDate();
             if (TextUtils.textEmpty(castrationDate)) {
