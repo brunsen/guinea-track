@@ -14,11 +14,13 @@ import java.util.Collections;
 import java.util.List;
 
 import de.brunsen.guineatrack.R;
+import de.brunsen.guineatrack.backup.BackupRecoveryActivity;
 import de.brunsen.guineatrack.database.GuineaPigCRUD;
 import de.brunsen.guineatrack.detail.GuineaPigDetailActivity;
 import de.brunsen.guineatrack.edit.GuineaPigEditActivity;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigComparator;
+import de.brunsen.guineatrack.settings.SettingsActivity;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
 import io.reactivex.functions.Consumer;
 
@@ -50,6 +52,21 @@ public class OverViewPresenterImpl implements OverViewPresenter {
                 initialPermissionRequest = false;
                 askForExternalStorageReadAccess();
             }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(int itemId) {
+        // Handle item selection
+        switch (itemId) {
+            case R.id.option_backup_recovery:
+                startBackupActivity();
+                return true;
+            case R.id.option_settings:
+                startSettingsActivity();
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -111,7 +128,7 @@ public class OverViewPresenterImpl implements OverViewPresenter {
         Collections.sort(mGuineaPigs, new GuineaPigComparator());
     }
 
-    private void  setGenderText() {
+    private void setGenderText() {
         int totalMale = 0;
         int totalFemale = 0;
         int totalCastrato = 0;
@@ -180,11 +197,22 @@ public class OverViewPresenterImpl implements OverViewPresenter {
                     public void accept(Permission permission) throws Exception {
                         if (permission.granted) {
                             mView.refreshList();
-                    } else if (permission.shouldShowRequestPermissionRationale) {
+                        } else if (permission.shouldShowRequestPermissionRationale) {
                             String rationaleMessage = mContext.getString(R.string.rationale_message_list);
                             PermissionDialog dialog = new PermissionDialog(mContext, rationaleMessage, null);
                             dialog.show();
                         }
-                }});
-        }
+                    }
+                });
+    }
+
+    private void startBackupActivity() {
+        Intent intent = new Intent(mContext, BackupRecoveryActivity.class);
+        mContext.startActivity(intent);
+    }
+
+    private void startSettingsActivity() {
+        Intent intent = new Intent(mContext, SettingsActivity.class);
+        mContext.startActivity(intent);
+    }
 }

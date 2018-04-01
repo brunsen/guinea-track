@@ -44,26 +44,46 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     protected EditText colorEdit;
     @BindView(R.id.edit_breed_text)
     protected EditText breedEdit;
+    @BindView(R.id.edit_weight_label)
+    protected TextView weightLabel;
     @BindView(R.id.edit_weight_text)
     protected EditText weightEdit;
+    @BindView(R.id.weight_optional_label)
+    protected TextView weightOptionalLabel;
     @BindView(R.id.edit_castration_label)
     protected TextView castrationDateLabel;
     @BindView(R.id.edit_castration_text)
     protected EditText castrationDateEdit;
     @BindView(R.id.edit_castration_optional_label)
     protected TextView castrationDateOptionalLabel;
+    @BindView(R.id.edit_limitations_label)
+    protected TextView limitationsLabel;
     @BindView(R.id.edit_limitations_text)
     protected EditText limitationsEdit;
+    @BindView(R.id.edit_limitations_optional_label)
+    protected TextView limitationsOptionalLabel;
+    @BindView(R.id.edit_origin_label)
+    protected TextView originLabel;
     @BindView(R.id.edit_origin_text)
     protected EditText originEdit;
+    @BindView(R.id.edit_origin_optional_label)
+    protected TextView originOptionalLabel;
     @BindView(R.id.edit_gender_spinner)
     protected Spinner genderSpinner;
     @BindView(R.id.edit_type_spinner)
     protected Spinner typeSpinner;
+    @BindView(R.id.edit_entry_label)
+    protected TextView entryLabel;
     @BindView(R.id.edit_entry_text)
     protected EditText entryEdit;
+    @BindView(R.id.edit_entry_optional_label)
+    protected TextView entryOptionalLabel;
+    @BindView(R.id.edit_departure_label)
+    protected TextView departureLabel;
     @BindView(R.id.edit_departure_text)
     protected EditText departureEdit;
+    @BindView(R.id.edit_departure_optional_label)
+    protected TextView depatureOptionalLabel;
     @BindView(R.id.edit_last_birth_label)
     protected TextView lastBirthLabel;
     @BindView(R.id.edit_last_birth_text)
@@ -119,8 +139,7 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        presenter.onOptionsItemSelected(item.getItemId());
-        return super.onOptionsItemSelected(item);
+        return presenter.onOptionsItemSelected(item.getItemId()) || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -180,6 +199,41 @@ public class GuineaPigEditActivity extends BaseActivity implements EditView{
     @Override
     public void setPicture(int resId) {
         ImageService.getInstance().loadImageIntoView(editImage, resId);
+    }
+
+    @Override
+    public void showWeightArea() {
+        weightLabel.setVisibility(View.VISIBLE);
+        weightEdit.setVisibility(View.VISIBLE);
+        weightOptionalLabel.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showOriginArea() {
+        originLabel.setVisibility(View.VISIBLE);
+        originEdit.setVisibility(View.VISIBLE);
+        originOptionalLabel.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showLimitationsArea() {
+        limitationsLabel.setVisibility(View.VISIBLE);
+        limitationsEdit.setVisibility(View.VISIBLE);
+        limitationsOptionalLabel.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showEntryArea() {
+        entryLabel.setVisibility(View.VISIBLE);
+        entryEdit.setVisibility(View.VISIBLE);
+        entryOptionalLabel.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showDepartureArea() {
+        departureLabel.setVisibility(View.VISIBLE);
+        departureEdit.setVisibility(View.VISIBLE);
+        depatureOptionalLabel.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -25,6 +25,7 @@ import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
+import de.brunsen.guineatrack.util.Settings;
 import de.brunsen.guineatrack.util.TextUtils;
 import io.reactivex.functions.Consumer;
 
@@ -50,10 +51,14 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
     }
 
     @Override
-    public void onOptionsItemSelected(int id) {
+    public boolean onOptionsItemSelected(int id) {
         // Handle item selection
-        if (id == R.id.action_save) {
-            save();
+        switch (id) {
+            case R.id.action_save:
+                save();
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -132,15 +137,17 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
         Gender selectedGender = mCopyGuineaPig.getGender();
         boolean showCastration = (!Gender.Male.equals(selectedGender) && !Type.BREED.equals(selectedType))
                 || Type.COLLECTOR.equals(selectedType);
-        mEditView.showCastrationDateArea(showCastration);
+        Settings settings = Settings.getSettings(mContext);
+        mEditView.showCastrationDateArea(showCastration && settings.displayCastrationField());
     }
 
     private void toggleBirthArea() {
         Type selectedType = mCopyGuineaPig.getType();
         Gender selectedGender = mCopyGuineaPig.getGender();
         boolean showBirthArea = Gender.Female.equals(selectedGender) && Type.BREED.equals(selectedType);
-        mEditView.showLastBirthArea(showBirthArea);
-        mEditView.showDueDateArea(showBirthArea);
+        Settings settings = Settings.getSettings(mContext);
+        mEditView.showLastBirthArea(showBirthArea && settings.displayLastBirthField());
+        mEditView.showDueDateArea(showBirthArea && settings.displayDueDateField());
     }
 
     @Override
@@ -181,7 +188,7 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
         permissions.requestEach(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 .subscribe(new Consumer<Permission>() {
                     @Override
-                    public void accept(Permission permission) throws Exception {
+                    public void accept(Permission permission) {
                         if (permission.granted) {
                             setImage(mCopyGuineaPig.getOptionalData().getPicturePath());
                         } else if (permission.shouldShowRequestPermissionRationale) {
@@ -251,7 +258,7 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
     }
 
     @Override
-    public void updateDeparture(String departure){
+    public void updateDeparture(String departure) {
         mCopyGuineaPig.getOptionalData().setDeparture(departure);
     }
 
@@ -279,6 +286,7 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
     public void setView(Object view) {
         mEditView = (EditView) view;
         mEditView.setTitle(getTitle());
+        showOptionalFields();
         setData();
     }
 
@@ -311,6 +319,25 @@ public abstract class BaseEditPresenterImpl implements BaseEditPresenter {
     protected abstract String getTitle();
 
     protected abstract String getLeaveMessage();
+
+    private void showOptionalFields() {
+        Settings settings = Settings.getSettings(mContext);
+        if (settings.displayWeightField()) {
+            mEditView.showWeightArea();
+        }
+        if (settings.displayOriginField()) {
+            mEditView.showOriginArea();
+        }
+        if (settings.displayLimitationsField()) {
+            mEditView.showLimitationsArea();
+        }
+        if (settings.displayEntryField()) {
+            mEditView.showEntryArea();
+        }
+        if (settings.displayDepartureField()) {
+            mEditView.showDepartureArea();
+        }
+    }
 
     private void setData() {
         mEditView.setNameText(mCopyGuineaPig.getName());

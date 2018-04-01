@@ -31,7 +31,10 @@
         <activity
             android:name=".backup.BackupRecoveryActivity"
             android:label="@string/title_activity_backup_recovery"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -2,10 +2,12 @@
 <resources>
     <string name="title_activity_guinea_pig_detail">Eigenschaften</string>
     <string name="title_activity_guinea_pig_add">Neues Meeri</string>
-    <string name="main_activity_subtitle">M:%1$d W:%2$d K:%3$d</string>
     <string name="title_activity_backup_recovery">Sichern und Wiederherstellen</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="main_activity_subtitle">M:%1$d W:%2$d K:%3$d</string>
     <string name="set">Setzen</string>
     <string name="menu_item_backup_restore">Sichern und Wiederherstellen</string>
+    <string name="menu_item_settings">Einstellungen</string>
     <string name="import_guinea_pigs">Meerschweinchen importieren</string>
     <string name="export_guinea_pigs">Meerschweinchen sichern</string>
     <string name="save">Speichern</string>
@@ -45,4 +47,15 @@
     <string name="successful_import">Import der Meerschweinchen war erfolgreich.</string>
     <string name="successful_export">Sicherung der Meerschweinchen war erfolgreich.</string>
     <string name="export_import_instruction">Falls Sie eine Sicherung Ihrer Guinea Track Daten vornehmen möchten, drücken Sie den Button \"Meerschweinchen sichern\". Diese Aktion legt eine Sicherungs-Datei auf Ihrem Gerät an. Falls Sie ihre Daten auf ein anderes Gerät übertragen möchten, kopieren Sie einfach den Guinea Track Ordner auf das Gerät und betätigen Sie den Button \"Meerschweinchen importieren\" auf dem neuen Gerät.</string>
+
+    <!-- Settings -->
+    <string name="settings_introduction">Stellen Sie hier ein wie Guinea Track aussehen soll. Wählen Sie Eingabgefelder aus, die Sie für die tägliche Nutzung benötigen, oder wählen Sie Eingabefelder ab, die Sie nicht weiter in dieser App sehen möchten.</string>
+    <string name="settings_weight">Eingabe für Gewicht anzeigen</string>
+    <string name="settings_origin_text">Eingabe für die Herkunft anzeigen</string>
+    <string name="settings_limitations_text">Eingabe für Einschränkungen anzeigen</string>
+    <string name="settings_entry_text">Eingabe für Einzug anzeigen</string>
+    <string name="show_departure_input_field">Eingabe für Auszug anzeigen</string>
+    <string name="settings_castration_text">Eingabe für das Katratiosdatum anzeigen</string>
+    <string name="settings_last_birth_text">Eingabe für den letzten Wurf anzeigen</string>
+    <string name="settings_due_date_text">Eingabe für den Stichtag anzeigen</string>
 </resources>

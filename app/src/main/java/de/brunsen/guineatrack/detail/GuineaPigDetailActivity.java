@@ -30,6 +30,9 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     @BindView(R.id.detail_birth_text)
     protected TextView birthText;
 
+    @BindView(R.id.detail_weight)
+    protected LinearLayout weightGroup;
+
     @BindView(R.id.detail_weight_text)
     protected TextView weightText;
 
@@ -57,20 +60,32 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     @BindView(R.id.detail_due_date_text)
     protected TextView dueDateText;
 
-    @BindView(R.id.detail_castration_date_area)
+    @BindView(R.id.detail_castration_date)
     protected LinearLayout castrationDateGroup;
 
     @BindView(R.id.detail_castration_date_text)
     protected TextView castrationDateTextView;
 
+    @BindView(R.id.detail_origin)
+    protected LinearLayout originGroup;
+
     @BindView(R.id.detail_origin_text)
     protected TextView originTextView;
+
+    @BindView(R.id.detail_limitations)
+    protected LinearLayout limitationsGroup;
 
     @BindView(R.id.detail_limitations_text)
     protected TextView limitationsTextView;
 
+    @BindView(R.id.detail_entry)
+    protected LinearLayout entryGroup;
+
     @BindView(R.id.detail_entry_text)
     protected TextView entryTextView;
+
+    @BindView(R.id.detail_departure)
+    protected LinearLayout departureGroup;
 
     @BindView(R.id.detail_departure_text)
     protected TextView departureTextView;
@@ -106,8 +121,7 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        presenter.onOptionsItemSelected(item);
-        return true;
+        return presenter.onOptionsItemSelected(item.getItemId()) || super.onOptionsItemSelected(item);
     }
 
     private void setupImageView() {
@@ -195,6 +209,31 @@ public class GuineaPigDetailActivity extends BaseActivity implements GuineaPigDe
     @Override
     public void setPicture(int resId) {
         ImageService.getInstance().loadImageIntoView(detailImageView, resId);
+    }
+
+    @Override
+    public void showWeightArea() {
+        weightGroup.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showOriginArea() {
+        originGroup.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showLimitationsArea() {
+        limitationsGroup.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showEntryArea() {
+        entryGroup.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showDepartureArea() {
+        departureGroup.setVisibility(View.VISIBLE);
     }
 
     @Override

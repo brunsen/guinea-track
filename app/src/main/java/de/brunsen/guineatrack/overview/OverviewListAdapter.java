@@ -16,6 +16,7 @@ import java.io.File;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.util.ImageService;
+import de.brunsen.guineatrack.util.Settings;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public class OverviewListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
@@ -64,7 +65,10 @@ public class OverviewListAdapter extends BaseAdapter implements StickyListHeader
         if(limitationText.equals("")){
             limitationText = mContext.getString(R.string.no_limitations);
         }
-        String subInfoText = guineaPig.getType().getText(mContext) + ", " + limitationText;
+        String subInfoText = guineaPig.getType().getText(mContext);
+        if(Settings.getSettings(mContext).displayLimitationsField()) {
+            subInfoText = subInfoText  + ", " + limitationText;
+        }
 
         holder.nameTextView.setText(guineaPig.getName());
         holder.subInfoTextView.setText(subInfoText);

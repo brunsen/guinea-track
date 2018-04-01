@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions2.Permission;
@@ -20,10 +19,11 @@ import de.brunsen.guineatrack.model.GuineaPig;
 import de.brunsen.guineatrack.model.GuineaPigOptionalData;
 import de.brunsen.guineatrack.model.Type;
 import de.brunsen.guineatrack.ui.dialogs.PermissionDialog;
+import de.brunsen.guineatrack.util.Settings;
 import de.brunsen.guineatrack.util.TextUtils;
 import io.reactivex.functions.Consumer;
 
-public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
+public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter {
 
     private Context mContext;
 
@@ -57,25 +57,27 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
     }
 
     @Override
-    public void onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(int itemId) {
+        switch (itemId) {
             case R.id.call_edit:
                 callEditor();
-                break;
+                return true;
             case R.id.call_delete:
                 showDeleteDialog();
-                break;
+                return true;
+            default:
+                return false;
         }
     }
 
-    public void callEditor() {
+    private void callEditor() {
         Intent intent = new Intent(mContext, GuineaPigEditActivity.class);
         intent.putExtra(mContext.getString(R.string.guinea_pig_identifier), mGuineaPig.getId());
         intent.putExtra(mContext.getString(R.string.editor_mode_flag), true);
         mContext.startActivity(intent);
     }
 
-    public void showDeleteDialog() {
+    private void showDeleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.AlertDialogStyle);
         builder.setTitle(mContext.getString(R.string.confirm));
         builder.setMessage(mContext.getString(R.string.deletion_confirmation_text, mGuineaPig.getName()));
@@ -94,7 +96,7 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
         builder.show();
     }
 
-    public void deleteGuineaPig() {
+    private void deleteGuineaPig() {
         GuineaPigCRUD crud = new GuineaPigCRUD(mContext);
         try {
             crud.deleteGuineaPig(mGuineaPig);
@@ -113,7 +115,7 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
             mView.setPicture(R.drawable.unknown_guinea_pig);
         } else if (!hasExternalReadAccess) {
             askForExternalStorageReadAccess();
-        }else {
+        } else {
             setPicture(picturePath);
         }
     }
@@ -141,57 +143,97 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
 
     private void setOptionalData(GuineaPigOptionalData optionalData) {
         String unknownText = mContext.getString(R.string.unknown);
-        mView.setWeightText("" + optionalData.getWeight());
-        String originText = optionalData.getOrigin();
-        if (TextUtils.textEmpty(originText)) {
-            originText = unknownText;
-        }
-        mView.setOriginText(originText);
-        String limitationsText = optionalData.getLimitations();
-        if (TextUtils.textEmpty(limitationsText)) {
-            limitationsText = mContext.getString(R.string.no_limitations);
-        }
-        mView.setLimitationsText(limitationsText);
-        String entryText = optionalData.getEntry();
-        if (TextUtils.textEmpty(entryText)) {
-            entryText = unknownText;
-        }
-        mView.setEntryText(entryText);
-        String departureText = optionalData.getDeparture();
-        if (TextUtils.textEmpty(departureText)) {
-            departureText = unknownText;
-        }
-        mView.setDepartureText(departureText);
+        Settings settings = Settings.getSettings(mContext);
+        setWeightData(optionalData, settings);
+        setOriginData(optionalData, settings, unknownText);
+        setLimitationsData(optionalData, settings);
+        setEntryData(optionalData, settings, unknownText);
+        setDepartureData(optionalData, settings, unknownText);
 
         if (mGuineaPig.getGender() == Gender.Female) {
-            setDueDateData(optionalData, unknownText);
-            setLastBirthData(optionalData, unknownText);
+            setDueDateData(optionalData, settings, unknownText);
+            setLastBirthData(optionalData, settings, unknownText);
         }
         setCastrationData(optionalData, unknownText);
     }
 
-    private void setLastBirthData(GuineaPigOptionalData optionalData, String unknownText) {
-        mView.showLastBirthArea();
-        String lastBirthDisplayText = optionalData.getLastBirth();
-        if (TextUtils.textEmpty(lastBirthDisplayText)) {
-            lastBirthDisplayText = unknownText;
+    private void setEntryData(GuineaPigOptionalData optionalData, Settings settings, String unknownText) {
+        if (settings.displayEntryField()) {
+            String entryText = optionalData.getEntry();
+            if (TextUtils.textEmpty(entryText)) {
+                entryText = unknownText;
+            }
+            mView.setEntryText(entryText);
+            mView.showEntryArea();
         }
-        mView.setLastBirthText(lastBirthDisplayText);
     }
 
-    private void setDueDateData(GuineaPigOptionalData optionalData, String unknownText) {
-        mView.showDueDateArea();
-        String dueDateDisplayText = optionalData.getDueDate();
-        if (TextUtils.textEmpty(dueDateDisplayText)) {
-            dueDateDisplayText = unknownText;
+    private void setDepartureData(GuineaPigOptionalData optionalData, Settings settings, String unknownText) {
+        if (settings.displayDepartureField()) {
+            String departureText = optionalData.getDeparture();
+            if (TextUtils.textEmpty(departureText)) {
+                departureText = unknownText;
+            }
+            mView.setDepartureText(departureText);
+            mView.showDepartureArea();
         }
-        mView.setDueDateText(dueDateDisplayText);
+    }
+
+    private void setLimitationsData(GuineaPigOptionalData optionalData, Settings settings) {
+        if (settings.displayLimitationsField()) {
+            String limitationsText = optionalData.getLimitations();
+            if (TextUtils.textEmpty(limitationsText)) {
+                limitationsText = mContext.getString(R.string.no_limitations);
+            }
+            mView.setLimitationsText(limitationsText);
+            mView.showLimitationsArea();
+        }
+    }
+
+    private void setOriginData(GuineaPigOptionalData optionalData, Settings settings, String unknownText) {
+        if (settings.displayOriginField()) {
+            String originText = optionalData.getOrigin();
+            if (TextUtils.textEmpty(originText)) {
+                originText = unknownText;
+            }
+            mView.setOriginText(originText);
+            mView.showOriginArea();
+        }
+    }
+
+    private void setWeightData(GuineaPigOptionalData optionalData, Settings settings) {
+        if (settings.displayWeightField()) {
+            mView.setWeightText("" + optionalData.getWeight());
+            mView.showWeightArea();
+        }
+    }
+
+    private void setLastBirthData(GuineaPigOptionalData optionalData, Settings settings, String unknownText) {
+        if (settings.displayLastBirthField()) {
+            String lastBirthDisplayText = optionalData.getLastBirth();
+            if (TextUtils.textEmpty(lastBirthDisplayText)) {
+                lastBirthDisplayText = unknownText;
+            }
+            mView.setLastBirthText(lastBirthDisplayText);
+            mView.showLastBirthArea();
+        }
+    }
+
+    private void setDueDateData(GuineaPigOptionalData optionalData, Settings settings, String unknownText) {
+        if (settings.displayDueDateField()) {
+            String dueDateDisplayText = optionalData.getDueDate();
+            if (TextUtils.textEmpty(dueDateDisplayText)) {
+                dueDateDisplayText = unknownText;
+            }
+            mView.setDueDateText(dueDateDisplayText);
+            mView.showDueDateArea();
+        }
     }
 
     private void setCastrationData(GuineaPigOptionalData optionalData, String unknownText) {
         boolean showCastration = (!Gender.Male.equals(mGuineaPig.getGender()) && !Type.BREED.equals(mGuineaPig.getType()))
                 || Type.COLLECTOR.equals(mGuineaPig.getType());
-        if (showCastration) {
+        if (showCastration && Settings.getSettings(mContext).displayCastrationField()) {
             mView.showCastrationDateArea();
             String castrationDate = optionalData.getCastrationDate();
             if (TextUtils.textEmpty(castrationDate)) {
@@ -214,6 +256,7 @@ public class GuineaPigDetailPresenterImpl implements GuineaPigDetailPresenter{
                             PermissionDialog dialog = new PermissionDialog(mContext, rationaleMessage, null);
                             dialog.show();
                         }
-                    }});
+                    }
+                });
     }
 }

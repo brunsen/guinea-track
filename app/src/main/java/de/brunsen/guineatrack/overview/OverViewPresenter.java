@@ -7,6 +7,8 @@ public interface OverViewPresenter extends BasePresenter {
 
     void onResume();
 
+    boolean onOptionsItemSelected(int itemId);
+
     void onItemClick(int position);
 
     void onItemLongClick(int position);

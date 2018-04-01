@@ -6,6 +6,6 @@ import de.brunsen.guineatrack.util.BasePresenter;
 
 public interface GuineaPigDetailPresenter extends BasePresenter {
 
-    void onOptionsItemSelected(MenuItem item);
+    boolean onOptionsItemSelected(int itemId);
 
 }

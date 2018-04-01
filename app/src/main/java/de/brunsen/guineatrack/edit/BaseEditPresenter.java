@@ -10,7 +10,7 @@ import de.brunsen.guineatrack.util.BasePresenter;
 
 public interface BaseEditPresenter extends BasePresenter {
 
-    void onOptionsItemSelected(int id);
+    boolean onOptionsItemSelected(int id);
 
     void onActivityResult(int requestCode, Intent data);
 

@@ -15,6 +15,16 @@ public interface EditView {
 
     void setPicture(int resId);
 
+    void showWeightArea();
+
+    void showOriginArea();
+
+    void showLimitationsArea();
+
+    void showEntryArea();
+
+    void showDepartureArea();
+
     void showCastrationDateArea(boolean show);
 
     void showDueDateArea(boolean show);

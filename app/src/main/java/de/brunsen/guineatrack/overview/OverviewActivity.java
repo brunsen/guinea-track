@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.brunsen.guineatrack.R;
 import de.brunsen.guineatrack.backup.BackupRecoveryActivity;
+import de.brunsen.guineatrack.settings.SettingsActivity;
 import de.brunsen.guineatrack.ui.activities.BaseActivity;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -62,13 +63,7 @@ public class OverviewActivity extends BaseActivity implements OverViewView{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.option_backup_recovery:
-                startBackupActivity();
-            default:
-                return true;
-        }
+        return presenter.onOptionsItemSelected(item.getItemId()) || super.onOptionsItemSelected(item);
     }
 
     private void initListAdapter() {
@@ -98,11 +93,6 @@ public class OverviewActivity extends BaseActivity implements OverViewView{
     @Override
     public void showErrorDialog(String title, String message, String okMessage) {
         showError(title, message, okMessage);
-    }
-
-    private void startBackupActivity() {
-        Intent intent = new Intent(this, BackupRecoveryActivity.class);
-        startActivity(intent);
     }
 
     @OnClick(R.id.add_button)

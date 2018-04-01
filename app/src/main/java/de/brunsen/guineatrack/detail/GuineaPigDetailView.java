@@ -10,6 +10,16 @@ public interface GuineaPigDetailView {
 
     void setPicture(int resId);
 
+    void showWeightArea();
+
+    void showOriginArea();
+
+    void showLimitationsArea();
+
+    void showEntryArea();
+
+    void showDepartureArea();
+
     void showCastrationDateArea();
 
     void showDueDateArea();

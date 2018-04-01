@@ -4,21 +4,26 @@ buildscript {
         maven {
             url 'https://maven.google.com'
         }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
     }
 }
 
 apply plugin: 'com.android.application'
 
 ext {
-    supportLibraryVersion="25.3.1"
+    supportLibraryVersion = "25.3.1"
 }
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "de.brunsen.guineatrack"
@@ -45,19 +50,20 @@ android {
 
 repositories {
     jcenter()
+    google()
 }
 
 dependencies {
-    compile "com.android.support:support-v4:$supportLibraryVersion"
-    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
-    compile "com.android.support:design:$supportLibraryVersion"
-    compile "com.android.support.constraint:constraint-layout:1.0.2"
-    compile group:'se.emilsjolander', name:"stickylistheaders", version:'2.7.0'
-    compile group:'com.makeramen', name:"roundedimageview", version:'2.2.1'
-    compile group:'com.github.bumptech.glide', name:"glide", version:'3.7.0'
-    compile group:'com.tbruyelle.rxpermissions2', name:'rxpermissions', version:'0.8.2'
-    compile group:'io.reactivex.rxjava2', name:'rxandroid', version:'2.0.1'
-    compile group:'io.reactivex.rxjava2', name:'rxjava', version:'2.0.1'
-    compile group:'com.jakewharton', name:'butterknife', version:'8.5.1'
-    annotationProcessor group:'com.jakewharton', name:'butterknife-compiler', version:'8.5.1'
+    implementation "com.android.support:support-v4:$supportLibraryVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:1.1.0-beta6"
+    implementation group: 'se.emilsjolander', name: "stickylistheaders", version: '2.7.0'
+    implementation group: 'com.makeramen', name: "roundedimageview", version: '2.2.1'
+    implementation group: 'com.github.bumptech.glide', name: "glide", version: '3.7.0'
+    implementation group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: '0.8.2'
+    implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.0.1'
+    implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.0.1'
+    implementation group: 'com.jakewharton', name: 'butterknife', version: '8.5.1'
+    annotationProcessor group: 'com.jakewharton', name: 'butterknife-compiler', version: '8.5.1'
 }
